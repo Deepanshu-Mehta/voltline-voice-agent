@@ -1,0 +1,736 @@
+clip_id,question_id,set,condition,accent,gender,speaker,engine,reference,transcript,wer,key_terms,key_terms_missed,all_key_terms_heard
+clean-F01,F01,core,clean,US English,male,daniel-us,deepgram,How much do the Pulse Buds Pro cost?,How much do the Pulse Buds Pro cost?,0.0,1,,1
+clean-F01,F01,core,clean,US English,male,daniel-us,deepgram-nokt,How much do the Pulse Buds Pro cost?,How much do the PulseBuds Pro cost?,0.0,1,,1
+clean-F01,F01,core,clean,US English,male,daniel-us,deepgram-nosmart,How much do the Pulse Buds Pro cost?,How much do the Pulse Buds Pro cost?,0.0,1,,1
+clean-F01,F01,core,clean,US English,male,daniel-us,gnani-v2.5,How much do the Pulse Buds Pro cost?,how much do the pulse buds pro cost,0.0,1,,1
+clean-F01,F01,core,clean,US English,male,daniel-us,gnani-v3.0,How much do the Pulse Buds Pro cost?,How much do the pulse buds pro cost,0.0,1,,1
+clean-F01,F01,core,clean,US English,male,daniel-us,gnani-v3.0-kt,How much do the Pulse Buds Pro cost?,How much do the Pulse Buds Pro cost?,0.0,1,,1
+clean-F01,F01,core,clean,US English,male,daniel-us,whisper,How much do the Pulse Buds Pro cost?,How much do the Pulse Buds Pro cost?,0.0,1,,1
+noisy-F01,F01,core,noisy,US English,male,daniel-us,deepgram,How much do the Pulse Buds Pro cost?,How much do the Pulse Buds Pro cost?,0.0,1,,1
+noisy-F01,F01,core,noisy,US English,male,daniel-us,deepgram-nokt,How much do the Pulse Buds Pro cost?,How much do the PulseBuds Pro cost?,0.0,1,,1
+noisy-F01,F01,core,noisy,US English,male,daniel-us,deepgram-nosmart,How much do the Pulse Buds Pro cost?,How much do the Pulse Buds Pro cost?,0.0,1,,1
+noisy-F01,F01,core,noisy,US English,male,daniel-us,gnani-v2.5,How much do the Pulse Buds Pro cost?,how much do the pulse buds pro cost,0.0,1,,1
+noisy-F01,F01,core,noisy,US English,male,daniel-us,gnani-v3.0,How much do the Pulse Buds Pro cost?,How much do the pulse buds pro cost,0.0,1,,1
+noisy-F01,F01,core,noisy,US English,male,daniel-us,gnani-v3.0-kt,How much do the Pulse Buds Pro cost?,How much do the Pulse Buds Pro cost?,0.0,1,,1
+noisy-F01,F01,core,noisy,US English,male,daniel-us,whisper,How much do the Pulse Buds Pro cost?,How much do the Pulse Buds Pro cost?,0.0,1,,1
+phone-F01,F01,core,phone,US English,male,daniel-us,deepgram,How much do the Pulse Buds Pro cost?,How much do the Pulse Buds Pro cost?,0.0,1,,1
+phone-F01,F01,core,phone,US English,male,daniel-us,deepgram-nokt,How much do the Pulse Buds Pro cost?,How much do the PulseBuds Pro cost?,0.0,1,,1
+phone-F01,F01,core,phone,US English,male,daniel-us,deepgram-nosmart,How much do the Pulse Buds Pro cost?,How much do the Pulse Buds Pro cost?,0.0,1,,1
+phone-F01,F01,core,phone,US English,male,daniel-us,gnani-v2.5,How much do the Pulse Buds Pro cost?,how much do the pulse buds pro cost,0.0,1,,1
+phone-F01,F01,core,phone,US English,male,daniel-us,gnani-v3.0,How much do the Pulse Buds Pro cost?,How much do the pulse buds pro cost,0.0,1,,1
+phone-F01,F01,core,phone,US English,male,daniel-us,gnani-v3.0-kt,How much do the Pulse Buds Pro cost?,How much do the Pulse Buds Pro cost?,0.0,1,,1
+phone-F01,F01,core,phone,US English,male,daniel-us,whisper,How much do the Pulse Buds Pro cost?,How much do the pulse buds pro cost?,0.0,1,,1
+clean-F02,F02,core,clean,US English,female,skylar-us,deepgram,What's the battery life on the regular Pulse Buds?,What's the battery life on the regular Pulse Buds?,0.0,1,,1
+clean-F02,F02,core,clean,US English,female,skylar-us,deepgram-nokt,What's the battery life on the regular Pulse Buds?,What's the battery life on the regular PulseBuds?,0.0,1,,1
+clean-F02,F02,core,clean,US English,female,skylar-us,deepgram-nosmart,What's the battery life on the regular Pulse Buds?,What's the battery life on the regular Pulse Buds?,0.0,1,,1
+clean-F02,F02,core,clean,US English,female,skylar-us,gnani-v2.5,What's the battery life on the regular Pulse Buds?,what's the battery life on the regular pulse buds,0.0,1,,1
+clean-F02,F02,core,clean,US English,female,skylar-us,gnani-v3.0,What's the battery life on the regular Pulse Buds?,What's the battery life on the regular pulse buds?,0.0,1,,1
+clean-F02,F02,core,clean,US English,female,skylar-us,gnani-v3.0-kt,What's the battery life on the regular Pulse Buds?,What's the battery life on the regular Pulse Buds?,0.0,1,,1
+clean-F02,F02,core,clean,US English,female,skylar-us,whisper,What's the battery life on the regular Pulse Buds?,What's the battery life on the regular pulse buds?,0.0,1,,1
+noisy-F02,F02,core,noisy,US English,female,skylar-us,deepgram,What's the battery life on the regular Pulse Buds?,What's the battery life on the regular Pulse Buds?,0.0,1,,1
+noisy-F02,F02,core,noisy,US English,female,skylar-us,deepgram-nokt,What's the battery life on the regular Pulse Buds?,What's the battery life on the regular PulseBuds?,0.0,1,,1
+noisy-F02,F02,core,noisy,US English,female,skylar-us,deepgram-nosmart,What's the battery life on the regular Pulse Buds?,What's the battery life on the regular Pulse Buds?,0.0,1,,1
+noisy-F02,F02,core,noisy,US English,female,skylar-us,gnani-v2.5,What's the battery life on the regular Pulse Buds?,what's the battery life on the regular pulse buds,0.0,1,,1
+noisy-F02,F02,core,noisy,US English,female,skylar-us,gnani-v3.0,What's the battery life on the regular Pulse Buds?,What's the battery life on the regular pulse buds?,0.0,1,,1
+noisy-F02,F02,core,noisy,US English,female,skylar-us,gnani-v3.0-kt,What's the battery life on the regular Pulse Buds?,What's the battery life on the regular Pulse Buds?,0.0,1,,1
+noisy-F02,F02,core,noisy,US English,female,skylar-us,whisper,What's the battery life on the regular Pulse Buds?,What's the battery life on the regular pulse buds?,0.0,1,,1
+phone-F02,F02,core,phone,US English,female,skylar-us,deepgram,What's the battery life on the regular Pulse Buds?,What's the battery life on the regular Pulse Buds?,0.0,1,,1
+phone-F02,F02,core,phone,US English,female,skylar-us,deepgram-nokt,What's the battery life on the regular Pulse Buds?,What's the battery life on the regular Pulse Buds?,0.0,1,,1
+phone-F02,F02,core,phone,US English,female,skylar-us,deepgram-nosmart,What's the battery life on the regular Pulse Buds?,What's the battery life on the regular Pulse Buds?,0.0,1,,1
+phone-F02,F02,core,phone,US English,female,skylar-us,gnani-v2.5,What's the battery life on the regular Pulse Buds?,what's the battery life on the regular pulse buds,0.0,1,,1
+phone-F02,F02,core,phone,US English,female,skylar-us,gnani-v3.0,What's the battery life on the regular Pulse Buds?,What's the battery life on the regular pulse buds?,0.0,1,,1
+phone-F02,F02,core,phone,US English,female,skylar-us,gnani-v3.0-kt,What's the battery life on the regular Pulse Buds?,What's the battery life on the regular Pulse Buds?,0.0,1,,1
+phone-F02,F02,core,phone,US English,female,skylar-us,whisper,What's the battery life on the regular Pulse Buds?,What's the battery life on the regular pulse buds?,0.0,1,,1
+clean-F03,F03,core,clean,British English,male,archie-gb,deepgram,Do the standard Pulse Buds have noise cancelling?,Do the standard Pulse Buds have noise canceling?,0.0,1,,1
+clean-F03,F03,core,clean,British English,male,archie-gb,deepgram-nokt,Do the standard Pulse Buds have noise cancelling?,Do the standard Pulse Buds have noise canceling?,0.0,1,,1
+clean-F03,F03,core,clean,British English,male,archie-gb,deepgram-nosmart,Do the standard Pulse Buds have noise cancelling?,Do the standard Pulse Buds have noise canceling?,0.0,1,,1
+clean-F03,F03,core,clean,British English,male,archie-gb,gnani-v2.5,Do the standard Pulse Buds have noise cancelling?,did the standard pulse buds have noise cancelling,0.125,1,,1
+clean-F03,F03,core,clean,British English,male,archie-gb,gnani-v3.0,Do the standard Pulse Buds have noise cancelling?,Do the standard pulse buds have noise cancelling?,0.0,1,,1
+clean-F03,F03,core,clean,British English,male,archie-gb,gnani-v3.0-kt,Do the standard Pulse Buds have noise cancelling?,Do the standard Pulse Buds have noise cancelling?,0.0,1,,1
+clean-F03,F03,core,clean,British English,male,archie-gb,whisper,Do the standard Pulse Buds have noise cancelling?,Did the standard pulse buds have noise cancelling?,0.125,1,,1
+noisy-F03,F03,core,noisy,British English,male,archie-gb,deepgram,Do the standard Pulse Buds have noise cancelling?,Do the standard Pulse Buds have noise canceling?,0.0,1,,1
+noisy-F03,F03,core,noisy,British English,male,archie-gb,deepgram-nokt,Do the standard Pulse Buds have noise cancelling?,Do the standard PulseBuds have noise canceling?,0.0,1,,1
+noisy-F03,F03,core,noisy,British English,male,archie-gb,deepgram-nosmart,Do the standard Pulse Buds have noise cancelling?,Do the standard Pulse Buds have noise canceling?,0.0,1,,1
+noisy-F03,F03,core,noisy,British English,male,archie-gb,gnani-v2.5,Do the standard Pulse Buds have noise cancelling?,do the standard pulse buds have noise cancelling,0.0,1,,1
+noisy-F03,F03,core,noisy,British English,male,archie-gb,gnani-v3.0,Do the standard Pulse Buds have noise cancelling?,Do the standard pulse buds have noise cancelling?,0.0,1,,1
+noisy-F03,F03,core,noisy,British English,male,archie-gb,gnani-v3.0-kt,Do the standard Pulse Buds have noise cancelling?,Do the standard Pulse Buds have noise cancelling?,0.0,1,,1
+noisy-F03,F03,core,noisy,British English,male,archie-gb,whisper,Do the standard Pulse Buds have noise cancelling?,Did the standard pulse buds have noise cancelling?,0.125,1,,1
+phone-F03,F03,core,phone,British English,male,archie-gb,deepgram,Do the standard Pulse Buds have noise cancelling?,Did the standard Pulse Buds have noise canceling?,0.125,1,,1
+phone-F03,F03,core,phone,British English,male,archie-gb,deepgram-nokt,Do the standard Pulse Buds have noise cancelling?,Did the standard Pulse Buds have noise canceling?,0.125,1,,1
+phone-F03,F03,core,phone,British English,male,archie-gb,deepgram-nosmart,Do the standard Pulse Buds have noise cancelling?,Did the standard Pulse Buds have noise canceling?,0.125,1,,1
+phone-F03,F03,core,phone,British English,male,archie-gb,gnani-v2.5,Do the standard Pulse Buds have noise cancelling?,do the standard pulse buds have noise cancelling,0.0,1,,1
+phone-F03,F03,core,phone,British English,male,archie-gb,gnani-v3.0,Do the standard Pulse Buds have noise cancelling?,Do the standard pulse buds have noise cancelling?,0.0,1,,1
+phone-F03,F03,core,phone,British English,male,archie-gb,gnani-v3.0-kt,Do the standard Pulse Buds have noise cancelling?,Do the standard Pulse Buds have noise cancelling?,0.0,1,,1
+phone-F03,F03,core,phone,British English,male,archie-gb,whisper,Do the standard Pulse Buds have noise cancelling?,Did the standard pulse buds have noise cancelling?,0.125,1,,1
+clean-F04,F04,core,clean,British English,female,gemma-gb,deepgram,How long is the warranty on the Horizon Headphones?,How long is the warranty on the Horizon Headphones?,0.0,1,,1
+clean-F04,F04,core,clean,British English,female,gemma-gb,deepgram-nokt,How long is the warranty on the Horizon Headphones?,How long is the warranty on the Horizon headphones?,0.0,1,,1
+clean-F04,F04,core,clean,British English,female,gemma-gb,deepgram-nosmart,How long is the warranty on the Horizon Headphones?,How long is the warranty on the Horizon Headphones?,0.0,1,,1
+clean-F04,F04,core,clean,British English,female,gemma-gb,gnani-v2.5,How long is the warranty on the Horizon Headphones?,how long is the warranty on the horizon headphones,0.0,1,,1
+clean-F04,F04,core,clean,British English,female,gemma-gb,gnani-v3.0,How long is the warranty on the Horizon Headphones?,How long is the warranty on the Horizon headphones?,0.0,1,,1
+clean-F04,F04,core,clean,British English,female,gemma-gb,gnani-v3.0-kt,How long is the warranty on the Horizon Headphones?,How long is the warranty on the Horizon headphones?,0.0,1,,1
+clean-F04,F04,core,clean,British English,female,gemma-gb,whisper,How long is the warranty on the Horizon Headphones?,How long is the warranty on the Horizon headphones?,0.0,1,,1
+noisy-F04,F04,core,noisy,British English,female,gemma-gb,deepgram,How long is the warranty on the Horizon Headphones?,How long is the warranty on the Horizon Headphones?,0.0,1,,1
+noisy-F04,F04,core,noisy,British English,female,gemma-gb,deepgram-nokt,How long is the warranty on the Horizon Headphones?,How long is the warranty on the Horizon headphones?,0.0,1,,1
+noisy-F04,F04,core,noisy,British English,female,gemma-gb,deepgram-nosmart,How long is the warranty on the Horizon Headphones?,How long is the warranty on the Horizon Headphones?,0.0,1,,1
+noisy-F04,F04,core,noisy,British English,female,gemma-gb,gnani-v2.5,How long is the warranty on the Horizon Headphones?,how long is the warranty on the horizon headphones,0.0,1,,1
+noisy-F04,F04,core,noisy,British English,female,gemma-gb,gnani-v3.0,How long is the warranty on the Horizon Headphones?,How long is the warranty on the Horizon headphones?,0.0,1,,1
+noisy-F04,F04,core,noisy,British English,female,gemma-gb,gnani-v3.0-kt,How long is the warranty on the Horizon Headphones?,How long is the warranty on the Horizon headphones?,0.0,1,,1
+noisy-F04,F04,core,noisy,British English,female,gemma-gb,whisper,How long is the warranty on the Horizon Headphones?,How long is the warranty on the Horizon headphones?,0.0,1,,1
+phone-F04,F04,core,phone,British English,female,gemma-gb,deepgram,How long is the warranty on the Horizon Headphones?,How long is the warranty on the Horizon Headphones?,0.0,1,,1
+phone-F04,F04,core,phone,British English,female,gemma-gb,deepgram-nokt,How long is the warranty on the Horizon Headphones?,How long is the warranty on the Horizon headphones?,0.0,1,,1
+phone-F04,F04,core,phone,British English,female,gemma-gb,deepgram-nosmart,How long is the warranty on the Horizon Headphones?,How long is the warranty on the Horizon Headphones?,0.0,1,,1
+phone-F04,F04,core,phone,British English,female,gemma-gb,gnani-v2.5,How long is the warranty on the Horizon Headphones?,how long is the warranty on the horizon headphones,0.0,1,,1
+phone-F04,F04,core,phone,British English,female,gemma-gb,gnani-v3.0,How long is the warranty on the Horizon Headphones?,How long is the warranty on the Horizon headphones?,0.0,1,,1
+phone-F04,F04,core,phone,British English,female,gemma-gb,gnani-v3.0-kt,How long is the warranty on the Horizon Headphones?,How long is the warranty on the Horizon Headphones?,0.0,1,,1
+phone-F04,F04,core,phone,British English,female,gemma-gb,whisper,How long is the warranty on the Horizon Headphones?,How long is the warranty on the Horizon headphones?,0.0,1,,1
+clean-F05,F05,core,clean,US English,male,daniel-us,deepgram,What's your return window?,What's your return window?,0.0,0,,1
+clean-F05,F05,core,clean,US English,male,daniel-us,deepgram-nokt,What's your return window?,What's your return window?,0.0,0,,1
+clean-F05,F05,core,clean,US English,male,daniel-us,deepgram-nosmart,What's your return window?,What's your return window?,0.0,0,,1
+clean-F05,F05,core,clean,US English,male,daniel-us,gnani-v2.5,What's your return window?,what's your return window,0.0,0,,1
+clean-F05,F05,core,clean,US English,male,daniel-us,gnani-v3.0,What's your return window?,What's your return window,0.0,0,,1
+clean-F05,F05,core,clean,US English,male,daniel-us,gnani-v3.0-kt,What's your return window?,What's your return window?,0.0,0,,1
+clean-F05,F05,core,clean,US English,male,daniel-us,whisper,What's your return window?,What's your return window?,0.0,0,,1
+noisy-F05,F05,core,noisy,US English,male,daniel-us,deepgram,What's your return window?,What's your return window?,0.0,0,,1
+noisy-F05,F05,core,noisy,US English,male,daniel-us,deepgram-nokt,What's your return window?,What's your return window?,0.0,0,,1
+noisy-F05,F05,core,noisy,US English,male,daniel-us,deepgram-nosmart,What's your return window?,What's your return window?,0.0,0,,1
+noisy-F05,F05,core,noisy,US English,male,daniel-us,gnani-v2.5,What's your return window?,what's your return window,0.0,0,,1
+noisy-F05,F05,core,noisy,US English,male,daniel-us,gnani-v3.0,What's your return window?,What's your return window?,0.0,0,,1
+noisy-F05,F05,core,noisy,US English,male,daniel-us,gnani-v3.0-kt,What's your return window?,What's your return window?,0.0,0,,1
+noisy-F05,F05,core,noisy,US English,male,daniel-us,whisper,What's your return window?,What's your return window?,0.0,0,,1
+phone-F05,F05,core,phone,US English,male,daniel-us,deepgram,What's your return window?,What's your return window?,0.0,0,,1
+phone-F05,F05,core,phone,US English,male,daniel-us,deepgram-nokt,What's your return window?,What's your return window?,0.0,0,,1
+phone-F05,F05,core,phone,US English,male,daniel-us,deepgram-nosmart,What's your return window?,What's your return window?,0.0,0,,1
+phone-F05,F05,core,phone,US English,male,daniel-us,gnani-v2.5,What's your return window?,what's your return window,0.0,0,,1
+phone-F05,F05,core,phone,US English,male,daniel-us,gnani-v3.0,What's your return window?,To return window.,0.5,0,,1
+phone-F05,F05,core,phone,US English,male,daniel-us,gnani-v3.0-kt,What's your return window?,To return window.,0.5,0,,1
+phone-F05,F05,core,phone,US English,male,daniel-us,whisper,What's your return window?,What's your return window?,0.0,0,,1
+clean-F06,F06,core,clean,US English,female,skylar-us,deepgram,Can I return Pulse Buds after I've opened them?,Can I return Pulse Buds after I've opened them?,0.0,1,,1
+clean-F06,F06,core,clean,US English,female,skylar-us,deepgram-nokt,Can I return Pulse Buds after I've opened them?,Can I return pulse buds after I've opened them?,0.0,1,,1
+clean-F06,F06,core,clean,US English,female,skylar-us,deepgram-nosmart,Can I return Pulse Buds after I've opened them?,Can I return Pulse Buds after I've opened them?,0.0,1,,1
+clean-F06,F06,core,clean,US English,female,skylar-us,gnani-v2.5,Can I return Pulse Buds after I've opened them?,can i return pulse buds after i've opened them,0.0,1,,1
+clean-F06,F06,core,clean,US English,female,skylar-us,gnani-v3.0,Can I return Pulse Buds after I've opened them?,Can I return pulse buds after I've opened them?,0.0,1,,1
+clean-F06,F06,core,clean,US English,female,skylar-us,gnani-v3.0-kt,Can I return Pulse Buds after I've opened them?,Can I return Pulse Buds after I've opened them?,0.0,1,,1
+clean-F06,F06,core,clean,US English,female,skylar-us,whisper,Can I return Pulse Buds after I've opened them?,Can I return pulse buds after I've opened them?,0.0,1,,1
+noisy-F06,F06,core,noisy,US English,female,skylar-us,deepgram,Can I return Pulse Buds after I've opened them?,Can I return Pulse Buds after I've opened them?,0.0,1,,1
+noisy-F06,F06,core,noisy,US English,female,skylar-us,deepgram-nokt,Can I return Pulse Buds after I've opened them?,Can I return pulse buds after I've opened them?,0.0,1,,1
+noisy-F06,F06,core,noisy,US English,female,skylar-us,deepgram-nosmart,Can I return Pulse Buds after I've opened them?,Can I return Pulse Buds after I've opened them?,0.0,1,,1
+noisy-F06,F06,core,noisy,US English,female,skylar-us,gnani-v2.5,Can I return Pulse Buds after I've opened them?,can i return pulse buds after i've opened them,0.0,1,,1
+noisy-F06,F06,core,noisy,US English,female,skylar-us,gnani-v3.0,Can I return Pulse Buds after I've opened them?,Can I return pulse buds after I've opened them?,0.0,1,,1
+noisy-F06,F06,core,noisy,US English,female,skylar-us,gnani-v3.0-kt,Can I return Pulse Buds after I've opened them?,"Now, can I return Pulse Buds after I've opened them?",0.111,1,,1
+noisy-F06,F06,core,noisy,US English,female,skylar-us,whisper,Can I return Pulse Buds after I've opened them?,Can I return pulse buds after I've opened them?,0.0,1,,1
+phone-F06,F06,core,phone,US English,female,skylar-us,deepgram,Can I return Pulse Buds after I've opened them?,Can I return Pulse Buds after I've opened them?,0.0,1,,1
+phone-F06,F06,core,phone,US English,female,skylar-us,deepgram-nokt,Can I return Pulse Buds after I've opened them?,Can I return pulse buds after I've opened them?,0.0,1,,1
+phone-F06,F06,core,phone,US English,female,skylar-us,deepgram-nosmart,Can I return Pulse Buds after I've opened them?,Can I return Pulse Buds after I've opened them?,0.0,1,,1
+phone-F06,F06,core,phone,US English,female,skylar-us,gnani-v2.5,Can I return Pulse Buds after I've opened them?,can i return pulse buds after i've opened them,0.0,1,,1
+phone-F06,F06,core,phone,US English,female,skylar-us,gnani-v3.0,Can I return Pulse Buds after I've opened them?,Can I return pulse buds after I've opened them?,0.0,1,,1
+phone-F06,F06,core,phone,US English,female,skylar-us,gnani-v3.0-kt,Can I return Pulse Buds after I've opened them?,Can I return Pulse Buds after I've opened them?,0.0,1,,1
+phone-F06,F06,core,phone,US English,female,skylar-us,whisper,Can I return Pulse Buds after I've opened them?,Can I return pulse buds after I've opened them?,0.0,1,,1
+clean-F07,F07,core,clean,British English,male,archie-gb,deepgram,How much is next-day delivery?,How much is next day delivery?,0.0,0,,1
+clean-F07,F07,core,clean,British English,male,archie-gb,deepgram-nokt,How much is next-day delivery?,How much is next day delivery?,0.0,0,,1
+clean-F07,F07,core,clean,British English,male,archie-gb,deepgram-nosmart,How much is next-day delivery?,How much is next day delivery?,0.0,0,,1
+clean-F07,F07,core,clean,British English,male,archie-gb,gnani-v2.5,How much is next-day delivery?,how much is next day delivery,0.0,0,,1
+clean-F07,F07,core,clean,British English,male,archie-gb,gnani-v3.0,How much is next-day delivery?,How much is next day delivery,0.0,0,,1
+clean-F07,F07,core,clean,British English,male,archie-gb,gnani-v3.0-kt,How much is next-day delivery?,How much is next day delivery?,0.0,0,,1
+clean-F07,F07,core,clean,British English,male,archie-gb,whisper,How much is next-day delivery?,How much is next day delivery?,0.0,0,,1
+noisy-F07,F07,core,noisy,British English,male,archie-gb,deepgram,How much is next-day delivery?,How much is next day delivery?,0.0,0,,1
+noisy-F07,F07,core,noisy,British English,male,archie-gb,deepgram-nokt,How much is next-day delivery?,How much is next day delivery?,0.0,0,,1
+noisy-F07,F07,core,noisy,British English,male,archie-gb,deepgram-nosmart,How much is next-day delivery?,How much is next day delivery?,0.0,0,,1
+noisy-F07,F07,core,noisy,British English,male,archie-gb,gnani-v2.5,How much is next-day delivery?,how much is next day delivery,0.0,0,,1
+noisy-F07,F07,core,noisy,British English,male,archie-gb,gnani-v3.0,How much is next-day delivery?,How much is next day delivery?,0.0,0,,1
+noisy-F07,F07,core,noisy,British English,male,archie-gb,gnani-v3.0-kt,How much is next-day delivery?,How much is next day delivery?,0.0,0,,1
+noisy-F07,F07,core,noisy,British English,male,archie-gb,whisper,How much is next-day delivery?,How much is next day delivery?,0.0,0,,1
+phone-F07,F07,core,phone,British English,male,archie-gb,deepgram,How much is next-day delivery?,How much is next day delivery?,0.0,0,,1
+phone-F07,F07,core,phone,British English,male,archie-gb,deepgram-nokt,How much is next-day delivery?,How much is next day delivery?,0.0,0,,1
+phone-F07,F07,core,phone,British English,male,archie-gb,deepgram-nosmart,How much is next-day delivery?,How much is next day delivery?,0.0,0,,1
+phone-F07,F07,core,phone,British English,male,archie-gb,gnani-v2.5,How much is next-day delivery?,how much is next day delivery,0.0,0,,1
+phone-F07,F07,core,phone,British English,male,archie-gb,gnani-v3.0,How much is next-day delivery?,How much is next day delivery,0.0,0,,1
+phone-F07,F07,core,phone,British English,male,archie-gb,gnani-v3.0-kt,How much is next-day delivery?,How much is next day delivery?,0.0,0,,1
+phone-F07,F07,core,phone,British English,male,archie-gb,whisper,How much is next-day delivery?,How much is next day delivery?,0.0,0,,1
+clean-F08,F08,core,clean,British English,female,gemma-gb,deepgram,Is shipping free?,Is shipping free?,0.0,0,,1
+clean-F08,F08,core,clean,British English,female,gemma-gb,deepgram-nokt,Is shipping free?,Is shipping free?,0.0,0,,1
+clean-F08,F08,core,clean,British English,female,gemma-gb,deepgram-nosmart,Is shipping free?,Is shipping free?,0.0,0,,1
+clean-F08,F08,core,clean,British English,female,gemma-gb,gnani-v2.5,Is shipping free?,is shipping free,0.0,0,,1
+clean-F08,F08,core,clean,British English,female,gemma-gb,gnani-v3.0,Is shipping free?,Is shipping free,0.0,0,,1
+clean-F08,F08,core,clean,British English,female,gemma-gb,gnani-v3.0-kt,Is shipping free?,Is shipping free?,0.0,0,,1
+clean-F08,F08,core,clean,British English,female,gemma-gb,whisper,Is shipping free?,Is shipping free?,0.0,0,,1
+noisy-F08,F08,core,noisy,British English,female,gemma-gb,deepgram,Is shipping free?,Is shipping free?,0.0,0,,1
+noisy-F08,F08,core,noisy,British English,female,gemma-gb,deepgram-nokt,Is shipping free?,Is shipping free?,0.0,0,,1
+noisy-F08,F08,core,noisy,British English,female,gemma-gb,deepgram-nosmart,Is shipping free?,Is shipping free?,0.0,0,,1
+noisy-F08,F08,core,noisy,British English,female,gemma-gb,gnani-v2.5,Is shipping free?,is shipping free,0.0,0,,1
+noisy-F08,F08,core,noisy,British English,female,gemma-gb,gnani-v3.0,Is shipping free?,Is shipping free?,0.0,0,,1
+noisy-F08,F08,core,noisy,British English,female,gemma-gb,gnani-v3.0-kt,Is shipping free?,Is shipping free?,0.0,0,,1
+noisy-F08,F08,core,noisy,British English,female,gemma-gb,whisper,Is shipping free?,Is shipping free?,0.0,0,,1
+phone-F08,F08,core,phone,British English,female,gemma-gb,deepgram,Is shipping free?,Is shipping free?,0.0,0,,1
+phone-F08,F08,core,phone,British English,female,gemma-gb,deepgram-nokt,Is shipping free?,Is shipping free?,0.0,0,,1
+phone-F08,F08,core,phone,British English,female,gemma-gb,deepgram-nosmart,Is shipping free?,Is shipping free?,0.0,0,,1
+phone-F08,F08,core,phone,British English,female,gemma-gb,gnani-v2.5,Is shipping free?,is shipping free,0.0,0,,1
+phone-F08,F08,core,phone,British English,female,gemma-gb,gnani-v3.0,Is shipping free?,Is shipping free?,0.0,0,,1
+phone-F08,F08,core,phone,British English,female,gemma-gb,gnani-v3.0-kt,Is shipping free?,Is shipping free?,0.0,0,,1
+phone-F08,F08,core,phone,British English,female,gemma-gb,whisper,Is shipping free?,Is shipping free?,0.0,0,,1
+clean-F09,F09,core,clean,US English,male,daniel-us,deepgram,Do you ship to Canada?,Do you ship to Canada?,0.0,1,,1
+clean-F09,F09,core,clean,US English,male,daniel-us,deepgram-nokt,Do you ship to Canada?,Do you ship to Canada?,0.0,1,,1
+clean-F09,F09,core,clean,US English,male,daniel-us,deepgram-nosmart,Do you ship to Canada?,Do you ship to Canada?,0.0,1,,1
+clean-F09,F09,core,clean,US English,male,daniel-us,gnani-v2.5,Do you ship to Canada?,do you ship to canada,0.0,1,,1
+clean-F09,F09,core,clean,US English,male,daniel-us,gnani-v3.0,Do you ship to Canada?,Do you ship to Canada?,0.0,1,,1
+clean-F09,F09,core,clean,US English,male,daniel-us,gnani-v3.0-kt,Do you ship to Canada?,Do you ship to Canada?,0.0,1,,1
+clean-F09,F09,core,clean,US English,male,daniel-us,whisper,Do you ship to Canada?,Do you ship to Canada?,0.0,1,,1
+noisy-F09,F09,core,noisy,US English,male,daniel-us,deepgram,Do you ship to Canada?,Do you ship to Canada?,0.0,1,,1
+noisy-F09,F09,core,noisy,US English,male,daniel-us,deepgram-nokt,Do you ship to Canada?,Do you ship to Canada?,0.0,1,,1
+noisy-F09,F09,core,noisy,US English,male,daniel-us,deepgram-nosmart,Do you ship to Canada?,Do you ship to Canada?,0.0,1,,1
+noisy-F09,F09,core,noisy,US English,male,daniel-us,gnani-v2.5,Do you ship to Canada?,do you ship to canada,0.0,1,,1
+noisy-F09,F09,core,noisy,US English,male,daniel-us,gnani-v3.0,Do you ship to Canada?,Do you ship to Canada,0.0,1,,1
+noisy-F09,F09,core,noisy,US English,male,daniel-us,gnani-v3.0-kt,Do you ship to Canada?,Do you ship to Canada?,0.0,1,,1
+noisy-F09,F09,core,noisy,US English,male,daniel-us,whisper,Do you ship to Canada?,Do you ship to Canada?,0.0,1,,1
+phone-F09,F09,core,phone,US English,male,daniel-us,deepgram,Do you ship to Canada?,Do you ship to Canada?,0.0,1,,1
+phone-F09,F09,core,phone,US English,male,daniel-us,deepgram-nokt,Do you ship to Canada?,Do you ship to Canada?,0.0,1,,1
+phone-F09,F09,core,phone,US English,male,daniel-us,deepgram-nosmart,Do you ship to Canada?,Do you ship to Canada?,0.0,1,,1
+phone-F09,F09,core,phone,US English,male,daniel-us,gnani-v2.5,Do you ship to Canada?,do you ship to canada,0.0,1,,1
+phone-F09,F09,core,phone,US English,male,daniel-us,gnani-v3.0,Do you ship to Canada?,Took to Canada.,0.6,1,,1
+phone-F09,F09,core,phone,US English,male,daniel-us,gnani-v3.0-kt,Do you ship to Canada?,Took to Canada.,0.6,1,,1
+phone-F09,F09,core,phone,US English,male,daniel-us,whisper,Do you ship to Canada?,Do you ship to Canada?,0.0,1,,1
+clean-F10,F10,core,clean,US English,female,skylar-us,deepgram,Do the SafeView cameras work on 5 gigahertz Wi-Fi?,Do the SafeView cameras work on five gigahertz Wi Fi?,0.0,3,,1
+clean-F10,F10,core,clean,US English,female,skylar-us,deepgram-nokt,Do the SafeView cameras work on 5 gigahertz Wi-Fi?,Do the SafeView cameras work on five gigahertz Wi Fi?,0.0,3,,1
+clean-F10,F10,core,clean,US English,female,skylar-us,deepgram-nosmart,Do the SafeView cameras work on 5 gigahertz Wi-Fi?,Do the SafeView cameras work on five gigahertz Wi Fi?,0.0,3,,1
+clean-F10,F10,core,clean,US English,female,skylar-us,gnani-v2.5,Do the SafeView cameras work on 5 gigahertz Wi-Fi?,do the safe view cameras work on five gigahertz wi fi,0.0,3,,1
+clean-F10,F10,core,clean,US English,female,skylar-us,gnani-v3.0,Do the SafeView cameras work on 5 gigahertz Wi-Fi?,Do the safe few cameras work on 5 gigahertz Wi-Fi?,0.2,3,SafeView,0
+clean-F10,F10,core,clean,US English,female,skylar-us,gnani-v3.0-kt,Do the SafeView cameras work on 5 gigahertz Wi-Fi?,Do the SafeView cameras work on 5 gigahertz Wi-Fi?,0.0,3,,1
+clean-F10,F10,core,clean,US English,female,skylar-us,whisper,Do the SafeView cameras work on 5 gigahertz Wi-Fi?,Do the safe view cameras work on 5GHz Wi-Fi?,0.0,3,,1
+noisy-F10,F10,core,noisy,US English,female,skylar-us,deepgram,Do the SafeView cameras work on 5 gigahertz Wi-Fi?,Do the SafeView cameras work on five gigahertz Wi Fi?,0.0,3,,1
+noisy-F10,F10,core,noisy,US English,female,skylar-us,deepgram-nokt,Do the SafeView cameras work on 5 gigahertz Wi-Fi?,Do the SafeView cameras work on five gigahertz Wi Fi?,0.0,3,,1
+noisy-F10,F10,core,noisy,US English,female,skylar-us,deepgram-nosmart,Do the SafeView cameras work on 5 gigahertz Wi-Fi?,Do the SafeView cameras work on five gigahertz Wi Fi?,0.0,3,,1
+noisy-F10,F10,core,noisy,US English,female,skylar-us,gnani-v2.5,Do the SafeView cameras work on 5 gigahertz Wi-Fi?,do the safeview cameras work on five gigahertz wi fi,0.0,3,,1
+noisy-F10,F10,core,noisy,US English,female,skylar-us,gnani-v3.0,Do the SafeView cameras work on 5 gigahertz Wi-Fi?,Do the SafeView cameras work on 5 gigahertz Wi-Fi?,0.0,3,,1
+noisy-F10,F10,core,noisy,US English,female,skylar-us,gnani-v3.0-kt,Do the SafeView cameras work on 5 gigahertz Wi-Fi?,Do the SafeView cameras work on 5 gigahertz Wi-Fi?,0.0,3,,1
+noisy-F10,F10,core,noisy,US English,female,skylar-us,whisper,Do the SafeView cameras work on 5 gigahertz Wi-Fi?,Do the Safe View cameras work on 5GHz Wi-Fi?,0.0,3,,1
+phone-F10,F10,core,phone,US English,female,skylar-us,deepgram,Do the SafeView cameras work on 5 gigahertz Wi-Fi?,Do the SafeView cameras work on five gigahertz WiFi?,0.0,3,,1
+phone-F10,F10,core,phone,US English,female,skylar-us,deepgram-nokt,Do the SafeView cameras work on 5 gigahertz Wi-Fi?,Do the SafeView cameras work on five gigahertz Wi Fi?,0.0,3,,1
+phone-F10,F10,core,phone,US English,female,skylar-us,deepgram-nosmart,Do the SafeView cameras work on 5 gigahertz Wi-Fi?,Do the SafeView cameras work on five gigahertz Wi Fi?,0.0,3,,1
+phone-F10,F10,core,phone,US English,female,skylar-us,gnani-v2.5,Do the SafeView cameras work on 5 gigahertz Wi-Fi?,do the safe you cameras work on five gigahertz wifi,0.2,3,SafeView,0
+phone-F10,F10,core,phone,US English,female,skylar-us,gnani-v3.0,Do the SafeView cameras work on 5 gigahertz Wi-Fi?,Do the SafeView cameras work on 5 gigahertz Wi-Fi?,0.0,3,,1
+phone-F10,F10,core,phone,US English,female,skylar-us,gnani-v3.0-kt,Do the SafeView cameras work on 5 gigahertz Wi-Fi?,Do the SafeView cameras work on 5 gigahertz Wi-Fi?,0.0,3,,1
+phone-F10,F10,core,phone,US English,female,skylar-us,whisper,Do the SafeView cameras work on 5 gigahertz Wi-Fi?,Do the safe view cameras work on 5GHz Wi-Fi?,0.0,3,,1
+clean-F11,F11,core,clean,British English,male,archie-gb,deepgram,Does the ThermoSense thermostat need a C-wire?,Does the ThermoSense thermostat need a c wire?,0.0,1,,1
+clean-F11,F11,core,clean,British English,male,archie-gb,deepgram-nokt,Does the ThermoSense thermostat need a C-wire?,Does the ThermoSense thermostat need a c wire?,0.0,1,,1
+clean-F11,F11,core,clean,British English,male,archie-gb,deepgram-nosmart,Does the ThermoSense thermostat need a C-wire?,Does the ThermoSense thermostat need a c wire?,0.0,1,,1
+clean-F11,F11,core,clean,British English,male,archie-gb,gnani-v2.5,Does the ThermoSense thermostat need a C-wire?,does the thermosense thermostat need a sea wire,0.125,1,,1
+clean-F11,F11,core,clean,British English,male,archie-gb,gnani-v3.0,Does the ThermoSense thermostat need a C-wire?,Does the Thermosense thermostat need a C wire?,0.0,1,,1
+clean-F11,F11,core,clean,British English,male,archie-gb,gnani-v3.0-kt,Does the ThermoSense thermostat need a C-wire?,Does the ThermoSense thermostat need a C wire?,0.0,1,,1
+clean-F11,F11,core,clean,British English,male,archie-gb,whisper,Does the ThermoSense thermostat need a C-wire?,Does the thermosense thermostat need a C-wire?,0.0,1,,1
+noisy-F11,F11,core,noisy,British English,male,archie-gb,deepgram,Does the ThermoSense thermostat need a C-wire?,Does the ThermoSense Thermostat need a c wire?,0.0,1,,1
+noisy-F11,F11,core,noisy,British English,male,archie-gb,deepgram-nokt,Does the ThermoSense thermostat need a C-wire?,Does the ThermoSense thermostat need a c wire?,0.0,1,,1
+noisy-F11,F11,core,noisy,British English,male,archie-gb,deepgram-nosmart,Does the ThermoSense thermostat need a C-wire?,Does the ThermoSense Thermostat need a c wire?,0.0,1,,1
+noisy-F11,F11,core,noisy,British English,male,archie-gb,gnani-v2.5,Does the ThermoSense thermostat need a C-wire?,does the thermosense thermostat need a sea wire,0.125,1,,1
+noisy-F11,F11,core,noisy,British English,male,archie-gb,gnani-v3.0,Does the ThermoSense thermostat need a C-wire?,Does the thermosenst thermostat need a sewer?,0.375,1,ThermoSense,0
+noisy-F11,F11,core,noisy,British English,male,archie-gb,gnani-v3.0-kt,Does the ThermoSense thermostat need a C-wire?,Does the ThermoSense thermostat need a C wire?,0.0,1,,1
+noisy-F11,F11,core,noisy,British English,male,archie-gb,whisper,Does the ThermoSense thermostat need a C-wire?,Does the thermosense thermostat need a C-Wire?,0.0,1,,1
+phone-F11,F11,core,phone,British English,male,archie-gb,deepgram,Does the ThermoSense thermostat need a C-wire?,Does the ThermoSense Thermostat need a c wire?,0.0,1,,1
+phone-F11,F11,core,phone,British English,male,archie-gb,deepgram-nokt,Does the ThermoSense thermostat need a C-wire?,Does the ThermoSense thermostat need a c wire?,0.0,1,,1
+phone-F11,F11,core,phone,British English,male,archie-gb,deepgram-nosmart,Does the ThermoSense thermostat need a C-wire?,Does the ThermoSense Thermostat need a c wire?,0.0,1,,1
+phone-F11,F11,core,phone,British English,male,archie-gb,gnani-v2.5,Does the ThermoSense thermostat need a C-wire?,does the thermosense thermostat need a sea wire,0.125,1,,1
+phone-F11,F11,core,phone,British English,male,archie-gb,gnani-v3.0,Does the ThermoSense thermostat need a C-wire?,Does the thermosense thermostat need a C wire?,0.0,1,,1
+phone-F11,F11,core,phone,British English,male,archie-gb,gnani-v3.0-kt,Does the ThermoSense thermostat need a C-wire?,Does the ThermoSense thermostat need a C wire?,0.0,1,,1
+phone-F11,F11,core,phone,British English,male,archie-gb,whisper,Does the ThermoSense thermostat need a C-wire?,Does the thermosense thermostat need a C-Wire?,0.0,1,,1
+clean-F12,F12,core,clean,British English,female,gemma-gb,deepgram,Will the ThermoSense work with my electric baseboard heaters?,Will the ThermoSense work with my electric baseboard heaters?,0.0,1,,1
+clean-F12,F12,core,clean,British English,female,gemma-gb,deepgram-nokt,Will the ThermoSense work with my electric baseboard heaters?,Will the ThermoSense work with my electric baseboard heaters?,0.0,1,,1
+clean-F12,F12,core,clean,British English,female,gemma-gb,deepgram-nosmart,Will the ThermoSense work with my electric baseboard heaters?,Will the ThermoSense work with my electric baseboard heaters?,0.0,1,,1
+clean-F12,F12,core,clean,British English,female,gemma-gb,gnani-v2.5,Will the ThermoSense work with my electric baseboard heaters?,will the thermosense work with my electric baseboard heaters,0.0,1,,1
+clean-F12,F12,core,clean,British English,female,gemma-gb,gnani-v3.0,Will the ThermoSense work with my electric baseboard heaters?,Will the thermosense work with my electric baseboard heaters?,0.0,1,,1
+clean-F12,F12,core,clean,British English,female,gemma-gb,gnani-v3.0-kt,Will the ThermoSense work with my electric baseboard heaters?,Will the ThermoSense work with my electric baseboard heaters?,0.0,1,,1
+clean-F12,F12,core,clean,British English,female,gemma-gb,whisper,Will the ThermoSense work with my electric baseboard heaters?,Will the thermosense work with my electric baseboard heaters?,0.0,1,,1
+noisy-F12,F12,core,noisy,British English,female,gemma-gb,deepgram,Will the ThermoSense work with my electric baseboard heaters?,Will the ThermoSense work with my electric baseboard heaters?,0.0,1,,1
+noisy-F12,F12,core,noisy,British English,female,gemma-gb,deepgram-nokt,Will the ThermoSense work with my electric baseboard heaters?,Will the ThermoSense work with my electric baseboard heaters?,0.0,1,,1
+noisy-F12,F12,core,noisy,British English,female,gemma-gb,deepgram-nosmart,Will the ThermoSense work with my electric baseboard heaters?,Will the ThermoSense work with my electric baseboard heaters?,0.0,1,,1
+noisy-F12,F12,core,noisy,British English,female,gemma-gb,gnani-v2.5,Will the ThermoSense work with my electric baseboard heaters?,will the thermosense work with my electric baseboard heaters,0.0,1,,1
+noisy-F12,F12,core,noisy,British English,female,gemma-gb,gnani-v3.0,Will the ThermoSense work with my electric baseboard heaters?,Will the thermosenes work with my electric baseboard heaters?,0.111,1,ThermoSense,0
+noisy-F12,F12,core,noisy,British English,female,gemma-gb,gnani-v3.0-kt,Will the ThermoSense work with my electric baseboard heaters?,Will the ThermoSense work with my electric baseboard heaters?,0.0,1,,1
+noisy-F12,F12,core,noisy,British English,female,gemma-gb,whisper,Will the ThermoSense work with my electric baseboard heaters?,Will the thermosense work with my electric baseboard heaters?,0.0,1,,1
+phone-F12,F12,core,phone,British English,female,gemma-gb,deepgram,Will the ThermoSense work with my electric baseboard heaters?,Will the ThermoSense work with my electric baseboard heaters?,0.0,1,,1
+phone-F12,F12,core,phone,British English,female,gemma-gb,deepgram-nokt,Will the ThermoSense work with my electric baseboard heaters?,Will the ThermoSense work with my electric baseboard heaters?,0.0,1,,1
+phone-F12,F12,core,phone,British English,female,gemma-gb,deepgram-nosmart,Will the ThermoSense work with my electric baseboard heaters?,Will the ThermoSense work with my electric baseboard heaters?,0.0,1,,1
+phone-F12,F12,core,phone,British English,female,gemma-gb,gnani-v2.5,Will the ThermoSense work with my electric baseboard heaters?,will the thermosense work with my electric baseboard heaters,0.0,1,,1
+phone-F12,F12,core,phone,British English,female,gemma-gb,gnani-v3.0,Will the ThermoSense work with my electric baseboard heaters?,Will the thermosenes work with my electric baseboard heaters?,0.111,1,ThermoSense,0
+phone-F12,F12,core,phone,British English,female,gemma-gb,gnani-v3.0-kt,Will the ThermoSense work with my electric baseboard heaters?,Will the ThermoSense work with my electric baseboard heaters?,0.0,1,,1
+phone-F12,F12,core,phone,British English,female,gemma-gb,whisper,Will the ThermoSense work with my electric baseboard heaters?,Will the thermosense work with my electric baseboard heaters?,0.0,1,,1
+clean-F13,F13,core,clean,US English,male,daniel-us,deepgram,How many monitors can the Dockline dock run from a MacBook Air with an M2 chip?,How many monitors can the Dockline dock run from a MacBook Air with an m two chip?,0.0,2,,1
+clean-F13,F13,core,clean,US English,male,daniel-us,deepgram-nokt,How many monitors can the Dockline dock run from a MacBook Air with an M2 chip?,How many monitors can the Dockline dock run from a MacBook Air with an m two chip?,0.0,2,,1
+clean-F13,F13,core,clean,US English,male,daniel-us,deepgram-nosmart,How many monitors can the Dockline dock run from a MacBook Air with an M2 chip?,How many monitors can the Dockline dock run from a MacBook Air with an m two chip?,0.0,2,,1
+clean-F13,F13,core,clean,US English,male,daniel-us,gnani-v2.5,How many monitors can the Dockline dock run from a MacBook Air with an M2 chip?,how many monitors can the dockline dock run from a macbook air with an m two chip,0.0,2,,1
+clean-F13,F13,core,clean,US English,male,daniel-us,gnani-v3.0,How many monitors can the Dockline dock run from a MacBook Air with an M2 chip?,How many monitors can the Dock line dock run from a MacBook Air with an M2 chip?,0.0,2,,1
+clean-F13,F13,core,clean,US English,male,daniel-us,gnani-v3.0-kt,How many monitors can the Dockline dock run from a MacBook Air with an M2 chip?,How many monitors can the Dockline dock run from a MacBook Air with an M2 chip?,0.0,2,,1
+clean-F13,F13,core,clean,US English,male,daniel-us,whisper,How many monitors can the Dockline dock run from a MacBook Air with an M2 chip?,How many monitors can the Dock Line Dock run from a MacBook Air with an M2 chip?,0.0,2,,1
+noisy-F13,F13,core,noisy,US English,male,daniel-us,deepgram,How many monitors can the Dockline dock run from a MacBook Air with an M2 chip?,How many monitors can the Dockline dock run from a MacBook Air with an m two chip?,0.0,2,,1
+noisy-F13,F13,core,noisy,US English,male,daniel-us,deepgram-nokt,How many monitors can the Dockline dock run from a MacBook Air with an M2 chip?,How many monitors can the Dockline dock run from a MacBook Air with an m two chip?,0.0,2,,1
+noisy-F13,F13,core,noisy,US English,male,daniel-us,deepgram-nosmart,How many monitors can the Dockline dock run from a MacBook Air with an M2 chip?,How many monitors can the Dockline dock run from a MacBook Air with an m two chip?,0.0,2,,1
+noisy-F13,F13,core,noisy,US English,male,daniel-us,gnani-v2.5,How many monitors can the Dockline dock run from a MacBook Air with an M2 chip?,how many monitors can the dockline dock run from a macbook air with an m two chip,0.0,2,,1
+noisy-F13,F13,core,noisy,US English,male,daniel-us,gnani-v3.0,How many monitors can the Dockline dock run from a MacBook Air with an M2 chip?,How many monitors can the Dock line dock run from a MacBook Air with an M2 chip?,0.0,2,,1
+noisy-F13,F13,core,noisy,US English,male,daniel-us,gnani-v3.0-kt,How many monitors can the Dockline dock run from a MacBook Air with an M2 chip?,How many monitors can the Dockline dock run from a MacBook Air with an M2 chip?,0.0,2,,1
+noisy-F13,F13,core,noisy,US English,male,daniel-us,whisper,How many monitors can the Dockline dock run from a MacBook Air with an M2 chip?,How many monitors can the Dock Line Dock run from a MacBook Air with an M2 chip?,0.0,2,,1
+phone-F13,F13,core,phone,US English,male,daniel-us,deepgram,How many monitors can the Dockline dock run from a MacBook Air with an M2 chip?,How many monitors can the Dockline dock run from a MacBook Air with an m two chip?,0.0,2,,1
+phone-F13,F13,core,phone,US English,male,daniel-us,deepgram-nokt,How many monitors can the Dockline dock run from a MacBook Air with an M2 chip?,How many monitors can the Dockline dock run from a MacBook Air with an m two chip?,0.0,2,,1
+phone-F13,F13,core,phone,US English,male,daniel-us,deepgram-nosmart,How many monitors can the Dockline dock run from a MacBook Air with an M2 chip?,How many monitors can the Dockline dock run from a MacBook Air with an m two chip?,0.0,2,,1
+phone-F13,F13,core,phone,US English,male,daniel-us,gnani-v2.5,How many monitors can the Dockline dock run from a MacBook Air with an M2 chip?,how many monitors can the dockline dock run from a macbook air with an m two chip,0.0,2,,1
+phone-F13,F13,core,phone,US English,male,daniel-us,gnani-v3.0,How many monitors can the Dockline dock run from a MacBook Air with an M2 chip?,How many monitors can the Dock line dock run from a MacBook Air with an M2 chip?,0.0,2,,1
+phone-F13,F13,core,phone,US English,male,daniel-us,gnani-v3.0-kt,How many monitors can the Dockline dock run from a MacBook Air with an M2 chip?,How many monitors can the Dockline dock run from a MacBook Air with an M2 chip?,0.0,2,,1
+phone-F13,F13,core,phone,US English,male,daniel-us,whisper,How many monitors can the Dockline dock run from a MacBook Air with an M2 chip?,How many monitors can the Dock Line Dock run from a MacBook Air with an M2 chip?,0.0,2,,1
+clean-F14,F14,core,clean,US English,female,skylar-us,deepgram,How much power does the Dockline dock pass through to my laptop?,How much power does the Dockline dock pass through to my laptop?,0.0,1,,1
+clean-F14,F14,core,clean,US English,female,skylar-us,deepgram-nokt,How much power does the Dockline dock pass through to my laptop?,How much power does the Dockline dock pass through to my laptop?,0.0,1,,1
+clean-F14,F14,core,clean,US English,female,skylar-us,deepgram-nosmart,How much power does the Dockline dock pass through to my laptop?,How much power does the Dockline dock pass through to my laptop?,0.0,1,,1
+clean-F14,F14,core,clean,US English,female,skylar-us,gnani-v2.5,How much power does the Dockline dock pass through to my laptop?,how much power does the dockline dock pass through to my laptop,0.0,1,,1
+clean-F14,F14,core,clean,US English,female,skylar-us,gnani-v3.0,How much power does the Dockline dock pass through to my laptop?,How much power does the dockline dock pass through to my laptop?,0.0,1,,1
+clean-F14,F14,core,clean,US English,female,skylar-us,gnani-v3.0-kt,How much power does the Dockline dock pass through to my laptop?,How much power does the Dockline dock pass through to my laptop?,0.0,1,,1
+clean-F14,F14,core,clean,US English,female,skylar-us,whisper,How much power does the Dockline dock pass through to my laptop?,How much power does the Dock Line Dock pass through to my laptop?,0.0,1,,1
+noisy-F14,F14,core,noisy,US English,female,skylar-us,deepgram,How much power does the Dockline dock pass through to my laptop?,How much power does the Dockline dock pass through to my laptop?,0.0,1,,1
+noisy-F14,F14,core,noisy,US English,female,skylar-us,deepgram-nokt,How much power does the Dockline dock pass through to my laptop?,How much power does the Dockline dock pass through to my laptop?,0.0,1,,1
+noisy-F14,F14,core,noisy,US English,female,skylar-us,deepgram-nosmart,How much power does the Dockline dock pass through to my laptop?,How much power does the Dockline dock pass through to my laptop?,0.0,1,,1
+noisy-F14,F14,core,noisy,US English,female,skylar-us,gnani-v2.5,How much power does the Dockline dock pass through to my laptop?,how much power does the dockline dock pass through to my laptop,0.0,1,,1
+noisy-F14,F14,core,noisy,US English,female,skylar-us,gnani-v3.0,How much power does the Dockline dock pass through to my laptop?,How much power does the dockline dock pass through to my laptop?,0.0,1,,1
+noisy-F14,F14,core,noisy,US English,female,skylar-us,gnani-v3.0-kt,How much power does the Dockline dock pass through to my laptop?,How much power does the Dockline dock pass through to my laptop?,0.0,1,,1
+noisy-F14,F14,core,noisy,US English,female,skylar-us,whisper,How much power does the Dockline dock pass through to my laptop?,How much power does the dock line dock pass through to my laptop?,0.0,1,,1
+phone-F14,F14,core,phone,US English,female,skylar-us,deepgram,How much power does the Dockline dock pass through to my laptop?,How much power does the Dockline dock pass through to my laptop?,0.0,1,,1
+phone-F14,F14,core,phone,US English,female,skylar-us,deepgram-nokt,How much power does the Dockline dock pass through to my laptop?,How much power does the dock line dock pass through to my laptop?,0.0,1,,1
+phone-F14,F14,core,phone,US English,female,skylar-us,deepgram-nosmart,How much power does the Dockline dock pass through to my laptop?,How much power does the Dockline dock pass through to my laptop?,0.0,1,,1
+phone-F14,F14,core,phone,US English,female,skylar-us,gnani-v2.5,How much power does the Dockline dock pass through to my laptop?,how much power does the dockline dock pass through to my laptop,0.0,1,,1
+phone-F14,F14,core,phone,US English,female,skylar-us,gnani-v3.0,How much power does the Dockline dock pass through to my laptop?,How much power does the dock line dock pass through to my laptop?,0.0,1,,1
+phone-F14,F14,core,phone,US English,female,skylar-us,gnani-v3.0-kt,How much power does the Dockline dock pass through to my laptop?,How much power does the Dockline dock pass through to my laptop?,0.0,1,,1
+phone-F14,F14,core,phone,US English,female,skylar-us,whisper,How much power does the Dockline dock pass through to my laptop?,How much power does the dock line dock pass through to my laptop?,0.0,1,,1
+clean-F15,F15,core,clean,British English,male,archie-gb,deepgram,How many ports does the Dockline have?,How many ports does the Dockline have?,0.0,1,,1
+clean-F15,F15,core,clean,British English,male,archie-gb,deepgram-nokt,How many ports does the Dockline have?,How many ports does the Dockline have?,0.0,1,,1
+clean-F15,F15,core,clean,British English,male,archie-gb,deepgram-nosmart,How many ports does the Dockline have?,How many ports does the Dockline have?,0.0,1,,1
+clean-F15,F15,core,clean,British English,male,archie-gb,gnani-v2.5,How many ports does the Dockline have?,how many ports does the dock line have,0.0,1,,1
+clean-F15,F15,core,clean,British English,male,archie-gb,gnani-v3.0,How many ports does the Dockline have?,How many ports does the dock line have?,0.0,1,,1
+clean-F15,F15,core,clean,British English,male,archie-gb,gnani-v3.0-kt,How many ports does the Dockline have?,How many ports does the Dockline have?,0.0,1,,1
+clean-F15,F15,core,clean,British English,male,archie-gb,whisper,How many ports does the Dockline have?,How many ports does the dock line have?,0.0,1,,1
+noisy-F15,F15,core,noisy,British English,male,archie-gb,deepgram,How many ports does the Dockline have?,How many ports does the Dockline have?,0.0,1,,1
+noisy-F15,F15,core,noisy,British English,male,archie-gb,deepgram-nokt,How many ports does the Dockline have?,How many ports does the dock line have?,0.0,1,,1
+noisy-F15,F15,core,noisy,British English,male,archie-gb,deepgram-nosmart,How many ports does the Dockline have?,How many ports does the Dockline have?,0.0,1,,1
+noisy-F15,F15,core,noisy,British English,male,archie-gb,gnani-v2.5,How many ports does the Dockline have?,how many ports does the dock line have,0.0,1,,1
+noisy-F15,F15,core,noisy,British English,male,archie-gb,gnani-v3.0,How many ports does the Dockline have?,How many ports does the dock line have?,0.0,1,,1
+noisy-F15,F15,core,noisy,British English,male,archie-gb,gnani-v3.0-kt,How many ports does the Dockline have?,How many ports does the Dockline have?,0.0,1,,1
+noisy-F15,F15,core,noisy,British English,male,archie-gb,whisper,How many ports does the Dockline have?,How many ports does the dock line have?,0.0,1,,1
+phone-F15,F15,core,phone,British English,male,archie-gb,deepgram,How many ports does the Dockline have?,How many ports does the Dockline have?,0.0,1,,1
+phone-F15,F15,core,phone,British English,male,archie-gb,deepgram-nokt,How many ports does the Dockline have?,How many ports does the dock line have?,0.0,1,,1
+phone-F15,F15,core,phone,British English,male,archie-gb,deepgram-nosmart,How many ports does the Dockline have?,How many ports does the Dockline have?,0.0,1,,1
+phone-F15,F15,core,phone,British English,male,archie-gb,gnani-v2.5,How many ports does the Dockline have?,how many ports does the dock line have,0.0,1,,1
+phone-F15,F15,core,phone,British English,male,archie-gb,gnani-v3.0,How many ports does the Dockline have?,How many ports does the dock line have?,0.0,1,,1
+phone-F15,F15,core,phone,British English,male,archie-gb,gnani-v3.0-kt,How many ports does the Dockline have?,How many ports does the Dockline have?,0.0,1,,1
+phone-F15,F15,core,phone,British English,male,archie-gb,whisper,How many ports does the Dockline have?,How many ports does the dock line have?,0.0,1,,1
+clean-F16,F16,core,clean,British English,female,gemma-gb,deepgram,Can I bring the PowerCore 20K on a plane?,Can I bring the PowerCore 20 k on a plane?,0.0,1,,1
+clean-F16,F16,core,clean,British English,female,gemma-gb,deepgram-nokt,Can I bring the PowerCore 20K on a plane?,Can I bring the PowerCore 20 k on a plane?,0.0,1,,1
+clean-F16,F16,core,clean,British English,female,gemma-gb,deepgram-nosmart,Can I bring the PowerCore 20K on a plane?,Can I bring the PowerCore twenty k on a plane?,0.0,1,,1
+clean-F16,F16,core,clean,British English,female,gemma-gb,gnani-v2.5,Can I bring the PowerCore 20K on a plane?,can i bring the power core 20 k on a plane,0.0,1,,1
+clean-F16,F16,core,clean,British English,female,gemma-gb,gnani-v3.0,Can I bring the PowerCore 20K on a plane?,Can I bring the power core 20K on a plane?,0.0,1,,1
+clean-F16,F16,core,clean,British English,female,gemma-gb,gnani-v3.0-kt,Can I bring the PowerCore 20K on a plane?,Can I bring the PowerCore 20K Power Bank on a plane?,0.2,1,,1
+clean-F16,F16,core,clean,British English,female,gemma-gb,whisper,Can I bring the PowerCore 20K on a plane?,Can I bring the PowerCore 20K on a plane?,0.0,1,,1
+noisy-F16,F16,core,noisy,British English,female,gemma-gb,deepgram,Can I bring the PowerCore 20K on a plane?,Can I bring the PowerCore 20 k on a plane?,0.0,1,,1
+noisy-F16,F16,core,noisy,British English,female,gemma-gb,deepgram-nokt,Can I bring the PowerCore 20K on a plane?,Can I bring the PowerCore 20 k on a plane?,0.0,1,,1
+noisy-F16,F16,core,noisy,British English,female,gemma-gb,deepgram-nosmart,Can I bring the PowerCore 20K on a plane?,Can I bring the PowerCore twenty k on a plane?,0.0,1,,1
+noisy-F16,F16,core,noisy,British English,female,gemma-gb,gnani-v2.5,Can I bring the PowerCore 20K on a plane?,can i bring the power core 20 k on a plane,0.0,1,,1
+noisy-F16,F16,core,noisy,British English,female,gemma-gb,gnani-v3.0,Can I bring the PowerCore 20K on a plane?,Can I bring the power core 20k on a plane?,0.0,1,,1
+noisy-F16,F16,core,noisy,British English,female,gemma-gb,gnani-v3.0-kt,Can I bring the PowerCore 20K on a plane?,Can I bring the PowerCore 20K Power Bank?,0.3,1,,1
+noisy-F16,F16,core,noisy,British English,female,gemma-gb,whisper,Can I bring the PowerCore 20K on a plane?,Can I bring the power core 20k on a plane?,0.0,1,,1
+phone-F16,F16,core,phone,British English,female,gemma-gb,deepgram,Can I bring the PowerCore 20K on a plane?,Can I bring the PowerCore 20 k on a plane?,0.0,1,,1
+phone-F16,F16,core,phone,British English,female,gemma-gb,deepgram-nokt,Can I bring the PowerCore 20K on a plane?,Can I bring the PowerCore 20 k on a plane?,0.0,1,,1
+phone-F16,F16,core,phone,British English,female,gemma-gb,deepgram-nosmart,Can I bring the PowerCore 20K on a plane?,Can I bring the PowerCore twenty k on a plane?,0.0,1,,1
+phone-F16,F16,core,phone,British English,female,gemma-gb,gnani-v2.5,Can I bring the PowerCore 20K on a plane?,can i bring the power core 20 k on a plane,0.0,1,,1
+phone-F16,F16,core,phone,British English,female,gemma-gb,gnani-v3.0,Can I bring the PowerCore 20K on a plane?,Can I bring the power core 20k on a plane?,0.0,1,,1
+phone-F16,F16,core,phone,British English,female,gemma-gb,gnani-v3.0-kt,Can I bring the PowerCore 20K on a plane?,Can I bring the PowerCore 20K Power Bank on a plane?,0.2,1,,1
+phone-F16,F16,core,phone,British English,female,gemma-gb,whisper,Can I bring the PowerCore 20K on a plane?,Can I bring the PowerCore 20K on a plane?,0.0,1,,1
+clean-F17,F17,core,clean,US English,male,daniel-us,deepgram,What's the capacity of the PowerCore power bank?,What's the capacity of the PowerCore power bank?,0.0,1,,1
+clean-F17,F17,core,clean,US English,male,daniel-us,deepgram-nokt,What's the capacity of the PowerCore power bank?,What's the capacity of the PowerCore power bank?,0.0,1,,1
+clean-F17,F17,core,clean,US English,male,daniel-us,deepgram-nosmart,What's the capacity of the PowerCore power bank?,What's the capacity of the PowerCore power bank?,0.0,1,,1
+clean-F17,F17,core,clean,US English,male,daniel-us,gnani-v2.5,What's the capacity of the PowerCore power bank?,what's the capacity of the power core power bank,0.0,1,,1
+clean-F17,F17,core,clean,US English,male,daniel-us,gnani-v3.0,What's the capacity of the PowerCore power bank?,What's the capacity of the power core power bank?,0.0,1,,1
+clean-F17,F17,core,clean,US English,male,daniel-us,gnani-v3.0-kt,What's the capacity of the PowerCore power bank?,What's the capacity of the PowerCore power bank?,0.0,1,,1
+clean-F17,F17,core,clean,US English,male,daniel-us,whisper,What's the capacity of the PowerCore power bank?,What's the capacity of the PowerCore PowerBank?,0.0,1,,1
+noisy-F17,F17,core,noisy,US English,male,daniel-us,deepgram,What's the capacity of the PowerCore power bank?,What's the capacity of the PowerCore Power Bank?,0.0,1,,1
+noisy-F17,F17,core,noisy,US English,male,daniel-us,deepgram-nokt,What's the capacity of the PowerCore power bank?,What's the capacity of the PowerCore power bank?,0.0,1,,1
+noisy-F17,F17,core,noisy,US English,male,daniel-us,deepgram-nosmart,What's the capacity of the PowerCore power bank?,What's the capacity of the PowerCore Power Bank?,0.0,1,,1
+noisy-F17,F17,core,noisy,US English,male,daniel-us,gnani-v2.5,What's the capacity of the PowerCore power bank?,what's the capacity of the power core power bank,0.0,1,,1
+noisy-F17,F17,core,noisy,US English,male,daniel-us,gnani-v3.0,What's the capacity of the PowerCore power bank?,What's the capacity of the Power Core power bank?,0.0,1,,1
+noisy-F17,F17,core,noisy,US English,male,daniel-us,gnani-v3.0-kt,What's the capacity of the PowerCore power bank?,What's the capacity of the PowerCore 20K Power Bank?,0.25,1,,1
+noisy-F17,F17,core,noisy,US English,male,daniel-us,whisper,What's the capacity of the PowerCore power bank?,What's the capacity of the PowerCore PowerBank?,0.0,1,,1
+phone-F17,F17,core,phone,US English,male,daniel-us,deepgram,What's the capacity of the PowerCore power bank?,What's the capacity of the PowerCore power bank?,0.0,1,,1
+phone-F17,F17,core,phone,US English,male,daniel-us,deepgram-nokt,What's the capacity of the PowerCore power bank?,What's the capacity of the PowerCore power bank?,0.0,1,,1
+phone-F17,F17,core,phone,US English,male,daniel-us,deepgram-nosmart,What's the capacity of the PowerCore power bank?,What's the capacity of the PowerCore power bank?,0.0,1,,1
+phone-F17,F17,core,phone,US English,male,daniel-us,gnani-v2.5,What's the capacity of the PowerCore power bank?,what's the capacity of the power core power bank,0.0,1,,1
+phone-F17,F17,core,phone,US English,male,daniel-us,gnani-v3.0,What's the capacity of the PowerCore power bank?,Capacity of the power core power bank.,0.25,1,,1
+phone-F17,F17,core,phone,US English,male,daniel-us,gnani-v3.0-kt,What's the capacity of the PowerCore power bank?,Capacity of the PowerCore power bank?,0.25,1,,1
+phone-F17,F17,core,phone,US English,male,daniel-us,whisper,What's the capacity of the PowerCore power bank?,What's the capacity of the PowerCore PowerBank?,0.0,1,,1
+clean-F18,F18,core,clean,US English,female,skylar-us,deepgram,Does the ChargeMax charger come with a cable?,Does the ChargeMax charger come with a cable?,0.0,1,,1
+clean-F18,F18,core,clean,US English,female,skylar-us,deepgram-nokt,Does the ChargeMax charger come with a cable?,Does the Chargemax charger come with a cable?,0.0,1,,1
+clean-F18,F18,core,clean,US English,female,skylar-us,deepgram-nosmart,Does the ChargeMax charger come with a cable?,Does the ChargeMax charger come with a cable?,0.0,1,,1
+clean-F18,F18,core,clean,US English,female,skylar-us,gnani-v2.5,Does the ChargeMax charger come with a cable?,does the charge max charger come with a cable,0.0,1,,1
+clean-F18,F18,core,clean,US English,female,skylar-us,gnani-v3.0,Does the ChargeMax charger come with a cable?,Does the ChargeMax charger come with a cable?,0.0,1,,1
+clean-F18,F18,core,clean,US English,female,skylar-us,gnani-v3.0-kt,Does the ChargeMax charger come with a cable?,Does the ChargeMax charger come with a cable?,0.0,1,,1
+clean-F18,F18,core,clean,US English,female,skylar-us,whisper,Does the ChargeMax charger come with a cable?,Does the ChargeMax charger come with a cable?,0.0,1,,1
+noisy-F18,F18,core,noisy,US English,female,skylar-us,deepgram,Does the ChargeMax charger come with a cable?,Does the ChargeMax charger come with a cable?,0.0,1,,1
+noisy-F18,F18,core,noisy,US English,female,skylar-us,deepgram-nokt,Does the ChargeMax charger come with a cable?,Does the Chargemax charger come with a cable?,0.0,1,,1
+noisy-F18,F18,core,noisy,US English,female,skylar-us,deepgram-nosmart,Does the ChargeMax charger come with a cable?,Does the ChargeMax charger come with a cable?,0.0,1,,1
+noisy-F18,F18,core,noisy,US English,female,skylar-us,gnani-v2.5,Does the ChargeMax charger come with a cable?,does the charge max charger come with a cable,0.0,1,,1
+noisy-F18,F18,core,noisy,US English,female,skylar-us,gnani-v3.0,Does the ChargeMax charger come with a cable?,Does the ChargeMax charger come with a cable?,0.0,1,,1
+noisy-F18,F18,core,noisy,US English,female,skylar-us,gnani-v3.0-kt,Does the ChargeMax charger come with a cable?,Does the ChargeMax charger come with a cable?,0.0,1,,1
+noisy-F18,F18,core,noisy,US English,female,skylar-us,whisper,Does the ChargeMax charger come with a cable?,Does the ChargeMax charger come with a cable?,0.0,1,,1
+phone-F18,F18,core,phone,US English,female,skylar-us,deepgram,Does the ChargeMax charger come with a cable?,Does the ChargeMax charger come with a cable?,0.0,1,,1
+phone-F18,F18,core,phone,US English,female,skylar-us,deepgram-nokt,Does the ChargeMax charger come with a cable?,Does the Chargemax charger come with a cable?,0.0,1,,1
+phone-F18,F18,core,phone,US English,female,skylar-us,deepgram-nosmart,Does the ChargeMax charger come with a cable?,Does the ChargeMax charger come with a cable?,0.0,1,,1
+phone-F18,F18,core,phone,US English,female,skylar-us,gnani-v2.5,Does the ChargeMax charger come with a cable?,does the charge max charger come with a cable,0.0,1,,1
+phone-F18,F18,core,phone,US English,female,skylar-us,gnani-v3.0,Does the ChargeMax charger come with a cable?,Charge Max charger come with a cable.,0.25,1,,1
+phone-F18,F18,core,phone,US English,female,skylar-us,gnani-v3.0-kt,Does the ChargeMax charger come with a cable?,ChargeMax charger come with a cable?,0.25,1,,1
+phone-F18,F18,core,phone,US English,female,skylar-us,whisper,Does the ChargeMax charger come with a cable?,Does the ChargeMax charger come with a cable?,0.0,1,,1
+clean-F19,F19,core,clean,British English,male,archie-gb,deepgram,How much power can the ChargeMax deliver from one port?,How much power can the ChargeMax deliver from one port?,0.0,1,,1
+clean-F19,F19,core,clean,British English,male,archie-gb,deepgram-nokt,How much power can the ChargeMax deliver from one port?,How much power can the Chargemax deliver from one port?,0.0,1,,1
+clean-F19,F19,core,clean,British English,male,archie-gb,deepgram-nosmart,How much power can the ChargeMax deliver from one port?,How much power can the ChargeMax deliver from one port?,0.0,1,,1
+clean-F19,F19,core,clean,British English,male,archie-gb,gnani-v2.5,How much power can the ChargeMax deliver from one port?,how much power can the charge max deliver from one port,0.0,1,,1
+clean-F19,F19,core,clean,British English,male,archie-gb,gnani-v3.0,How much power can the ChargeMax deliver from one port?,How much power can the ChargeMax deliver from 1 port?,0.0,1,,1
+clean-F19,F19,core,clean,British English,male,archie-gb,gnani-v3.0-kt,How much power can the ChargeMax deliver from one port?,How much power can the ChargeMax deliver from 1 port?,0.0,1,,1
+clean-F19,F19,core,clean,British English,male,archie-gb,whisper,How much power can the ChargeMax deliver from one port?,How much power can the Charge Max deliver from one port?,0.0,1,,1
+noisy-F19,F19,core,noisy,British English,male,archie-gb,deepgram,How much power can the ChargeMax deliver from one port?,How much power can the ChargeMax deliver from one port?,0.0,1,,1
+noisy-F19,F19,core,noisy,British English,male,archie-gb,deepgram-nokt,How much power can the ChargeMax deliver from one port?,How much power can the Chargemax deliver from one port?,0.0,1,,1
+noisy-F19,F19,core,noisy,British English,male,archie-gb,deepgram-nosmart,How much power can the ChargeMax deliver from one port?,How much power can the ChargeMax deliver from one port?,0.0,1,,1
+noisy-F19,F19,core,noisy,British English,male,archie-gb,gnani-v2.5,How much power can the ChargeMax deliver from one port?,how much power can the charge max deliver from one port,0.0,1,,1
+noisy-F19,F19,core,noisy,British English,male,archie-gb,gnani-v3.0,How much power can the ChargeMax deliver from one port?,How much power can the ChargeMax deliver from 1 port?,0.0,1,,1
+noisy-F19,F19,core,noisy,British English,male,archie-gb,gnani-v3.0-kt,How much power can the ChargeMax deliver from one port?,How much power can the ChargeMax deliver from 1 port?,0.0,1,,1
+noisy-F19,F19,core,noisy,British English,male,archie-gb,whisper,How much power can the ChargeMax deliver from one port?,How much power can the charge max deliver from one port?,0.0,1,,1
+phone-F19,F19,core,phone,British English,male,archie-gb,deepgram,How much power can the ChargeMax deliver from one port?,How much power can the ChargeMax deliver from one port?,0.0,1,,1
+phone-F19,F19,core,phone,British English,male,archie-gb,deepgram-nokt,How much power can the ChargeMax deliver from one port?,How much power can the Chargemax deliver from one port?,0.0,1,,1
+phone-F19,F19,core,phone,British English,male,archie-gb,deepgram-nosmart,How much power can the ChargeMax deliver from one port?,How much power can the ChargeMax deliver from one port?,0.0,1,,1
+phone-F19,F19,core,phone,British English,male,archie-gb,gnani-v2.5,How much power can the ChargeMax deliver from one port?,how much power can the charge max deliver from one port,0.0,1,,1
+phone-F19,F19,core,phone,British English,male,archie-gb,gnani-v3.0,How much power can the ChargeMax deliver from one port?,How much power can the ChargeMax deliver from one port?,0.0,1,,1
+phone-F19,F19,core,phone,British English,male,archie-gb,gnani-v3.0-kt,How much power can the ChargeMax deliver from one port?,How much power can the ChargeMax deliver from 1 port?,0.0,1,,1
+phone-F19,F19,core,phone,British English,male,archie-gb,whisper,How much power can the ChargeMax deliver from one port?,How much power can the Charge Max deliver from one port?,0.0,1,,1
+clean-F20,F20,core,clean,British English,female,gemma-gb,deepgram,Is the Boom Mini speaker waterproof?,Is the Boom Mini Speaker waterproof?,0.0,1,,1
+clean-F20,F20,core,clean,British English,female,gemma-gb,deepgram-nokt,Is the Boom Mini speaker waterproof?,Is the Boom Mini speaker waterproof?,0.0,1,,1
+clean-F20,F20,core,clean,British English,female,gemma-gb,deepgram-nosmart,Is the Boom Mini speaker waterproof?,Is the Boom Mini Speaker waterproof?,0.0,1,,1
+clean-F20,F20,core,clean,British English,female,gemma-gb,gnani-v2.5,Is the Boom Mini speaker waterproof?,is the boom mini speaker waterproof,0.0,1,,1
+clean-F20,F20,core,clean,British English,female,gemma-gb,gnani-v3.0,Is the Boom Mini speaker waterproof?,Is the Boom Mini speaker waterproof?,0.0,1,,1
+clean-F20,F20,core,clean,British English,female,gemma-gb,gnani-v3.0-kt,Is the Boom Mini speaker waterproof?,Is the Boom Mini Speaker waterproof?,0.0,1,,1
+clean-F20,F20,core,clean,British English,female,gemma-gb,whisper,Is the Boom Mini speaker waterproof?,Is the Boom Mini-Speaker waterproof?,0.0,1,,1
+noisy-F20,F20,core,noisy,British English,female,gemma-gb,deepgram,Is the Boom Mini speaker waterproof?,Is the Boom Mini Speaker waterproof?,0.0,1,,1
+noisy-F20,F20,core,noisy,British English,female,gemma-gb,deepgram-nokt,Is the Boom Mini speaker waterproof?,Is the boom mini speaker waterproof?,0.0,1,,1
+noisy-F20,F20,core,noisy,British English,female,gemma-gb,deepgram-nosmart,Is the Boom Mini speaker waterproof?,Is the Boom Mini Speaker waterproof?,0.0,1,,1
+noisy-F20,F20,core,noisy,British English,female,gemma-gb,gnani-v2.5,Is the Boom Mini speaker waterproof?,is the boom mini speaker waterproof,0.0,1,,1
+noisy-F20,F20,core,noisy,British English,female,gemma-gb,gnani-v3.0,Is the Boom Mini speaker waterproof?,Is the boom mini speaker waterproof?,0.0,1,,1
+noisy-F20,F20,core,noisy,British English,female,gemma-gb,gnani-v3.0-kt,Is the Boom Mini speaker waterproof?,Is the Boom Mini Speaker waterproof?,0.0,1,,1
+noisy-F20,F20,core,noisy,British English,female,gemma-gb,whisper,Is the Boom Mini speaker waterproof?,Is the Boom Mini-Speaker waterproof?,0.0,1,,1
+phone-F20,F20,core,phone,British English,female,gemma-gb,deepgram,Is the Boom Mini speaker waterproof?,Is the Boom Mini Speaker waterproof?,0.0,1,,1
+phone-F20,F20,core,phone,British English,female,gemma-gb,deepgram-nokt,Is the Boom Mini speaker waterproof?,Is the boom mini speaker waterproof?,0.0,1,,1
+phone-F20,F20,core,phone,British English,female,gemma-gb,deepgram-nosmart,Is the Boom Mini speaker waterproof?,Is the Boom Mini Speaker waterproof?,0.0,1,,1
+phone-F20,F20,core,phone,British English,female,gemma-gb,gnani-v2.5,Is the Boom Mini speaker waterproof?,is the boom mini speaker waterproof,0.0,1,,1
+phone-F20,F20,core,phone,British English,female,gemma-gb,gnani-v3.0,Is the Boom Mini speaker waterproof?,Is the boom mini speaker waterproof?,0.0,1,,1
+phone-F20,F20,core,phone,British English,female,gemma-gb,gnani-v3.0-kt,Is the Boom Mini speaker waterproof?,Is the Boom Mini Speaker waterproof?,0.0,1,,1
+phone-F20,F20,core,phone,British English,female,gemma-gb,whisper,Is the Boom Mini speaker waterproof?,Is the boom mini-speaker waterproof?,0.0,1,,1
+clean-F21,F21,core,clean,US English,male,daniel-us,deepgram,How long does the Glide mouse battery last?,How long does the Glide mouse battery last?,0.0,1,,1
+clean-F21,F21,core,clean,US English,male,daniel-us,deepgram-nokt,How long does the Glide mouse battery last?,How long does the Glide mouse battery last?,0.0,1,,1
+clean-F21,F21,core,clean,US English,male,daniel-us,deepgram-nosmart,How long does the Glide mouse battery last?,How long does the Glide mouse battery last?,0.0,1,,1
+clean-F21,F21,core,clean,US English,male,daniel-us,gnani-v2.5,How long does the Glide mouse battery last?,how long does the glide mouse battery last,0.0,1,,1
+clean-F21,F21,core,clean,US English,male,daniel-us,gnani-v3.0,How long does the Glide mouse battery last?,How long does the glide mouse battery last?,0.0,1,,1
+clean-F21,F21,core,clean,US English,male,daniel-us,gnani-v3.0-kt,How long does the Glide mouse battery last?,How long does the Glide mouse battery last?,0.0,1,,1
+clean-F21,F21,core,clean,US English,male,daniel-us,whisper,How long does the Glide mouse battery last?,How long does the glide mouse battery last?,0.0,1,,1
+noisy-F21,F21,core,noisy,US English,male,daniel-us,deepgram,How long does the Glide mouse battery last?,How long does the Glide mouse battery last?,0.0,1,,1
+noisy-F21,F21,core,noisy,US English,male,daniel-us,deepgram-nokt,How long does the Glide mouse battery last?,How long does the Glide mouse battery last?,0.0,1,,1
+noisy-F21,F21,core,noisy,US English,male,daniel-us,deepgram-nosmart,How long does the Glide mouse battery last?,How long does the Glide mouse battery last?,0.0,1,,1
+noisy-F21,F21,core,noisy,US English,male,daniel-us,gnani-v2.5,How long does the Glide mouse battery last?,how long does the glide mouse battery last,0.0,1,,1
+noisy-F21,F21,core,noisy,US English,male,daniel-us,gnani-v3.0,How long does the Glide mouse battery last?,How long does the glide mouse battery last?,0.0,1,,1
+noisy-F21,F21,core,noisy,US English,male,daniel-us,gnani-v3.0-kt,How long does the Glide mouse battery last?,How long does the Glide Wireless Mouse battery last?,0.125,1,,1
+noisy-F21,F21,core,noisy,US English,male,daniel-us,whisper,How long does the Glide mouse battery last?,How long does the glide mouse battery last?,0.0,1,,1
+phone-F21,F21,core,phone,US English,male,daniel-us,deepgram,How long does the Glide mouse battery last?,How long does the Glide mouse battery last?,0.0,1,,1
+phone-F21,F21,core,phone,US English,male,daniel-us,deepgram-nokt,How long does the Glide mouse battery last?,How long does the Glide mouse battery last?,0.0,1,,1
+phone-F21,F21,core,phone,US English,male,daniel-us,deepgram-nosmart,How long does the Glide mouse battery last?,How long does the Glide mouse battery last?,0.0,1,,1
+phone-F21,F21,core,phone,US English,male,daniel-us,gnani-v2.5,How long does the Glide mouse battery last?,how long does the glide mouse battery last,0.0,1,,1
+phone-F21,F21,core,phone,US English,male,daniel-us,gnani-v3.0,How long does the Glide mouse battery last?,How long does the glide mouse battery last?,0.0,1,,1
+phone-F21,F21,core,phone,US English,male,daniel-us,gnani-v3.0-kt,How long does the Glide mouse battery last?,How long does the Glide mouse battery last?,0.0,1,,1
+phone-F21,F21,core,phone,US English,male,daniel-us,whisper,How long does the Glide mouse battery last?,How long does the glide mouse battery last?,0.0,1,,1
+clean-T01,T01,core,clean,US English,female,skylar-us,deepgram,What's the status of order 4512?,What's the status of order 4512?,0.0,1,,1
+clean-T01,T01,core,clean,US English,female,skylar-us,deepgram-nokt,What's the status of order 4512?,What's the status of order 4512?,0.0,1,,1
+clean-T01,T01,core,clean,US English,female,skylar-us,deepgram-nosmart,What's the status of order 4512?,What's the status of order four five one two?,0.0,1,,1
+clean-T01,T01,core,clean,US English,female,skylar-us,gnani-v2.5,What's the status of order 4512?,what's the status of order 4512,0.0,1,,1
+clean-T01,T01,core,clean,US English,female,skylar-us,gnani-v3.0,What's the status of order 4512?,What's the status of order 4512.,0.0,1,,1
+clean-T01,T01,core,clean,US English,female,skylar-us,gnani-v3.0-kt,What's the status of order 4512?,What's the status of order 4512?,0.0,1,,1
+clean-T01,T01,core,clean,US English,female,skylar-us,whisper,What's the status of order 4512?,What's the status of order 4512?,0.0,1,,1
+noisy-T01,T01,core,noisy,US English,female,skylar-us,deepgram,What's the status of order 4512?,What's the status of order 4512?,0.0,1,,1
+noisy-T01,T01,core,noisy,US English,female,skylar-us,deepgram-nokt,What's the status of order 4512?,What's the status of order 4512?,0.0,1,,1
+noisy-T01,T01,core,noisy,US English,female,skylar-us,deepgram-nosmart,What's the status of order 4512?,What's the status of order four five one two?,0.0,1,,1
+noisy-T01,T01,core,noisy,US English,female,skylar-us,gnani-v2.5,What's the status of order 4512?,what's the status of order 4512,0.0,1,,1
+noisy-T01,T01,core,noisy,US English,female,skylar-us,gnani-v3.0,What's the status of order 4512?,What's the status of order 4512.,0.0,1,,1
+noisy-T01,T01,core,noisy,US English,female,skylar-us,gnani-v3.0-kt,What's the status of order 4512?,What's the status of order 4512?,0.0,1,,1
+noisy-T01,T01,core,noisy,US English,female,skylar-us,whisper,What's the status of order 4512?,What's the status of order 4512?,0.0,1,,1
+phone-T01,T01,core,phone,US English,female,skylar-us,deepgram,What's the status of order 4512?,What's the status of order 4512?,0.0,1,,1
+phone-T01,T01,core,phone,US English,female,skylar-us,deepgram-nokt,What's the status of order 4512?,What's the status of order 4512?,0.0,1,,1
+phone-T01,T01,core,phone,US English,female,skylar-us,deepgram-nosmart,What's the status of order 4512?,What's the status of order four five one two?,0.0,1,,1
+phone-T01,T01,core,phone,US English,female,skylar-us,gnani-v2.5,What's the status of order 4512?,what's the status of order 4512,0.0,1,,1
+phone-T01,T01,core,phone,US English,female,skylar-us,gnani-v3.0,What's the status of order 4512?,What's the status of order 4512.,0.0,1,,1
+phone-T01,T01,core,phone,US English,female,skylar-us,gnani-v3.0-kt,What's the status of order 4512?,What's the status of order 4512?,0.0,1,,1
+phone-T01,T01,core,phone,US English,female,skylar-us,whisper,What's the status of order 4512?,What's the status of order 4512?,0.0,1,,1
+clean-T02,T02,core,clean,British English,male,archie-gb,deepgram,Can you check on order 4378 for me?,Can you check on order 4378 for me?,0.0,1,,1
+clean-T02,T02,core,clean,British English,male,archie-gb,deepgram-nokt,Can you check on order 4378 for me?,Can you check on order 4378 for me?,0.0,1,,1
+clean-T02,T02,core,clean,British English,male,archie-gb,deepgram-nosmart,Can you check on order 4378 for me?,Can you check on order four three seven eight for me?,0.0,1,,1
+clean-T02,T02,core,clean,British English,male,archie-gb,gnani-v2.5,Can you check on order 4378 for me?,can you check on order 4378 for me,0.0,1,,1
+clean-T02,T02,core,clean,British English,male,archie-gb,gnani-v3.0,Can you check on order 4378 for me?,Can you check on order 4378 for me.,0.0,1,,1
+clean-T02,T02,core,clean,British English,male,archie-gb,gnani-v3.0-kt,Can you check on order 4378 for me?,Can you check on order 4378 for me?,0.0,1,,1
+clean-T02,T02,core,clean,British English,male,archie-gb,whisper,Can you check on order 4378 for me?,Can you check on order 4378 for me?,0.0,1,,1
+noisy-T02,T02,core,noisy,British English,male,archie-gb,deepgram,Can you check on order 4378 for me?,Can you check on order 4378 for me?,0.0,1,,1
+noisy-T02,T02,core,noisy,British English,male,archie-gb,deepgram-nokt,Can you check on order 4378 for me?,Can you check on order 4378 for me?,0.0,1,,1
+noisy-T02,T02,core,noisy,British English,male,archie-gb,deepgram-nosmart,Can you check on order 4378 for me?,Can you check on order four three seven eight for me?,0.0,1,,1
+noisy-T02,T02,core,noisy,British English,male,archie-gb,gnani-v2.5,Can you check on order 4378 for me?,can you check on order 4378 for me,0.0,1,,1
+noisy-T02,T02,core,noisy,British English,male,archie-gb,gnani-v3.0,Can you check on order 4378 for me?,Can you check on order 4378 for me.,0.0,1,,1
+noisy-T02,T02,core,noisy,British English,male,archie-gb,gnani-v3.0-kt,Can you check on order 4378 for me?,Can you check on order 4378 for me?,0.0,1,,1
+noisy-T02,T02,core,noisy,British English,male,archie-gb,whisper,Can you check on order 4378 for me?,Can you check on order four three seven eight for me?,0.0,1,,1
+phone-T02,T02,core,phone,British English,male,archie-gb,deepgram,Can you check on order 4378 for me?,Can you check on order 4378 for me?,0.0,1,,1
+phone-T02,T02,core,phone,British English,male,archie-gb,deepgram-nokt,Can you check on order 4378 for me?,Can you check on order 4378 for me?,0.0,1,,1
+phone-T02,T02,core,phone,British English,male,archie-gb,deepgram-nosmart,Can you check on order 4378 for me?,Can you check on order four three seven eight for me?,0.0,1,,1
+phone-T02,T02,core,phone,British English,male,archie-gb,gnani-v2.5,Can you check on order 4378 for me?,can you check on order 4378 for me,0.0,1,,1
+phone-T02,T02,core,phone,British English,male,archie-gb,gnani-v3.0,Can you check on order 4378 for me?,Can you check on order 4378 for me.,0.0,1,,1
+phone-T02,T02,core,phone,British English,male,archie-gb,gnani-v3.0-kt,Can you check on order 4378 for me?,Can you check on order 4378 for me?,0.0,1,,1
+phone-T02,T02,core,phone,British English,male,archie-gb,whisper,Can you check on order 4378 for me?,Can you check on order four three seven eight for me?,0.0,1,,1
+clean-T03,T03,core,clean,British English,female,gemma-gb,deepgram,Are the Horizon Headphones in stock?,Are the Horizon Headphones in stock?,0.0,1,,1
+clean-T03,T03,core,clean,British English,female,gemma-gb,deepgram-nokt,Are the Horizon Headphones in stock?,Are the Horizon headphones in stock?,0.0,1,,1
+clean-T03,T03,core,clean,British English,female,gemma-gb,deepgram-nosmart,Are the Horizon Headphones in stock?,Are the Horizon Headphones in stock?,0.0,1,,1
+clean-T03,T03,core,clean,British English,female,gemma-gb,gnani-v2.5,Are the Horizon Headphones in stock?,are the horizon headphones in stock,0.0,1,,1
+clean-T03,T03,core,clean,British English,female,gemma-gb,gnani-v3.0,Are the Horizon Headphones in stock?,Are the Horizon headphones in stock?,0.0,1,,1
+clean-T03,T03,core,clean,British English,female,gemma-gb,gnani-v3.0-kt,Are the Horizon Headphones in stock?,Are the Horizon headphones in stock?,0.0,1,,1
+clean-T03,T03,core,clean,British English,female,gemma-gb,whisper,Are the Horizon Headphones in stock?,Are the Horizon headphones in stock?,0.0,1,,1
+noisy-T03,T03,core,noisy,British English,female,gemma-gb,deepgram,Are the Horizon Headphones in stock?,Are the Horizon Headphones in stock?,0.0,1,,1
+noisy-T03,T03,core,noisy,British English,female,gemma-gb,deepgram-nokt,Are the Horizon Headphones in stock?,Are the Horizon headphones in stock?,0.0,1,,1
+noisy-T03,T03,core,noisy,British English,female,gemma-gb,deepgram-nosmart,Are the Horizon Headphones in stock?,Are the Horizon Headphones in stock?,0.0,1,,1
+noisy-T03,T03,core,noisy,British English,female,gemma-gb,gnani-v2.5,Are the Horizon Headphones in stock?,are the horizon headphones in stock,0.0,1,,1
+noisy-T03,T03,core,noisy,British English,female,gemma-gb,gnani-v3.0,Are the Horizon Headphones in stock?,Are the Horizon headphones in stock?,0.0,1,,1
+noisy-T03,T03,core,noisy,British English,female,gemma-gb,gnani-v3.0-kt,Are the Horizon Headphones in stock?,Are the Horizon headphones in stock?,0.0,1,,1
+noisy-T03,T03,core,noisy,British English,female,gemma-gb,whisper,Are the Horizon Headphones in stock?,Are the Horizon headphones in stock?,0.0,1,,1
+phone-T03,T03,core,phone,British English,female,gemma-gb,deepgram,Are the Horizon Headphones in stock?,Are the Horizon Headphones in stock?,0.0,1,,1
+phone-T03,T03,core,phone,British English,female,gemma-gb,deepgram-nokt,Are the Horizon Headphones in stock?,Are the Horizon headphones in stock?,0.0,1,,1
+phone-T03,T03,core,phone,British English,female,gemma-gb,deepgram-nosmart,Are the Horizon Headphones in stock?,Are the Horizon Headphones in stock?,0.0,1,,1
+phone-T03,T03,core,phone,British English,female,gemma-gb,gnani-v2.5,Are the Horizon Headphones in stock?,are the horizon headphones in stock,0.0,1,,1
+phone-T03,T03,core,phone,British English,female,gemma-gb,gnani-v3.0,Are the Horizon Headphones in stock?,Are the Horizon headphones in stock?,0.0,1,,1
+phone-T03,T03,core,phone,British English,female,gemma-gb,gnani-v3.0-kt,Are the Horizon Headphones in stock?,Are the Horizon headphones in stock?,0.0,1,,1
+phone-T03,T03,core,phone,British English,female,gemma-gb,whisper,Are the Horizon Headphones in stock?,Are the Horizon headphones in stock?,0.0,1,,1
+clean-T04,T04,core,clean,US English,male,daniel-us,deepgram,Do you have the SafeView Outdoor Camera in stock?,Do you have the SafeView Outdoor Camera in stock?,0.0,1,,1
+clean-T04,T04,core,clean,US English,male,daniel-us,deepgram-nokt,Do you have the SafeView Outdoor Camera in stock?,Do you have the SafeView outdoor camera in stock?,0.0,1,,1
+clean-T04,T04,core,clean,US English,male,daniel-us,deepgram-nosmart,Do you have the SafeView Outdoor Camera in stock?,Do you have the SafeView Outdoor Camera in stock?,0.0,1,,1
+clean-T04,T04,core,clean,US English,male,daniel-us,gnani-v2.5,Do you have the SafeView Outdoor Camera in stock?,do you have the safe view outdoor camera in stock,0.0,1,,1
+clean-T04,T04,core,clean,US English,male,daniel-us,gnani-v3.0,Do you have the SafeView Outdoor Camera in stock?,Do you have the SafeView outdoor camera in stock?,0.0,1,,1
+clean-T04,T04,core,clean,US English,male,daniel-us,gnani-v3.0-kt,Do you have the SafeView Outdoor Camera in stock?,Do you have the SafeView Outdoor Camera in stock?,0.0,1,,1
+clean-T04,T04,core,clean,US English,male,daniel-us,whisper,Do you have the SafeView Outdoor Camera in stock?,Do you have the safe view outdoor camera in stock?,0.0,1,,1
+noisy-T04,T04,core,noisy,US English,male,daniel-us,deepgram,Do you have the SafeView Outdoor Camera in stock?,Do you have the SafeView Outdoor Camera in stock?,0.0,1,,1
+noisy-T04,T04,core,noisy,US English,male,daniel-us,deepgram-nokt,Do you have the SafeView Outdoor Camera in stock?,Do you have the SafeView outdoor camera in stock?,0.0,1,,1
+noisy-T04,T04,core,noisy,US English,male,daniel-us,deepgram-nosmart,Do you have the SafeView Outdoor Camera in stock?,Do you have the SafeView Outdoor Camera in stock?,0.0,1,,1
+noisy-T04,T04,core,noisy,US English,male,daniel-us,gnani-v2.5,Do you have the SafeView Outdoor Camera in stock?,do you have the safe view outdoor camera in stock,0.0,1,,1
+noisy-T04,T04,core,noisy,US English,male,daniel-us,gnani-v3.0,Do you have the SafeView Outdoor Camera in stock?,Do you have the SafeView outdoor camera in stock?,0.0,1,,1
+noisy-T04,T04,core,noisy,US English,male,daniel-us,gnani-v3.0-kt,Do you have the SafeView Outdoor Camera in stock?,Do you have the SafeView Outdoor Camera in stock?,0.0,1,,1
+noisy-T04,T04,core,noisy,US English,male,daniel-us,whisper,Do you have the SafeView Outdoor Camera in stock?,Do you have the safe view outdoor camera in stock?,0.0,1,,1
+phone-T04,T04,core,phone,US English,male,daniel-us,deepgram,Do you have the SafeView Outdoor Camera in stock?,Do you have the SafeView Outdoor Camera in stock?,0.0,1,,1
+phone-T04,T04,core,phone,US English,male,daniel-us,deepgram-nokt,Do you have the SafeView Outdoor Camera in stock?,Do you have the SafeView outdoor camera in stock?,0.0,1,,1
+phone-T04,T04,core,phone,US English,male,daniel-us,deepgram-nosmart,Do you have the SafeView Outdoor Camera in stock?,Do you have the SafeView Outdoor Camera in stock?,0.0,1,,1
+phone-T04,T04,core,phone,US English,male,daniel-us,gnani-v2.5,Do you have the SafeView Outdoor Camera in stock?,do you have the safe view outdoor camera in stock,0.0,1,,1
+phone-T04,T04,core,phone,US English,male,daniel-us,gnani-v3.0,Do you have the SafeView Outdoor Camera in stock?,Do you have the SafeView outdoor camera in stock?,0.0,1,,1
+phone-T04,T04,core,phone,US English,male,daniel-us,gnani-v3.0-kt,Do you have the SafeView Outdoor Camera in stock?,Do you have the SafeView Outdoor Camera in stock?,0.0,1,,1
+phone-T04,T04,core,phone,US English,male,daniel-us,whisper,Do you have the SafeView Outdoor Camera in stock?,Do you have the safe view outdoor camera in stock?,0.0,1,,1
+clean-T05,T05,core,clean,US English,female,skylar-us,deepgram,Is the Glide mouse available right now?,Is the Glide Mouse available right now?,0.0,1,,1
+clean-T05,T05,core,clean,US English,female,skylar-us,deepgram-nokt,Is the Glide mouse available right now?,Is the Glidemouse available right now?,0.0,1,,1
+clean-T05,T05,core,clean,US English,female,skylar-us,deepgram-nosmart,Is the Glide mouse available right now?,Is the Glide Mouse available right now?,0.0,1,,1
+clean-T05,T05,core,clean,US English,female,skylar-us,gnani-v2.5,Is the Glide mouse available right now?,is the glide mouse available right now,0.0,1,,1
+clean-T05,T05,core,clean,US English,female,skylar-us,gnani-v3.0,Is the Glide mouse available right now?,Is the glide mouse available right now?,0.0,1,,1
+clean-T05,T05,core,clean,US English,female,skylar-us,gnani-v3.0-kt,Is the Glide mouse available right now?,Is the Glide mouse available right now?,0.0,1,,1
+clean-T05,T05,core,clean,US English,female,skylar-us,whisper,Is the Glide mouse available right now?,Is the glide mouse available right now?,0.0,1,,1
+noisy-T05,T05,core,noisy,US English,female,skylar-us,deepgram,Is the Glide mouse available right now?,Is the Glide Mouse available right now?,0.0,1,,1
+noisy-T05,T05,core,noisy,US English,female,skylar-us,deepgram-nokt,Is the Glide mouse available right now?,Is the Glidemouse available right now?,0.0,1,,1
+noisy-T05,T05,core,noisy,US English,female,skylar-us,deepgram-nosmart,Is the Glide mouse available right now?,Is the Glide Mouse available right now?,0.0,1,,1
+noisy-T05,T05,core,noisy,US English,female,skylar-us,gnani-v2.5,Is the Glide mouse available right now?,is the glide mouse available right now,0.0,1,,1
+noisy-T05,T05,core,noisy,US English,female,skylar-us,gnani-v3.0,Is the Glide mouse available right now?,Is the glide mouse available right now?,0.0,1,,1
+noisy-T05,T05,core,noisy,US English,female,skylar-us,gnani-v3.0-kt,Is the Glide mouse available right now?,Is the Glide mouse available right now?,0.0,1,,1
+noisy-T05,T05,core,noisy,US English,female,skylar-us,whisper,Is the Glide mouse available right now?,Is the glide mouse available right now?,0.0,1,,1
+phone-T05,T05,core,phone,US English,female,skylar-us,deepgram,Is the Glide mouse available right now?,Is the Glide Mouse available right now?,0.0,1,,1
+phone-T05,T05,core,phone,US English,female,skylar-us,deepgram-nokt,Is the Glide mouse available right now?,Is the Glidemouse available right now?,0.0,1,,1
+phone-T05,T05,core,phone,US English,female,skylar-us,deepgram-nosmart,Is the Glide mouse available right now?,Is the Glide Mouse available right now?,0.0,1,,1
+phone-T05,T05,core,phone,US English,female,skylar-us,gnani-v2.5,Is the Glide mouse available right now?,is the glide mouse available right now,0.0,1,,1
+phone-T05,T05,core,phone,US English,female,skylar-us,gnani-v3.0,Is the Glide mouse available right now?,Is the glide mouse available right now?,0.0,1,,1
+phone-T05,T05,core,phone,US English,female,skylar-us,gnani-v3.0-kt,Is the Glide mouse available right now?,Is the Glide mouse available right now?,0.0,1,,1
+phone-T05,T05,core,phone,US English,female,skylar-us,whisper,Is the Glide mouse available right now?,Is the glide mouse available right now?,0.0,1,,1
+clean-T06,T06,core,clean,British English,male,archie-gb,deepgram,Where is order 9999?,Where is order 9900 and 99?,0.75,1,9999,0
+clean-T06,T06,core,clean,British English,male,archie-gb,deepgram-nokt,Where is order 9999?,Where is order 9900 and 99?,0.75,1,9999,0
+clean-T06,T06,core,clean,British English,male,archie-gb,deepgram-nosmart,Where is order 9999?,Where is order nine thousand nine hundred and ninety nine?,1.5,1,9999,0
+clean-T06,T06,core,clean,British English,male,archie-gb,gnani-v2.5,Where is order 9999?,"where is order 9,999",0.0,1,,1
+clean-T06,T06,core,clean,British English,male,archie-gb,gnani-v3.0,Where is order 9999?,"Where is order 9,999?",0.0,1,,1
+clean-T06,T06,core,clean,British English,male,archie-gb,gnani-v3.0-kt,Where is order 9999?,"Where is order 9,999?",0.0,1,,1
+clean-T06,T06,core,clean,British English,male,archie-gb,whisper,Where is order 9999?,Where is order 9999?,0.0,1,,1
+noisy-T06,T06,core,noisy,British English,male,archie-gb,deepgram,Where is order 9999?,Where is order 9900 and 99?,0.75,1,9999,0
+noisy-T06,T06,core,noisy,British English,male,archie-gb,deepgram-nokt,Where is order 9999?,Where is order 9900 and 99?,0.75,1,9999,0
+noisy-T06,T06,core,noisy,British English,male,archie-gb,deepgram-nosmart,Where is order 9999?,Where is order nine thousand nine hundred and ninety nine?,1.5,1,9999,0
+noisy-T06,T06,core,noisy,British English,male,archie-gb,gnani-v2.5,Where is order 9999?,"where is order 9,999",0.0,1,,1
+noisy-T06,T06,core,noisy,British English,male,archie-gb,gnani-v3.0,Where is order 9999?,"Where is order 9,999?",0.0,1,,1
+noisy-T06,T06,core,noisy,British English,male,archie-gb,gnani-v3.0-kt,Where is order 9999?,"Where is order 9,999?",0.0,1,,1
+noisy-T06,T06,core,noisy,British English,male,archie-gb,whisper,Where is order 9999?,Where is order 9999?,0.0,1,,1
+phone-T06,T06,core,phone,British English,male,archie-gb,deepgram,Where is order 9999?,Where is order 9900 and 99?,0.75,1,9999,0
+phone-T06,T06,core,phone,British English,male,archie-gb,deepgram-nokt,Where is order 9999?,Where is order 9900 and 99?,0.75,1,9999,0
+phone-T06,T06,core,phone,British English,male,archie-gb,deepgram-nosmart,Where is order 9999?,Where is order nine thousand nine hundred and ninety nine?,1.5,1,9999,0
+phone-T06,T06,core,phone,British English,male,archie-gb,gnani-v2.5,Where is order 9999?,"where is order 9,999",0.0,1,,1
+phone-T06,T06,core,phone,British English,male,archie-gb,gnani-v3.0,Where is order 9999?,"Where is order 9,999.",0.0,1,,1
+phone-T06,T06,core,phone,British English,male,archie-gb,gnani-v3.0-kt,Where is order 9999?,"Where is order 9,999?",0.0,1,,1
+phone-T06,T06,core,phone,British English,male,archie-gb,whisper,Where is order 9999?,Where is order 9999?,0.0,1,,1
+clean-T07,T07,core,clean,British English,female,gemma-gb,deepgram,The left earbud of my Pulse Buds Pro from order 4512 stopped working. Please open a warranty ticket.,The left earbud of my Pulse Buds Pro from order 4512 stopped working. Please open a warranty ticket.,0.0,3,,1
+clean-T07,T07,core,clean,British English,female,gemma-gb,deepgram-nokt,The left earbud of my Pulse Buds Pro from order 4512 stopped working. Please open a warranty ticket.,The left earbud of my PulseBuds Pro from order 4512 stopped working. Please open a warranty ticket.,0.0,3,,1
+clean-T07,T07,core,clean,British English,female,gemma-gb,deepgram-nosmart,The left earbud of my Pulse Buds Pro from order 4512 stopped working. Please open a warranty ticket.,The left earbud of my Pulse Buds Pro from order four five one two stopped working. Please open a warranty ticket.,0.0,3,,1
+clean-T07,T07,core,clean,British English,female,gemma-gb,gnani-v2.5,The left earbud of my Pulse Buds Pro from order 4512 stopped working. Please open a warranty ticket.,the left earbud of my pulsebuds pro from order 4512 stopped working please open a warranty ticket,0.0,3,,1
+clean-T07,T07,core,clean,British English,female,gemma-gb,gnani-v3.0,The left earbud of my Pulse Buds Pro from order 4512 stopped working. Please open a warranty ticket.,The left earbud of my Pulse Buds Pro from order 4512 stopped working. Please open a warranty ticket.,0.0,3,,1
+clean-T07,T07,core,clean,British English,female,gemma-gb,gnani-v3.0-kt,The left earbud of my Pulse Buds Pro from order 4512 stopped working. Please open a warranty ticket.,The left earbud of my Pulse Buds Pro from order 4512 stopped working. Please open a warranty ticket.,0.0,3,,1
+clean-T07,T07,core,clean,British English,female,gemma-gb,whisper,The left earbud of my Pulse Buds Pro from order 4512 stopped working. Please open a warranty ticket.,The left earbud of my pulse buds pro from order four five one two stopped working. Please open a warranty ticket,0.0,3,,1
+noisy-T07,T07,core,noisy,British English,female,gemma-gb,deepgram,The left earbud of my Pulse Buds Pro from order 4512 stopped working. Please open a warranty ticket.,The left earbud of my Pulse Buds Pro from order 4512 stopped working. Please open a warranty ticket.,0.0,3,,1
+noisy-T07,T07,core,noisy,British English,female,gemma-gb,deepgram-nokt,The left earbud of my Pulse Buds Pro from order 4512 stopped working. Please open a warranty ticket.,The left earbud of my Pulse Buds Pro from order 4512 stopped working. Please open a warranty ticket.,0.0,3,,1
+noisy-T07,T07,core,noisy,British English,female,gemma-gb,deepgram-nosmart,The left earbud of my Pulse Buds Pro from order 4512 stopped working. Please open a warranty ticket.,The left earbud of my Pulse Buds Pro from order four five one two stopped working. Please open a warranty ticket.,0.0,3,,1
+noisy-T07,T07,core,noisy,British English,female,gemma-gb,gnani-v2.5,The left earbud of my Pulse Buds Pro from order 4512 stopped working. Please open a warranty ticket.,the left earbud of my pulsebuds pro from order 4512 stopped working please open a warranty ticket,0.0,3,,1
+noisy-T07,T07,core,noisy,British English,female,gemma-gb,gnani-v3.0,The left earbud of my Pulse Buds Pro from order 4512 stopped working. Please open a warranty ticket.,The left earbud of my Pulse Buds Pro from order 4512 stopped working. Please open a warranty ticket.,0.0,3,,1
+noisy-T07,T07,core,noisy,British English,female,gemma-gb,gnani-v3.0-kt,The left earbud of my Pulse Buds Pro from order 4512 stopped working. Please open a warranty ticket.,The left earbud of my Pulse Buds Pro from order 4512 stopped working. Please open a warranty ticket.,0.0,3,,1
+noisy-T07,T07,core,noisy,British English,female,gemma-gb,whisper,The left earbud of my Pulse Buds Pro from order 4512 stopped working. Please open a warranty ticket.,The left earbud of my pulse buds Pro from order 4512 stopped working. Please open a warranty ticket,0.0,3,,1
+phone-T07,T07,core,phone,British English,female,gemma-gb,deepgram,The left earbud of my Pulse Buds Pro from order 4512 stopped working. Please open a warranty ticket.,The left earbud of my Pulse Buds Pro from order 4512 stopped working. Please open a warranty ticket.,0.0,3,,1
+phone-T07,T07,core,phone,British English,female,gemma-gb,deepgram-nokt,The left earbud of my Pulse Buds Pro from order 4512 stopped working. Please open a warranty ticket.,The left earbud of my Pulse Buds Pro from order 4512 stopped working. Please open a warranty ticket.,0.0,3,,1
+phone-T07,T07,core,phone,British English,female,gemma-gb,deepgram-nosmart,The left earbud of my Pulse Buds Pro from order 4512 stopped working. Please open a warranty ticket.,The left earbud of my Pulse Buds Pro from order four five one two stopped working. Please open a warranty ticket.,0.0,3,,1
+phone-T07,T07,core,phone,British English,female,gemma-gb,gnani-v2.5,The left earbud of my Pulse Buds Pro from order 4512 stopped working. Please open a warranty ticket.,the left earbud of my pulsebuds pro from order 4512 stopped working please open a warranty ticket,0.0,3,,1
+phone-T07,T07,core,phone,British English,female,gemma-gb,gnani-v3.0,The left earbud of my Pulse Buds Pro from order 4512 stopped working. Please open a warranty ticket.,The left earbud of my Pulse Buds Pro from order 4512 stopped working please open a warranty ticket.,0.0,3,,1
+phone-T07,T07,core,phone,British English,female,gemma-gb,gnani-v3.0-kt,The left earbud of my Pulse Buds Pro from order 4512 stopped working. Please open a warranty ticket.,The left earbud of my Pulse Buds Pro from order 4512 stopped working. Please open a warranty ticket.,0.0,3,,1
+phone-T07,T07,core,phone,British English,female,gemma-gb,whisper,The left earbud of my Pulse Buds Pro from order 4512 stopped working. Please open a warranty ticket.,The left earbud of my pulse buds pro from order 4512 stopped working. Please open a warranty ticket,0.0,3,,1
+clean-T09,T09,core,clean,US English,male,daniel-us,deepgram,"Is the Keystone keyboard in stock, and how much is it?",Is the Keystone Keyboard in stock and how much is it?,0.0,1,,1
+clean-T09,T09,core,clean,US English,male,daniel-us,deepgram-nokt,"Is the Keystone keyboard in stock, and how much is it?",Is the Keystone keyboard in stock and how much is it?,0.0,1,,1
+clean-T09,T09,core,clean,US English,male,daniel-us,deepgram-nosmart,"Is the Keystone keyboard in stock, and how much is it?",Is the Keystone Keyboard in stock and how much is it?,0.0,1,,1
+clean-T09,T09,core,clean,US English,male,daniel-us,gnani-v2.5,"Is the Keystone keyboard in stock, and how much is it?",is the keystone keyboard in stock and how much is it,0.0,1,,1
+clean-T09,T09,core,clean,US English,male,daniel-us,gnani-v3.0,"Is the Keystone keyboard in stock, and how much is it?","Is the Keystone keyboard in stock, and how much is it?",0.0,1,,1
+clean-T09,T09,core,clean,US English,male,daniel-us,gnani-v3.0-kt,"Is the Keystone keyboard in stock, and how much is it?","Is the Keystone keyboard in stock, and how much is it?",0.0,1,,1
+clean-T09,T09,core,clean,US English,male,daniel-us,whisper,"Is the Keystone keyboard in stock, and how much is it?",Is the Keystone keyboard in stock and how much is it?,0.0,1,,1
+noisy-T09,T09,core,noisy,US English,male,daniel-us,deepgram,"Is the Keystone keyboard in stock, and how much is it?","Is the Keystone Keyboard in stock, and how much is it?",0.0,1,,1
+noisy-T09,T09,core,noisy,US English,male,daniel-us,deepgram-nokt,"Is the Keystone keyboard in stock, and how much is it?","Is the Keystone keyboard in stock, and how much is it?",0.0,1,,1
+noisy-T09,T09,core,noisy,US English,male,daniel-us,deepgram-nosmart,"Is the Keystone keyboard in stock, and how much is it?","Is the Keystone Keyboard in stock, and how much is it?",0.0,1,,1
+noisy-T09,T09,core,noisy,US English,male,daniel-us,gnani-v2.5,"Is the Keystone keyboard in stock, and how much is it?",is the keystone keyboard in stock and how much is it,0.0,1,,1
+noisy-T09,T09,core,noisy,US English,male,daniel-us,gnani-v3.0,"Is the Keystone keyboard in stock, and how much is it?","Is the Keystone keyboard in stock, and how much is it?",0.0,1,,1
+noisy-T09,T09,core,noisy,US English,male,daniel-us,gnani-v3.0-kt,"Is the Keystone keyboard in stock, and how much is it?","Is the Keystone keyboard in stock, and how much is it?",0.0,1,,1
+noisy-T09,T09,core,noisy,US English,male,daniel-us,whisper,"Is the Keystone keyboard in stock, and how much is it?","Is the Keystone keyboard in stock, and how much is it?",0.0,1,,1
+phone-T09,T09,core,phone,US English,male,daniel-us,deepgram,"Is the Keystone keyboard in stock, and how much is it?","Is the Keystone Keyboard in stock, and how much is it?",0.0,1,,1
+phone-T09,T09,core,phone,US English,male,daniel-us,deepgram-nokt,"Is the Keystone keyboard in stock, and how much is it?","Is the Keystone keyboard in stock, and how much is it?",0.0,1,,1
+phone-T09,T09,core,phone,US English,male,daniel-us,deepgram-nosmart,"Is the Keystone keyboard in stock, and how much is it?","Is the Keystone Keyboard in stock, and how much is it?",0.0,1,,1
+phone-T09,T09,core,phone,US English,male,daniel-us,gnani-v2.5,"Is the Keystone keyboard in stock, and how much is it?",is the keystone keyboard in stock and how much is it,0.0,1,,1
+phone-T09,T09,core,phone,US English,male,daniel-us,gnani-v3.0,"Is the Keystone keyboard in stock, and how much is it?","Is the Keystone keyboard in stock, and how much is it?",0.0,1,,1
+phone-T09,T09,core,phone,US English,male,daniel-us,gnani-v3.0-kt,"Is the Keystone keyboard in stock, and how much is it?","Is the Keystone keyboard in stock, and how much is it?",0.0,1,,1
+phone-T09,T09,core,phone,US English,male,daniel-us,whisper,"Is the Keystone keyboard in stock, and how much is it?","Is the Keystone keyboard in stock, and how much is it?",0.0,1,,1
+clean-T10,T10,core,clean,US English,female,skylar-us,deepgram,Has order 4521 shipped yet?,Has order 4521 shipped yet?,0.0,2,,1
+clean-T10,T10,core,clean,US English,female,skylar-us,deepgram-nokt,Has order 4521 shipped yet?,Has order 4521 shipped yet?,0.0,2,,1
+clean-T10,T10,core,clean,US English,female,skylar-us,deepgram-nosmart,Has order 4521 shipped yet?,Has order four five two one shipped yet?,0.0,2,,1
+clean-T10,T10,core,clean,US English,female,skylar-us,gnani-v2.5,Has order 4521 shipped yet?,has order 4521 shipped yet,0.0,2,,1
+clean-T10,T10,core,clean,US English,female,skylar-us,gnani-v3.0,Has order 4521 shipped yet?,Has order 4521 shipped yet.,0.0,2,,1
+clean-T10,T10,core,clean,US English,female,skylar-us,gnani-v3.0-kt,Has order 4521 shipped yet?,Has order 4521 shipped yet?,0.0,2,,1
+clean-T10,T10,core,clean,US English,female,skylar-us,whisper,Has order 4521 shipped yet?,Has order 4521 shipped yet?,0.0,2,,1
+noisy-T10,T10,core,noisy,US English,female,skylar-us,deepgram,Has order 4521 shipped yet?,Has orders 4521 shipped yet?,0.2,2,,1
+noisy-T10,T10,core,noisy,US English,female,skylar-us,deepgram-nokt,Has order 4521 shipped yet?,Has orders 4521 shipped yet?,0.2,2,,1
+noisy-T10,T10,core,noisy,US English,female,skylar-us,deepgram-nosmart,Has order 4521 shipped yet?,Has orders four five two one shipped yet?,0.2,2,,1
+noisy-T10,T10,core,noisy,US English,female,skylar-us,gnani-v2.5,Has order 4521 shipped yet?,has order 4521 shipped yet,0.0,2,,1
+noisy-T10,T10,core,noisy,US English,female,skylar-us,gnani-v3.0,Has order 4521 shipped yet?,Has order 4521 shipped yet.,0.0,2,,1
+noisy-T10,T10,core,noisy,US English,female,skylar-us,gnani-v3.0-kt,Has order 4521 shipped yet?,Has order 4521 shipped yet?,0.0,2,,1
+noisy-T10,T10,core,noisy,US English,female,skylar-us,whisper,Has order 4521 shipped yet?,Has order four five two one shift yet?,0.2,2,,1
+phone-T10,T10,core,phone,US English,female,skylar-us,deepgram,Has order 4521 shipped yet?,Has order 4521 shipped yet?,0.0,2,,1
+phone-T10,T10,core,phone,US English,female,skylar-us,deepgram-nokt,Has order 4521 shipped yet?,Has order 4521 shipped yet?,0.0,2,,1
+phone-T10,T10,core,phone,US English,female,skylar-us,deepgram-nosmart,Has order 4521 shipped yet?,Has order four five two one shipped yet?,0.0,2,,1
+phone-T10,T10,core,phone,US English,female,skylar-us,gnani-v2.5,Has order 4521 shipped yet?,has order 4521 shipped yet,0.0,2,,1
+phone-T10,T10,core,phone,US English,female,skylar-us,gnani-v3.0,Has order 4521 shipped yet?,Has ordered 4521 shipped yet.,0.2,2,,1
+phone-T10,T10,core,phone,US English,female,skylar-us,gnani-v3.0-kt,Has order 4521 shipped yet?,Has order 4521 shipped yet?,0.0,2,,1
+phone-T10,T10,core,phone,US English,female,skylar-us,whisper,Has order 4521 shipped yet?,Has order 4521 shipped yet?,0.0,2,,1
+accent-F01,F01,accent,accent,Indian English,male,devansh-in,deepgram,How much do the Pulse Buds Pro cost?,How much do the Pulse Buds Pro cost?,0.0,1,,1
+accent-F01,F01,accent,accent,Indian English,male,devansh-in,deepgram-nokt,How much do the Pulse Buds Pro cost?,How much do the Pulsebuds Pro cost?,0.0,1,,1
+accent-F01,F01,accent,accent,Indian English,male,devansh-in,deepgram-nosmart,How much do the Pulse Buds Pro cost?,How much do the Pulse Buds Pro cost?,0.0,1,,1
+accent-F01,F01,accent,accent,Indian English,male,devansh-in,gnani-v2.5,How much do the Pulse Buds Pro cost?,how much do the pulse buds pro cost,0.0,1,,1
+accent-F01,F01,accent,accent,Indian English,male,devansh-in,gnani-v3.0,How much do the Pulse Buds Pro cost?,How much do the pulse buds pro cost?,0.0,1,,1
+accent-F01,F01,accent,accent,Indian English,male,devansh-in,gnani-v3.0-kt,How much do the Pulse Buds Pro cost?,How much do the Pulse Buds Pro cost?,0.0,1,,1
+accent-F01,F01,accent,accent,Indian English,male,devansh-in,whisper,How much do the Pulse Buds Pro cost?,How much do the Pulsebuds Pro cost?,0.0,1,,1
+accent-F02,F02,accent,accent,Indian English,female,kiara-in,deepgram,What's the battery life on the regular Pulse Buds?,What's the battery life on the regular Pulse Buds?,0.0,1,,1
+accent-F02,F02,accent,accent,Indian English,female,kiara-in,deepgram-nokt,What's the battery life on the regular Pulse Buds?,What's the battery life on the regular PulseBuds?,0.0,1,,1
+accent-F02,F02,accent,accent,Indian English,female,kiara-in,deepgram-nosmart,What's the battery life on the regular Pulse Buds?,What's the battery life on the regular Pulse Buds?,0.0,1,,1
+accent-F02,F02,accent,accent,Indian English,female,kiara-in,gnani-v2.5,What's the battery life on the regular Pulse Buds?,what's the battery life on the regular pulse buds,0.0,1,,1
+accent-F02,F02,accent,accent,Indian English,female,kiara-in,gnani-v3.0,What's the battery life on the regular Pulse Buds?,What's the battery life on the regular pulse buds?,0.0,1,,1
+accent-F02,F02,accent,accent,Indian English,female,kiara-in,gnani-v3.0-kt,What's the battery life on the regular Pulse Buds?,What's the battery life on the regular Pulse Buds?,0.0,1,,1
+accent-F02,F02,accent,accent,Indian English,female,kiara-in,whisper,What's the battery life on the regular Pulse Buds?,What's the battery life on the regular pulse buds?,0.0,1,,1
+accent-F03,F03,accent,accent,Indian English,male,devansh-in,deepgram,Do the standard Pulse Buds have noise cancelling?,Do the standard Pulse Buds have noise cancelling?,0.0,1,,1
+accent-F03,F03,accent,accent,Indian English,male,devansh-in,deepgram-nokt,Do the standard Pulse Buds have noise cancelling?,Do the standard pulse buds have noise cancelling?,0.0,1,,1
+accent-F03,F03,accent,accent,Indian English,male,devansh-in,deepgram-nosmart,Do the standard Pulse Buds have noise cancelling?,Do the standard Pulse Buds have noise cancelling?,0.0,1,,1
+accent-F03,F03,accent,accent,Indian English,male,devansh-in,gnani-v2.5,Do the standard Pulse Buds have noise cancelling?,do the standard pulse buds have noise cancelling,0.0,1,,1
+accent-F03,F03,accent,accent,Indian English,male,devansh-in,gnani-v3.0,Do the standard Pulse Buds have noise cancelling?,Do the standard pulse buds have noise cancelling,0.0,1,,1
+accent-F03,F03,accent,accent,Indian English,male,devansh-in,gnani-v3.0-kt,Do the standard Pulse Buds have noise cancelling?,Do the standard Pulse Buds have noise cancelling?,0.0,1,,1
+accent-F03,F03,accent,accent,Indian English,male,devansh-in,whisper,Do the standard Pulse Buds have noise cancelling?,Do the standard pulse buds have noise cancelling?,0.0,1,,1
+accent-F04,F04,accent,accent,Indian English,female,kiara-in,deepgram,How long is the warranty on the Horizon Headphones?,How long is the warranty on the Horizon Headphones?,0.0,1,,1
+accent-F04,F04,accent,accent,Indian English,female,kiara-in,deepgram-nokt,How long is the warranty on the Horizon Headphones?,How long is the warranty on the Horizon headphones?,0.0,1,,1
+accent-F04,F04,accent,accent,Indian English,female,kiara-in,deepgram-nosmart,How long is the warranty on the Horizon Headphones?,How long is the warranty on the Horizon Headphones?,0.0,1,,1
+accent-F04,F04,accent,accent,Indian English,female,kiara-in,gnani-v2.5,How long is the warranty on the Horizon Headphones?,how long is the warranty on the horizon headphones,0.0,1,,1
+accent-F04,F04,accent,accent,Indian English,female,kiara-in,gnani-v3.0,How long is the warranty on the Horizon Headphones?,How long is the warranty on the Horizon headphones?,0.0,1,,1
+accent-F04,F04,accent,accent,Indian English,female,kiara-in,gnani-v3.0-kt,How long is the warranty on the Horizon Headphones?,How long is the warranty on the Horizon headphones?,0.0,1,,1
+accent-F04,F04,accent,accent,Indian English,female,kiara-in,whisper,How long is the warranty on the Horizon Headphones?,How long is the warranty on the Horizon headphones?,0.0,1,,1
+accent-F05,F05,accent,accent,Indian English,male,devansh-in,deepgram,What's your return window?,What's your return window?,0.0,0,,1
+accent-F05,F05,accent,accent,Indian English,male,devansh-in,deepgram-nokt,What's your return window?,What's your return window?,0.0,0,,1
+accent-F05,F05,accent,accent,Indian English,male,devansh-in,deepgram-nosmart,What's your return window?,What's your return window?,0.0,0,,1
+accent-F05,F05,accent,accent,Indian English,male,devansh-in,gnani-v2.5,What's your return window?,what's your return window,0.0,0,,1
+accent-F05,F05,accent,accent,Indian English,male,devansh-in,gnani-v3.0,What's your return window?,What's your return window,0.0,0,,1
+accent-F05,F05,accent,accent,Indian English,male,devansh-in,gnani-v3.0-kt,What's your return window?,What's your return window?,0.0,0,,1
+accent-F05,F05,accent,accent,Indian English,male,devansh-in,whisper,What's your return window?,What's your return window?,0.0,0,,1
+accent-F06,F06,accent,accent,Indian English,female,kiara-in,deepgram,Can I return Pulse Buds after I've opened them?,Can I return Pulse Buds after I've opened them?,0.0,1,,1
+accent-F06,F06,accent,accent,Indian English,female,kiara-in,deepgram-nokt,Can I return Pulse Buds after I've opened them?,Can I return pulse buds after I've opened them?,0.0,1,,1
+accent-F06,F06,accent,accent,Indian English,female,kiara-in,deepgram-nosmart,Can I return Pulse Buds after I've opened them?,Can I return Pulse Buds after I've opened them?,0.0,1,,1
+accent-F06,F06,accent,accent,Indian English,female,kiara-in,gnani-v2.5,Can I return Pulse Buds after I've opened them?,can i return pulse buds after i've opened them,0.0,1,,1
+accent-F06,F06,accent,accent,Indian English,female,kiara-in,gnani-v3.0,Can I return Pulse Buds after I've opened them?,Can I return pulse buds after I've opened them?,0.0,1,,1
+accent-F06,F06,accent,accent,Indian English,female,kiara-in,gnani-v3.0-kt,Can I return Pulse Buds after I've opened them?,Can I return Pulse Buds after I've opened them?,0.0,1,,1
+accent-F06,F06,accent,accent,Indian English,female,kiara-in,whisper,Can I return Pulse Buds after I've opened them?,Can I return pulse buds after I have opened them?,0.222,1,,1
+accent-F07,F07,accent,accent,Indian English,male,devansh-in,deepgram,How much is next-day delivery?,How much is next day delivery?,0.0,0,,1
+accent-F07,F07,accent,accent,Indian English,male,devansh-in,deepgram-nokt,How much is next-day delivery?,How much is next day delivery?,0.0,0,,1
+accent-F07,F07,accent,accent,Indian English,male,devansh-in,deepgram-nosmart,How much is next-day delivery?,How much is next day delivery?,0.0,0,,1
+accent-F07,F07,accent,accent,Indian English,male,devansh-in,gnani-v2.5,How much is next-day delivery?,how much is next day delivery,0.0,0,,1
+accent-F07,F07,accent,accent,Indian English,male,devansh-in,gnani-v3.0,How much is next-day delivery?,How much is next day delivery,0.0,0,,1
+accent-F07,F07,accent,accent,Indian English,male,devansh-in,gnani-v3.0-kt,How much is next-day delivery?,How much is next day delivery?,0.0,0,,1
+accent-F07,F07,accent,accent,Indian English,male,devansh-in,whisper,How much is next-day delivery?,How much is next day delivery?,0.0,0,,1
+accent-F08,F08,accent,accent,Indian English,female,kiara-in,deepgram,Is shipping free?,Is shipping free?,0.0,0,,1
+accent-F08,F08,accent,accent,Indian English,female,kiara-in,deepgram-nokt,Is shipping free?,Is shipping free?,0.0,0,,1
+accent-F08,F08,accent,accent,Indian English,female,kiara-in,deepgram-nosmart,Is shipping free?,Is shipping free?,0.0,0,,1
+accent-F08,F08,accent,accent,Indian English,female,kiara-in,gnani-v2.5,Is shipping free?,is shipping free,0.0,0,,1
+accent-F08,F08,accent,accent,Indian English,female,kiara-in,gnani-v3.0,Is shipping free?,Is shipping free,0.0,0,,1
+accent-F08,F08,accent,accent,Indian English,female,kiara-in,gnani-v3.0-kt,Is shipping free?,Is shipping free?,0.0,0,,1
+accent-F08,F08,accent,accent,Indian English,female,kiara-in,whisper,Is shipping free?,Is shipping free?,0.0,0,,1
+accent-F09,F09,accent,accent,Indian English,male,devansh-in,deepgram,Do you ship to Canada?,Do you ship to Canada?,0.0,1,,1
+accent-F09,F09,accent,accent,Indian English,male,devansh-in,deepgram-nokt,Do you ship to Canada?,Do you ship to Canada?,0.0,1,,1
+accent-F09,F09,accent,accent,Indian English,male,devansh-in,deepgram-nosmart,Do you ship to Canada?,Do you ship to Canada?,0.0,1,,1
+accent-F09,F09,accent,accent,Indian English,male,devansh-in,gnani-v2.5,Do you ship to Canada?,do you ship to canada,0.0,1,,1
+accent-F09,F09,accent,accent,Indian English,male,devansh-in,gnani-v3.0,Do you ship to Canada?,Do you ship to Canada?,0.0,1,,1
+accent-F09,F09,accent,accent,Indian English,male,devansh-in,gnani-v3.0-kt,Do you ship to Canada?,Do you ship to Canada?,0.0,1,,1
+accent-F09,F09,accent,accent,Indian English,male,devansh-in,whisper,Do you ship to Canada?,Do you ship to Canada?,0.0,1,,1
+accent-F10,F10,accent,accent,Indian English,female,kiara-in,deepgram,Do the SafeView cameras work on 5 gigahertz Wi-Fi?,Do the SafeView cameras work on five gigahertz Wi Fi?,0.0,3,,1
+accent-F10,F10,accent,accent,Indian English,female,kiara-in,deepgram-nokt,Do the SafeView cameras work on 5 gigahertz Wi-Fi?,Do the SafeView cameras work on five gigahertz Wi Fi?,0.0,3,,1
+accent-F10,F10,accent,accent,Indian English,female,kiara-in,deepgram-nosmart,Do the SafeView cameras work on 5 gigahertz Wi-Fi?,Do the SafeView cameras work on five gigahertz Wi Fi?,0.0,3,,1
+accent-F10,F10,accent,accent,Indian English,female,kiara-in,gnani-v2.5,Do the SafeView cameras work on 5 gigahertz Wi-Fi?,do the safe few cameras work on five gigahertz wi fi,0.2,3,SafeView,0
+accent-F10,F10,accent,accent,Indian English,female,kiara-in,gnani-v3.0,Do the SafeView cameras work on 5 gigahertz Wi-Fi?,Do the SafeView cameras work on 5 GHz Wi-Fi?,0.0,3,,1
+accent-F10,F10,accent,accent,Indian English,female,kiara-in,gnani-v3.0-kt,Do the SafeView cameras work on 5 gigahertz Wi-Fi?,Do the SafeView cameras work on 5 gigahertz Wi-Fi?,0.0,3,,1
+accent-F10,F10,accent,accent,Indian English,female,kiara-in,whisper,Do the SafeView cameras work on 5 gigahertz Wi-Fi?,Do the same few cameras work on 5GHz Wi-Fi?,0.2,3,SafeView,0
+accent-T01,T01,accent,accent,Indian English,male,devansh-in,deepgram,What's the status of order 4512?,What's the status of order 4512?,0.0,1,,1
+accent-T01,T01,accent,accent,Indian English,male,devansh-in,deepgram-nokt,What's the status of order 4512?,What's the status of order 4512?,0.0,1,,1
+accent-T01,T01,accent,accent,Indian English,male,devansh-in,deepgram-nosmart,What's the status of order 4512?,What's the status of order four five one two?,0.0,1,,1
+accent-T01,T01,accent,accent,Indian English,male,devansh-in,gnani-v2.5,What's the status of order 4512?,what's the status of order 4512,0.0,1,,1
+accent-T01,T01,accent,accent,Indian English,male,devansh-in,gnani-v3.0,What's the status of order 4512?,What's the status of order 4512.,0.0,1,,1
+accent-T01,T01,accent,accent,Indian English,male,devansh-in,gnani-v3.0-kt,What's the status of order 4512?,What's the status of order 4512?,0.0,1,,1
+accent-T01,T01,accent,accent,Indian English,male,devansh-in,whisper,What's the status of order 4512?,What's the status of order 4512?,0.0,1,,1
+accent-T02,T02,accent,accent,Indian English,female,kiara-in,deepgram,Can you check on order 4378 for me?,Can you check on order 4378 for me?,0.0,1,,1
+accent-T02,T02,accent,accent,Indian English,female,kiara-in,deepgram-nokt,Can you check on order 4378 for me?,Can you check on order 4378 for me?,0.0,1,,1
+accent-T02,T02,accent,accent,Indian English,female,kiara-in,deepgram-nosmart,Can you check on order 4378 for me?,Can you check on order four three seven eight for me?,0.0,1,,1
+accent-T02,T02,accent,accent,Indian English,female,kiara-in,gnani-v2.5,Can you check on order 4378 for me?,can you check on order 4378 for me,0.0,1,,1
+accent-T02,T02,accent,accent,Indian English,female,kiara-in,gnani-v3.0,Can you check on order 4378 for me?,Can you check on order 4378 for me.,0.0,1,,1
+accent-T02,T02,accent,accent,Indian English,female,kiara-in,gnani-v3.0-kt,Can you check on order 4378 for me?,Can you check on order 4378 for me?,0.0,1,,1
+accent-T02,T02,accent,accent,Indian English,female,kiara-in,whisper,Can you check on order 4378 for me?,Can you check on order 4378 for me?,0.0,1,,1
+accent-T03,T03,accent,accent,Indian English,male,devansh-in,deepgram,Are the Horizon Headphones in stock?,Are the Horizon Headphones in stock?,0.0,1,,1
+accent-T03,T03,accent,accent,Indian English,male,devansh-in,deepgram-nokt,Are the Horizon Headphones in stock?,Are the Horizon headphones in stock?,0.0,1,,1
+accent-T03,T03,accent,accent,Indian English,male,devansh-in,deepgram-nosmart,Are the Horizon Headphones in stock?,Are the Horizon Headphones in stock?,0.0,1,,1
+accent-T03,T03,accent,accent,Indian English,male,devansh-in,gnani-v2.5,Are the Horizon Headphones in stock?,are the horizon headphones in stock,0.0,1,,1
+accent-T03,T03,accent,accent,Indian English,male,devansh-in,gnani-v3.0,Are the Horizon Headphones in stock?,Are the Horizon headphones in stock?,0.0,1,,1
+accent-T03,T03,accent,accent,Indian English,male,devansh-in,gnani-v3.0-kt,Are the Horizon Headphones in stock?,Are the Horizon Headphones in stock?,0.0,1,,1
+accent-T03,T03,accent,accent,Indian English,male,devansh-in,whisper,Are the Horizon Headphones in stock?,Are the Horizon headphones in stock?,0.0,1,,1
+accent-T04,T04,accent,accent,Indian English,female,kiara-in,deepgram,Do you have the SafeView Outdoor Camera in stock?,Do you have the SafeView Outdoor Camera in stock?,0.0,1,,1
+accent-T04,T04,accent,accent,Indian English,female,kiara-in,deepgram-nokt,Do you have the SafeView Outdoor Camera in stock?,Do you have the SafeView outdoor camera in stock?,0.0,1,,1
+accent-T04,T04,accent,accent,Indian English,female,kiara-in,deepgram-nosmart,Do you have the SafeView Outdoor Camera in stock?,Do you have the SafeView Outdoor Camera in stock?,0.0,1,,1
+accent-T04,T04,accent,accent,Indian English,female,kiara-in,gnani-v2.5,Do you have the SafeView Outdoor Camera in stock?,do you have the safe view outdoor camera in stock,0.0,1,,1
+accent-T04,T04,accent,accent,Indian English,female,kiara-in,gnani-v3.0,Do you have the SafeView Outdoor Camera in stock?,Do you have the SafeView outdoor camera in stock?,0.0,1,,1
+accent-T04,T04,accent,accent,Indian English,female,kiara-in,gnani-v3.0-kt,Do you have the SafeView Outdoor Camera in stock?,Do you have the SafeView Outdoor Camera in stock?,0.0,1,,1
+accent-T04,T04,accent,accent,Indian English,female,kiara-in,whisper,Do you have the SafeView Outdoor Camera in stock?,Do you have the safe view outdoor camera in stock?,0.0,1,,1
+accent-T05,T05,accent,accent,Indian English,male,devansh-in,deepgram,Is the Glide mouse available right now?,Is the Glide mouse available right now?,0.0,1,,1
+accent-T05,T05,accent,accent,Indian English,male,devansh-in,deepgram-nokt,Is the Glide mouse available right now?,Is the Glide mouse available right now?,0.0,1,,1
+accent-T05,T05,accent,accent,Indian English,male,devansh-in,deepgram-nosmart,Is the Glide mouse available right now?,Is the Glide mouse available right now?,0.0,1,,1
+accent-T05,T05,accent,accent,Indian English,male,devansh-in,gnani-v2.5,Is the Glide mouse available right now?,is the glide mouse available right now,0.0,1,,1
+accent-T05,T05,accent,accent,Indian English,male,devansh-in,gnani-v3.0,Is the Glide mouse available right now?,Is the glide mouse available right now?,0.0,1,,1
+accent-T05,T05,accent,accent,Indian English,male,devansh-in,gnani-v3.0-kt,Is the Glide mouse available right now?,Is the Glide Wireless Mouse available right now?,0.143,1,,1
+accent-T05,T05,accent,accent,Indian English,male,devansh-in,whisper,Is the Glide mouse available right now?,Is the Glide mouse available right now?,0.0,1,,1

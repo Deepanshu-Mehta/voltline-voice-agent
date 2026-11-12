@@ -87,6 +87,10 @@ def check_expectations(expect: dict, rows: list[dict]) -> list[str]:
         n = sum(1 for r in rows if json.loads(r["extra"] or "{}").get("voice", {}).get("interrupted"))
         if n < expect["interrupted_turns"]:
             problems.append(f"expected {expect['interrupted_turns']} interrupted turn(s), saw {n}")
+    if "max_interrupted_turns" in expect:
+        n = sum(1 for r in rows if json.loads(r["extra"] or "{}").get("voice", {}).get("interrupted"))
+        if n > expect["max_interrupted_turns"]:
+            problems.append(f"the agent was stopped {n} time(s); expected at most {expect['max_interrupted_turns']}")
     if "max_user_turns" in expect and len(rows) > expect["max_user_turns"]:
         problems.append(f"the user was cut off: {len(rows)} turns instead of {expect['max_user_turns']}")
     return problems
@@ -148,9 +152,14 @@ async def run_scenario(page, site: str, api: str, scenario: dict, out_dir: Path,
         timing = await page.evaluate(f"__driver.play('/__clips/scenarios/{clip_path.name}')")
         speech_end = timing["start"] + speech_end_offset_ms(samples)
         played.append((timing["start"], samples))
-        reply_onset = await wait_for(lambda: page.evaluate(
-            f"(__driver.events.find(e => e.kind === 'onset' && e.t > {speech_end}) || {{}}).t"), 30)
-        turns.append({"turn": n, "text": turn["text"], "speech_end": speech_end,
+        if turn.get("backchannel") or turn.get("no_reply"):
+            # Not a question: the agent should carry on (backchannel) or stay quiet (noise).
+            await asyncio.sleep(len(samples) / RATE + 2.5)
+            reply_onset = None
+        else:
+            reply_onset = await wait_for(lambda: page.evaluate(
+                f"(__driver.events.find(e => e.kind === 'onset' && e.t > {speech_end}) || {{}}).t"), 30)
+        turns.append({"turn": n, "text": turn.get("text") or f"[{turn.get('noise')}]", "speech_end": speech_end,
                       "measured_response_ms": round(reply_onset - speech_end) if reply_onset else None})
 
     await wait_for(lambda: page.evaluate("__driver.state() === 'Listening'"), 45)

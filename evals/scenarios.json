@@ -160,5 +160,159 @@
         "two-year"
       ]
     }
+  },
+  {
+    "id": "TT1-pause-1s",
+    "purpose": "a 1 s pause mid-sentence must not end the turn",
+    "turns": [
+      {
+        "text": "Is the Keystone keyboard | in stock?",
+        "pause_ms": 1000
+      }
+    ],
+    "expect": {
+      "tools": [
+        "check_stock"
+      ],
+      "max_user_turns": 1
+    }
+  },
+  {
+    "id": "TT2-pause-2s",
+    "purpose": "a 2 s pause mid-sentence must not end the turn",
+    "turns": [
+      {
+        "text": "What is the warranty on the | Horizon Headphones?",
+        "pause_ms": 2000
+      }
+    ],
+    "expect": {
+      "max_user_turns": 1,
+      "final_includes_any": [
+        "24 months",
+        "two years",
+        "2 years",
+        "24-month",
+        "two-year",
+        "twenty four"
+      ]
+    }
+  },
+  {
+    "id": "TT3-backchannel",
+    "purpose": "a short 'mm-hm' while the agent talks must not stop it",
+    "turns": [
+      {
+        "text": "Tell me about the Dockline dock."
+      },
+      {
+        "text": "Mm-hm.",
+        "interrupt_after_ms": 2500,
+        "backchannel": true
+      }
+    ],
+    "expect": {
+      "max_interrupted_turns": 0,
+      "max_user_turns": 1
+    }
+  },
+  {
+    "id": "TT4-early-interrupt",
+    "purpose": "the user cuts in 0.4 s into a long reply",
+    "turns": [
+      {
+        "text": "Tell me everything about the Horizon Headphones."
+      },
+      {
+        "text": "Just the price, please.",
+        "interrupt_after_ms": 400
+      }
+    ],
+    "expect": {
+      "interrupted_turns": 1,
+      "final_includes_any": [
+        "229.99"
+      ]
+    }
+  },
+  {
+    "id": "TT5-late-interrupt",
+    "purpose": "the user cuts in 4 s into a long reply",
+    "turns": [
+      {
+        "text": "Tell me everything about the ThermoSense thermostat."
+      },
+      {
+        "text": "Sorry, does it come in white?",
+        "interrupt_after_ms": 4000
+      }
+    ],
+    "expect": {
+      "interrupted_turns": 1,
+      "final_includes_any": [
+        "white"
+      ]
+    }
+  },
+  {
+    "id": "TT6-cough",
+    "purpose": "a cough while the agent is listening must not start a turn",
+    "turns": [
+      {
+        "text": "How much is the Glide mouse?"
+      },
+      {
+        "noise": "cough",
+        "no_reply": true
+      },
+      {
+        "text": "And what colours does it come in?"
+      }
+    ],
+    "expect": {
+      "max_user_turns": 2,
+      "final_includes_any": [
+        "graphite",
+        "arctic"
+      ]
+    }
+  },
+  {
+    "id": "TT7-self-correction",
+    "purpose": "the user corrects a digit inside one sentence",
+    "turns": [
+      {
+        "text": "Where is order 4521, no wait, sorry, 4512?"
+      }
+    ],
+    "expect": {
+      "tools": [
+        "get_order_status"
+      ],
+      "args": {
+        "order_id": "4512"
+      },
+      "max_user_turns": 1
+    }
+  },
+  {
+    "id": "TT8-hesitation",
+    "purpose": "fillers and hesitation in the question",
+    "turns": [
+      {
+        "text": "Um, so, I was wondering, uh, do you ship to, um, Canada?"
+      }
+    ],
+    "expect": {
+      "max_user_turns": 1,
+      "final_includes_any": [
+        "United States",
+        "US states",
+        "outside the US",
+        "do not ship",
+        "don't ship",
+        "only ship"
+      ]
+    }
   }
 ]

@@ -1,0 +1,7 @@
+speaker,label,clips,median_f0_hz,from_pitch,verdict,clips_flagged_individually
+archie-gb,male,13,118.0,male,ok,1
+daniel-us,male,15,127.0,male,ok,3
+devansh-in,male,8,157.2,undecided,undecided,3
+gemma-gb,female,16,212.9,female,ok,1
+kiara-in,female,7,196.3,female,ok,1
+skylar-us,female,15,202.0,female,ok,0

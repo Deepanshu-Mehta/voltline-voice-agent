@@ -32,3 +32,12 @@ build-web:          ## Production build of the website
 	cd web && npm run build
 
 check: test build-web  ## Everything that runs without API keys
+
+data-check:         ## Build data/manifest.csv and run the quality checks on every clip
+	uv run --project server python evals/data_check.py
+
+stt-compare:        ## Hearing A/B: the question clips through Deepgram, Gnani and Whisper
+	uv run --project server python evals/stt_compare.py
+
+record:             ## Record the 20-question set in your own voice (stays local, data/private/)
+	uv run --project server python evals/audio/record.py

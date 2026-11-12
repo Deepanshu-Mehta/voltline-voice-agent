@@ -16,9 +16,12 @@ dependencies = [
 
 [dependency-groups]
 dev = [
+    "faster-whisper>=1.2.1",
     "playwright>=1.65.1",
+    "praat-parselmouth>=0.4.7",
     "pytest>=9.2.0",
     "pytest-asyncio>=1.4.1.post1",
+    "sounddevice>=0.5.6",
 ]
 
 [tool.pytest.ini_options]

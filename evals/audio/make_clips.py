@@ -101,8 +101,10 @@ def telephone(x: np.ndarray) -> np.ndarray:
 
 
 def spoken(text: str) -> str:
-    """Callers read order numbers digit by digit: "4512" -> "4 5 1 2"."""
-    return re.sub(r"\b4\d{3}\b", lambda m: " ".join(m.group(0)), text)
+    """Callers read order numbers digit by digit: "4512" -> "4 5 1 2". All four-digit numbers:
+    until 2026-11-13 only those starting with 4 were split, so "9999" (T06) was read as "nine
+    thousand nine hundred ninety-nine" (issue QA-001)."""
+    return re.sub(r"\b\d{4}\b", lambda m: " ".join(m.group(0)), text)
 
 
 async def synthesise(tts: CartesiaTTS, text: str) -> np.ndarray:
