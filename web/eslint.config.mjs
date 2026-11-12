@@ -12,6 +12,8 @@ const eslintConfig = defineConfig([
     "out/**",
     "build/**",
     "next-env.d.ts",
+    // Third-party bundles copied by scripts/copy-vad-assets.mjs
+    "public/vad/**",
   ]),
 ]);
 

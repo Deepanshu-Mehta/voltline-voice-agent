@@ -80,3 +80,21 @@ def test_api_endpoints(settings, retriever):
         events = [json.loads(line[6:]) for line in r.iter_lines() if line.startswith("data: ")]
     assert events[-1]["reply"] == "Second reply."
     assert client.get("/turns/recent").json()[0]["reply"] == "Second reply."
+
+
+async def test_falls_back_when_main_llm_fails(tool_ctx, retriever):
+    from app.agent import Fallback
+
+    class RateLimited:
+        class chat:
+            class completions:
+                @staticmethod
+                async def create(**_):
+                    raise RuntimeError("429 rate limit")
+
+    backup = FakeLLM(["Pulse Buds Pro cost $149.99."])
+    agent = Agent(RateLimited, retriever, tool_ctx, TurnConfig(model="main"), fallback=Fallback(backup, "backup"))
+    done = (await _run(agent, [{"role": "user", "content": "How much are the Pulse Buds Pro?"}]))[-1]
+    assert done["reply"] == "Pulse Buds Pro cost $149.99."
+    assert done["model"] == "backup" and "429" in done["fallback_reason"]
+    assert backup.requests[0]["model"] == "backup"

@@ -18,17 +18,18 @@ import subprocess
 import time
 from typing import Any, Literal
 
-from fastapi import FastAPI, HTTPException
+from fastapi import FastAPI, HTTPException, WebSocket
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.responses import StreamingResponse
 from pydantic import BaseModel, Field
 
-from .agent import Agent, TurnConfig, TurnRecord, with_overrides
+from .agent import Agent, Fallback, TurnConfig, TurnRecord, with_overrides
 from .config import REPO_ROOT, Settings, get_settings
 from .content import load_orders, load_pages, load_products
 from .db import Database
 from .retrieval import Retriever
 from .tools import TOOLS, ToolContext, run_tool
+from .voice.session import VoiceSession
 
 log = logging.getLogger("voltline")
 logging.basicConfig(level=logging.INFO, format="%(asctime)s %(levelname)s %(name)s: %(message)s")
@@ -40,7 +41,7 @@ class _MissingKeyLLM:
 
     class _Completions:
         async def create(self, **_: Any):
-            raise RuntimeError("No LLM API key configured. Set LLM_API_KEY or OPENAI_API_KEY in .env.")
+            raise RuntimeError("No LLM API key configured. Set the key for LLM_PROVIDER (e.g. GROQ_API_KEY) in .env.")
 
     def __init__(self):
         self.chat = type("Chat", (), {"completions": self._Completions()})()
@@ -76,7 +77,9 @@ def _commit_hash() -> str | None:
         return None
 
 
-def create_app(settings: Settings | None = None, llm: Any = None, retriever: Retriever | None = None) -> FastAPI:
+def create_app(settings: Settings | None = None, llm: Any = None, retriever: Retriever | None = None,
+               stt_factory: Any = None, tts_factory: Any = None) -> FastAPI:
+    """Build the app. Tests inject fake LLM, speech-to-text and text-to-speech factories."""
     settings = settings or get_settings()
     t0 = time.perf_counter()
 
@@ -90,20 +93,29 @@ def create_app(settings: Settings | None = None, llm: Any = None, retriever: Ret
         if settings.resolved_llm_key:
             from openai import AsyncOpenAI
 
-            llm = AsyncOpenAI(api_key=settings.resolved_llm_key, base_url=settings.llm_base_url,
-                              timeout=settings.llm_timeout_s, max_retries=1)
+            llm = AsyncOpenAI(api_key=settings.resolved_llm_key, base_url=settings.resolved_llm_base_url,
+                              timeout=settings.llm_timeout_s,
+                              max_retries=settings.llm_max_retries if settings.llm_max_retries is not None
+                              else (0 if settings.fallback_llm else 1))
         else:
             log.warning("No LLM API key set: /chat will return a fallback reply until one is configured.")
             llm = _MissingKeyLLM()
 
     tool_ctx = ToolContext(db=db, products=products, retriever=retriever)
-    default_cfg = TurnConfig(model=settings.llm_model, max_tokens=settings.llm_max_tokens,
-                             reasoning_effort=settings.llm_reasoning_effort, history_turns=settings.history_turns,
+    default_cfg = TurnConfig(model=settings.resolved_llm_model, max_tokens=settings.llm_max_tokens,
+                             reasoning_effort=settings.resolved_reasoning_effort, history_turns=settings.history_turns,
                              top_k=settings.retrieval_top_k, max_tool_rounds=settings.max_tool_rounds)
-    agent = Agent(llm, retriever, tool_ctx, default_cfg)
+    fallback = None
+    if settings.fallback_llm and not isinstance(llm, _MissingKeyLLM) and not getattr(llm, "is_fake", False):
+        from openai import AsyncOpenAI
+
+        key, base_url, fb_model, fb_effort = settings.fallback_llm
+        fallback = Fallback(AsyncOpenAI(api_key=key, base_url=base_url, timeout=settings.llm_timeout_s, max_retries=0),
+                            fb_model, fb_effort)
+    agent = Agent(llm, retriever, tool_ctx, default_cfg, fallback=fallback)
     commit = _commit_hash()
     log.info("Ready in %.1f s: %d products, %d chunks, retrieval=%s, model=%s", time.perf_counter() - t0,
-             len(products), len(retriever.chunks), retriever.mode, settings.llm_model)
+             len(products), len(retriever.chunks), retriever.mode, settings.resolved_llm_model)
 
     app = FastAPI(title="Voltline voice agent API", version="0.1.0")
     app.add_middleware(CORSMiddleware, allow_origins=settings.cors_origin_list, allow_methods=["*"],
@@ -112,7 +124,7 @@ def create_app(settings: Settings | None = None, llm: Any = None, retriever: Ret
 
     @app.get("/health")
     def health():
-        return {"ok": True, "retrieval": retriever.mode, "chunks": len(retriever.chunks), "model": settings.llm_model,
+        return {"ok": True, "retrieval": retriever.mode, "chunks": len(retriever.chunks), "model": settings.resolved_llm_model, "provider": settings.llm_provider, "fallback": fallback.model if fallback else None, "voice_configured": stt_factory is not None and tts_factory is not None,
                 "llm_configured": not isinstance(llm, _MissingKeyLLM), "commit": commit}
 
     @app.post("/retrieve")
@@ -133,8 +145,44 @@ def create_app(settings: Settings | None = None, llm: Any = None, retriever: Ret
         return run_tool(tool_ctx, name, args)
 
     @app.get("/turns/recent")
-    def recent_turns(limit: int = 20):
-        return db.recent_turns(min(max(limit, 1), 200))
+    def recent_turns(limit: int = 20, session_id: str | None = None):
+        return db.recent_turns(min(max(limit, 1), 200), session_id)
+
+    @app.get("/turns/summary")
+    def turns_summary(hours: float = 168):
+        return db.turn_summary(min(max(hours, 1), 24 * 90))
+
+    if stt_factory is None and settings.deepgram_api_key:
+        from .voice.stt import DeepgramSTT
+
+        # Product names from the catalog, plus the brand, so speech-to-text spells them as the site does.
+        keyterms = ["Voltline", *(p.name for p in products)]
+
+        async def stt_factory(sample_rate: int):
+            return await DeepgramSTT(settings.deepgram_api_key, model=settings.stt_model, language=settings.stt_language,
+                                     sample_rate=sample_rate, endpointing_ms=settings.stt_endpointing_ms,
+                                     utterance_end_ms=settings.stt_utterance_end_ms, keyterms=keyterms).connect()
+
+    if tts_factory is None and settings.cartesia_api_key:
+        from .voice.tts import CartesiaTTS
+
+        async def tts_factory():
+            return await CartesiaTTS(settings.cartesia_api_key, version=settings.cartesia_version,
+                                     model=settings.tts_model, voice_id=settings.tts_voice_id,
+                                     sample_rate=settings.tts_sample_rate).connect()
+
+    @app.websocket("/voice")
+    async def voice(ws: WebSocket):
+        await ws.accept()
+        if stt_factory is None or tts_factory is None:
+            await ws.send_text(json.dumps({"type": "error", "message":
+                "Voice is not configured on this server: set DEEPGRAM_API_KEY and CARTESIA_API_KEY."}))
+            await ws.close()
+            return
+        session = VoiceSession(ws, agent, db, default_cfg, stt_factory=stt_factory, tts_factory=tts_factory,
+                               tts_sample_rate=settings.tts_sample_rate, commit_hash=commit,
+                               silence_ms=settings.stt_endpointing_ms)
+        await session.run()
 
     @app.post("/chat")
     async def chat(req: ChatRequest):
@@ -149,7 +197,8 @@ def create_app(settings: Settings | None = None, llm: Any = None, retriever: Ret
                         retrieval_ms=rec.timings.get("retrieval_ms"),
                         llm_first_token_ms=rec.timings.get("llm_first_token_ms"),
                         total_ms=rec.timings.get("total_ms"), model=cfg.model, commit_hash=commit,
-                        extra={"timings": rec.timings, "usage": rec.usage, "error": rec.error})
+                        extra={"timings": rec.timings, "usage": rec.usage, "error": rec.error,
+                               "model_used": rec.model_used, "fallback_reason": rec.fallback_reason})
 
         if not req.stream:
             events = [e async for e in agent.stream_turn(messages, cfg, rec)]

@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import LatencyTable from "@/components/LatencyTable";
 import { getLatestEval } from "@/lib/content";
 
 export const metadata: Metadata = { title: "Benchmarks" };
@@ -29,6 +30,9 @@ export default function BenchmarksPage() {
           built.
         </p>
       </header>
+
+      <h2>Live latency</h2>
+      <LatencyTable />
 
       <h2>Text agent evaluation</h2>
       {report ? (

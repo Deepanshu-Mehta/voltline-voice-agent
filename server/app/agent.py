@@ -30,6 +30,14 @@ FALLBACK_REPLY = "Sorry, I'm having trouble answering right now. Could you try a
 
 
 @dataclass(frozen=True)
+class Fallback:
+    """A second provider for when the main one fails before answering (rate limit, outage)."""
+    client: Any
+    model: str
+    reasoning_effort: str | None = None
+
+
+@dataclass(frozen=True)
 class TurnConfig:
     model: str
     max_tokens: int = 300
@@ -57,6 +65,8 @@ class TurnRecord:
     timings: dict[str, float] = field(default_factory=dict)
     usage: dict[str, Any] = field(default_factory=dict)
     error: str | None = None
+    model_used: str | None = None
+    fallback_reason: str | None = None
 
 
 def load_system_prompt() -> str:
@@ -85,8 +95,10 @@ def retrieval_query(messages: list[dict]) -> str:
 
 
 class Agent:
-    def __init__(self, llm: Any, retriever: Retriever, tool_ctx: ToolContext, default: TurnConfig):
+    def __init__(self, llm: Any, retriever: Retriever, tool_ctx: ToolContext, default: TurnConfig,
+                 fallback: Fallback | None = None):
         self.llm = llm  # an openai.AsyncOpenAI-compatible client
+        self.fallback = fallback
         self.retriever = retriever
         self.tool_ctx = tool_ctx
         self.default = default
@@ -126,18 +138,33 @@ class Agent:
         tools = openai_tool_schemas(list(cfg.tools)) if cfg.tools else None
         reply_parts: list[str] = []
         tool_ms = 0.0
+        client, model, effort = self.llm, cfg.model, cfg.reasoning_effort
 
         try:
             for round_no in range(cfg.max_tool_rounds + 1):
-                kwargs: dict[str, Any] = {"model": cfg.model, "messages": convo, "stream": True,
+                kwargs: dict[str, Any] = {"model": model, "messages": convo, "stream": True,
                                           "stream_options": {"include_usage": True},
                                           "max_completion_tokens": cfg.max_tokens}
                 if tools and round_no < cfg.max_tool_rounds:
                     kwargs["tools"] = tools
-                if cfg.reasoning_effort:
-                    kwargs["reasoning_effort"] = cfg.reasoning_effort
+                if effort:
+                    kwargs["reasoning_effort"] = effort
                 rec.timings.setdefault("llm_request_ms", ms())
-                stream = await self.llm.chat.completions.create(**kwargs)
+                try:
+                    stream = await client.chat.completions.create(**kwargs)
+                except Exception as exc:
+                    if self.fallback is None or client is self.fallback.client:
+                        raise
+                    # Switch provider for the rest of this turn, so tool rounds stay consistent.
+                    rec.fallback_reason = f"{type(exc).__name__}: {str(exc)[:160]}"
+                    fb = self.fallback
+                    client, model, effort = fb.client, fb.model, fb.reasoning_effort
+                    kwargs["model"] = model
+                    kwargs.pop("reasoning_effort", None)
+                    if effort:
+                        kwargs["reasoning_effort"] = effort
+                    stream = await client.chat.completions.create(**kwargs)
+                rec.model_used = model
 
                 calls: dict[int, _ToolCall] = {}
                 round_text: list[str] = []
@@ -194,7 +221,8 @@ class Agent:
         rec.timings["total_ms"] = ms()
         rec.timings.setdefault("llm_rounds", 1)
         yield {"type": "done", "reply": rec.reply, "timings": rec.timings, "query": rec.query, "sources": rec.sources,
-               "tool_calls": rec.tool_calls, "usage": rec.usage, "error": rec.error}
+               "tool_calls": rec.tool_calls, "usage": rec.usage, "error": rec.error, "model": rec.model_used,
+               "fallback_reason": rec.fallback_reason}
 
     @staticmethod
     def _add_usage(rec: TurnRecord, usage: Any) -> None:

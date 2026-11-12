@@ -1,0 +1,164 @@
+[
+  {
+    "id": "S1-order-status",
+    "turns": [
+      {
+        "text": "Hi, can you check on my order?"
+      },
+      {
+        "text": "It's order 4512."
+      }
+    ],
+    "expect": {
+      "tools": [
+        "get_order_status"
+      ],
+      "args": {
+        "order_id": "4512"
+      },
+      "final_includes_any": [
+        "shipped",
+        "on its way"
+      ]
+    }
+  },
+  {
+    "id": "S2-stock-then-price",
+    "turns": [
+      {
+        "text": "Do you have the Horizon Headphones in stock?"
+      },
+      {
+        "text": "And how much are they?"
+      }
+    ],
+    "expect": {
+      "tools": [
+        "check_stock"
+      ],
+      "final_includes_any": [
+        "229.99"
+      ]
+    }
+  },
+  {
+    "id": "S3-returns-then-ticket",
+    "turns": [
+      {
+        "text": "What's your return policy?"
+      },
+      {
+        "text": "My Pulse Buds Pro from order 4512 stopped charging. Can you open a ticket for me?"
+      }
+    ],
+    "expect": {
+      "tools": [
+        "create_support_ticket"
+      ],
+      "final_includes_any": [
+        "ticket"
+      ]
+    }
+  },
+  {
+    "id": "S4-callback",
+    "turns": [
+      {
+        "text": "Can someone from your support team call me back?"
+      },
+      {
+        "text": "My name is Sam Lee, and my number is 512 555 0147."
+      },
+      {
+        "text": "Tomorrow at ten in the morning."
+      },
+      {
+        "text": "Yes, that's right."
+      }
+    ],
+    "expect": {
+      "tools": [
+        "book_callback"
+      ],
+      "args": {
+        "phone": "5125550147"
+      }
+    }
+  },
+  {
+    "id": "S5-interruption",
+    "turns": [
+      {
+        "text": "Tell me everything about the Keystone keyboard."
+      },
+      {
+        "text": "Sorry, just tell me the price.",
+        "interrupt_after_ms": 1500
+      }
+    ],
+    "expect": {
+      "interrupted_turns": 1,
+      "final_includes_any": [
+        "119.99"
+      ]
+    }
+  },
+  {
+    "id": "S6-correction",
+    "turns": [
+      {
+        "text": "Where is order 4521?"
+      },
+      {
+        "text": "No, sorry, I said 4512."
+      }
+    ],
+    "expect": {
+      "tools": [
+        "get_order_status"
+      ],
+      "args": {
+        "order_id": "4512"
+      },
+      "final_includes_any": [
+        "shipped",
+        "on its way"
+      ]
+    }
+  },
+  {
+    "id": "S7-long-pause",
+    "turns": [
+      {
+        "text": "Do the SafeView cameras work with | five gigahertz Wi-Fi?",
+        "pause_ms": 1500
+      }
+    ],
+    "expect": {
+      "max_user_turns": 1,
+      "final_includes_any": [
+        "2.4"
+      ]
+    }
+  },
+  {
+    "id": "S8-out-of-scope",
+    "turns": [
+      {
+        "text": "Can you help me with my maths homework?"
+      },
+      {
+        "text": "Okay. Then how long is the warranty on the ThermoSense thermostat?"
+      }
+    ],
+    "expect": {
+      "final_includes_any": [
+        "24 months",
+        "two years",
+        "2 years",
+        "24-month",
+        "two-year"
+      ]
+    }
+  }
+]

@@ -886,7 +886,8 @@ textarea {
   color: var(--ink);
   cursor: pointer;
 }
-.segment[aria-checked="true"] {
+.segment[aria-checked="true"],
+.segment[aria-selected="true"] {
   background: var(--ink);
   border-color: var(--ink);
   color: var(--paper);
@@ -1137,4 +1138,83 @@ textarea {
 .doc-list .order-id {
   color: var(--ink);
   font-size: 1.1rem;
+}
+
+/* ---------------------------------------------------------------- voice */
+
+.talk-panel {
+  display: grid;
+  gap: 12px;
+}
+.meter {
+  width: 120px;
+  height: 6px;
+  border-radius: 3px;
+  background: var(--aluminium);
+  overflow: hidden;
+}
+.meter span {
+  display: block;
+  height: 100%;
+  background: var(--ink);
+  transform-origin: left;
+  transition: transform 60ms linear;
+}
+.voice-empty {
+  display: grid;
+  justify-items: center;
+  text-align: center;
+  gap: 18px;
+  max-width: 46ch;
+  margin: auto;
+}
+.voice-empty p {
+  margin: 0;
+}
+.call-button {
+  font: inherit;
+  font-weight: 800;
+  font-variation-settings: "wdth" 112;
+  font-size: var(--step-1);
+  width: 168px;
+  height: 168px;
+  border-radius: 50%;
+  border: 1.5px solid var(--ink);
+  background: var(--signal);
+  color: var(--signal-ink);
+  cursor: pointer;
+  box-shadow: 6px 6px 0 var(--ink);
+}
+.call-button:hover {
+  transform: translate(-1px, -1px);
+  box-shadow: 7px 7px 0 var(--ink);
+}
+.call-button:disabled {
+  opacity: 0.6;
+  cursor: progress;
+}
+.msg-user[data-final="false"] {
+  opacity: 0.65;
+}
+.cut {
+  color: var(--slate);
+  font-style: italic;
+}
+.meta-strong {
+  color: var(--ink);
+  font-weight: 700;
+}
+.voice-controls {
+  justify-content: flex-end;
+  align-items: center;
+  gap: 12px;
+}
+.voice-controls .error-line {
+  margin: 0 auto 0 0;
+}
+
+.table-note {
+  color: var(--slate);
+  font-size: var(--step--1);
+  margin-top: -0.5em;
 }

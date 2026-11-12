@@ -1,4 +1,4 @@
-.PHONY: install server web test eval-text eval-text-fast build-web check
+.PHONY: install server web test eval-text eval-text-fast audio-clips eval-audio eval-scenarios build-web check
 
 install:            ## Install server and web dependencies
 	cd server && uv sync
@@ -18,6 +18,15 @@ eval-text:          ## 60-question text eval with the LLM judge (needs an API ke
 
 eval-text-fast:     ## Same, deterministic checks only (no judge calls)
 	uv run --project server python evals/run_text_eval.py --no-judge
+
+audio-clips:        ## Synthesise the 90 audio eval clips and scenario clips (needs CARTESIA_API_KEY)
+	uv run --project server python evals/audio/make_clips.py
+
+eval-audio:         ## Stream the audio clips into /voice; WER and latency per condition (needs make server)
+	uv run --project server python evals/run_audio_eval.py
+
+eval-scenarios:     ## Browser test driver: 8 scripted conversations through the real page (needs make server and make web)
+	uv run --project server python evals/driver/browser_driver.py
 
 build-web:          ## Production build of the website
 	cd web && npm run build

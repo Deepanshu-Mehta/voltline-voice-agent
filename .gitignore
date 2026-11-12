@@ -26,3 +26,14 @@ evals/results/*
 *.tsbuildinfo
 .vscode/
 .idea/
+
+# copied from node_modules by web/scripts/copy-vad-assets.mjs
+web/public/vad/
+
+# synthesised by make audio-clips
+evals/audio/clips/
+evals/audio/manifest.jsonl
+
+# local agent notes and planning docs (kept out of the repository)
+CLAUDE.md
+PLAN.md

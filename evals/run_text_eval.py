@@ -67,7 +67,7 @@ Agent's final reply:
 {reply}
 
 Grade the final reply:
-- correct: true if it conveys the reference answer's key facts (or, for out_of_scope, declines or corrects the false premise politely and does not invent anything). Extra correct detail is fine. For a tool task where the reference says the agent should ask or confirm something first, asking is correct.
+- correct: true if it answers the customer's question accurately with the reference's main fact (for out_of_scope: declines or corrects the false premise politely and invents nothing). This is a voice agent told to answer in one or two short sentences, so the reference may list more detail than a good spoken reply needs: leaving out secondary details is fine unless the question asked for them or the omission would mislead. Extra correct detail is fine. For a tool task where the reference says the agent should ask or confirm something first, asking is correct.
 - hallucination: true if it states any price, spec, date, policy, discount or product that is not supported by the excerpts or tool results.
 
 Answer with JSON only: {{"correct": true|false, "hallucination": true|false, "reason": "<one sentence>"}}"""
@@ -206,7 +206,7 @@ async def main() -> int:
     ap.add_argument("--only", help="Comma-separated question ids")
     ap.add_argument("--concurrency", type=int, default=6)
     ap.add_argument("--model", help="Override the agent's LLM model")
-    ap.add_argument("--judge-model", default=os.environ.get("JUDGE_MODEL") or get_settings().judge_model)
+    ap.add_argument("--judge-model", default=os.environ.get("JUDGE_MODEL") or get_settings().resolved_judge_model)
     args = ap.parse_args()
 
     settings = get_settings()
@@ -229,7 +229,8 @@ async def main() -> int:
     if use_judge:
         from openai import AsyncOpenAI
 
-        judge_llm = AsyncOpenAI(api_key=settings.resolved_llm_key, base_url=settings.llm_base_url)
+        judge_llm = AsyncOpenAI(api_key=settings.resolved_llm_key, base_url=settings.resolved_llm_base_url,
+                                max_retries=settings.llm_max_retries if settings.llm_max_retries is not None else 2)
     if not health.get("llm_configured"):
         print("WARNING: the server has no LLM API key; replies will be the fallback line.", file=sys.stderr)
 

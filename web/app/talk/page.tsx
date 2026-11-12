@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-import Chat from "@/components/Chat";
+import TalkPanel from "@/components/TalkPanel";
 
 export const metadata: Metadata = { title: "Talk to us" };
 
@@ -15,7 +15,7 @@ export default function TalkPage() {
         </p>
       </header>
       <div className="talk-layout">
-        <Chat autoFromUrl />
+        <TalkPanel />
         <aside className="prose" aria-label="About this agent">
           <h2 style={{ marginTop: 0, fontSize: "1.25rem" }}>What Volt can do</h2>
           <ul>
@@ -25,8 +25,12 @@ export default function TalkPage() {
             <li>Open a support ticket or book a callback</li>
           </ul>
           <p>
-            Sample order numbers are on the <Link href="/docs#demo-orders">Docs page</Link>. Voice, phone, LiveKit and
-            Vapi versions of Volt will appear on this page.
+            In a voice call, interrupt Volt whenever you like; it stops and listens. Each reply shows how long Volt
+            took to start speaking.
+          </p>
+          <p>
+            Sample order numbers are on the <Link href="/docs#demo-orders">Docs page</Link>. Phone, LiveKit and Vapi versions of Volt
+            will appear on this page.
           </p>
         </aside>
       </div>

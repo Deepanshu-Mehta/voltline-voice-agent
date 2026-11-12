@@ -6,9 +6,12 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "eslint"
+    "lint": "eslint",
+    "predev": "node scripts/copy-vad-assets.mjs",
+    "prebuild": "node scripts/copy-vad-assets.mjs"
   },
   "dependencies": {
+    "@ricky0123/vad-web": "^0.0.31",
     "gray-matter": "^4.0.3",
     "marked": "^18.2.0",
     "next": "16.4.6",

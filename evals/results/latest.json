@@ -1,0 +1,2077 @@
+{
+  "timestamp": "2026-11-12T19:18:26",
+  "commit": "d9eb58f",
+  "model": "openai/gpt-oss-20b",
+  "judge_model": "openai/gpt-oss-120b",
+  "retrieval": "hybrid",
+  "summary": {
+    "n": 60,
+    "errors": 0,
+    "retrieval_hit3_pct": 100.0,
+    "keyword_pass_pct": 93.9,
+    "tool_selection_pct": 92.3,
+    "tool_args_pct": 92.3,
+    "forbidden_phrase_items": 0,
+    "median_words": 16.0,
+    "format_violation_items": 0,
+    "median_retrieval_ms": 16.7,
+    "median_llm_first_token_ms": 12464.4,
+    "median_total_ms": 13405.6,
+    "correctness_pct": 81.7,
+    "hallucination_pct": 0.0,
+    "out_of_scope_handled": "10 of 10",
+    "correctness_by_category": {
+      "factual": 76.7,
+      "tool": 90.0,
+      "multi_turn": 70.0,
+      "out_of_scope": 100.0
+    }
+  },
+  "results": [
+    {
+      "id": "F01",
+      "category": "factual",
+      "reply": "The Pulse Buds Pro cost $149.99.",
+      "words": 6,
+      "tool_calls": [],
+      "sources_top3": [
+        "/products/vl-a300-pulse-buds-pro",
+        "/docs/pulse-buds-setup",
+        "/products/vl-a300-pulse-buds-pro"
+      ],
+      "error": null,
+      "timings": [
+        {
+          "retrieval_ms": 20.0,
+          "llm_request_ms": 20.1,
+          "llm_first_token_ms": 2250.8,
+          "tool_ms": 0.0,
+          "total_ms": 2257.1,
+          "llm_rounds": 1
+        }
+      ],
+      "retrieval_hit3": true,
+      "keyword_pass": true,
+      "format_violations": [],
+      "judge": {
+        "correct": true,
+        "hallucination": false,
+        "reason": "The reply correctly provides the price $149.99, matching the reference and knowledge base without adding unsupported information."
+      }
+    },
+    {
+      "id": "F02",
+      "category": "factual",
+      "reply": "They last about eight hours on a single charge and around 32 hours total with the charging case.",
+      "words": 18,
+      "tool_calls": [],
+      "sources_top3": [
+        "/products/vl-a100-pulse-buds",
+        "/products/vl-a100-pulse-buds",
+        "/products/vl-a300-pulse-buds-pro"
+      ],
+      "error": null,
+      "timings": [
+        {
+          "retrieval_ms": 13.1,
+          "llm_request_ms": 13.2,
+          "llm_first_token_ms": 498.5,
+          "tool_ms": 0.0,
+          "total_ms": 517.8,
+          "llm_rounds": 1
+        }
+      ],
+      "retrieval_hit3": true,
+      "keyword_pass": true,
+      "format_violations": [],
+      "judge": {
+        "correct": true,
+        "hallucination": false,
+        "reason": "The reply accurately states the battery life (\u22488\u202fh per charge, \u224832\u202fh total) as in the reference without adding unsupported information."
+      }
+    },
+    {
+      "id": "F03",
+      "category": "factual",
+      "reply": "The standard Pulse Buds (VL\u2011A100) do not have noise cancellation.",
+      "words": 10,
+      "tool_calls": [],
+      "sources_top3": [
+        "/products/vl-a300-pulse-buds-pro",
+        "/products/vl-a300-pulse-buds-pro",
+        "/faq"
+      ],
+      "error": null,
+      "timings": [
+        {
+          "retrieval_ms": 6.5,
+          "llm_request_ms": 6.5,
+          "llm_first_token_ms": 11581.2,
+          "tool_ms": 0.0,
+          "total_ms": 11596.3,
+          "llm_rounds": 1
+        }
+      ],
+      "retrieval_hit3": true,
+      "keyword_pass": false,
+      "format_violations": [],
+      "judge": {
+        "correct": true,
+        "hallucination": false,
+        "reason": "The reply accurately states that the standard Pulse Buds lack noise cancellation, matching the reference answer."
+      }
+    },
+    {
+      "id": "F04",
+      "category": "factual",
+      "reply": "The Horizon Headphones come with a 24\u2011month limited warranty.",
+      "words": 9,
+      "tool_calls": [],
+      "sources_top3": [
+        "/faq",
+        "/products/vl-h500-horizon-headphones",
+        "/products/vl-h500-horizon-headphones"
+      ],
+      "error": null,
+      "timings": [
+        {
+          "retrieval_ms": 12.8,
+          "llm_request_ms": 13.0,
+          "llm_first_token_ms": 12589.6,
+          "tool_ms": 0.0,
+          "total_ms": 12619.3,
+          "llm_rounds": 1
+        }
+      ],
+      "retrieval_hit3": true,
+      "keyword_pass": true,
+      "format_violations": [],
+      "judge": {
+        "correct": true,
+        "hallucination": false,
+        "reason": "The reply accurately states the 24\u2011month warranty for Horizon Headphones without adding unsupported information."
+      }
+    },
+    {
+      "id": "F05",
+      "category": "factual",
+      "reply": "Our return window is 30 days from the delivery date. Orders delivered between 1\u202fNovember and 31\u202fDecember\u202f2026 can be returned until 31\u202fJanuary\u202f2027.",
+      "words": 26,
+      "tool_calls": [],
+      "sources_top3": [
+        "/returns-warranty",
+        "/faq",
+        "/faq"
+      ],
+      "error": null,
+      "timings": [
+        {
+          "retrieval_ms": 38.6,
+          "llm_request_ms": 38.7,
+          "llm_first_token_ms": 11697.5,
+          "tool_ms": 0.0,
+          "total_ms": 11749.3,
+          "llm_rounds": 1
+        }
+      ],
+      "retrieval_hit3": true,
+      "keyword_pass": true,
+      "format_violations": [],
+      "judge": {
+        "correct": false,
+        "hallucination": false,
+        "reason": "The reply gave the time window but omitted the required condition that items must be in like\u2011new condition, which is part of the reference answer's key facts."
+      }
+    },
+    {
+      "id": "F06",
+      "category": "factual",
+      "reply": "Opened Pulse\u202fBuds can be returned only if they are defective.",
+      "words": 11,
+      "tool_calls": [],
+      "sources_top3": [
+        "/faq",
+        "/returns-warranty",
+        "/products/vl-a100-pulse-buds"
+      ],
+      "error": null,
+      "timings": [
+        {
+          "retrieval_ms": 8.3,
+          "llm_request_ms": 8.5,
+          "llm_first_token_ms": 14627.4,
+          "tool_ms": 0.0,
+          "total_ms": 14640.1,
+          "llm_rounds": 1
+        }
+      ],
+      "retrieval_hit3": true,
+      "keyword_pass": true,
+      "format_violations": [],
+      "judge": {
+        "correct": true,
+        "hallucination": false,
+        "reason": "The reply correctly states that opened Pulse Buds are returnable only if defective, matching the reference answer without adding unsupported information."
+      }
+    },
+    {
+      "id": "F07",
+      "category": "factual",
+      "reply": "Next\u2011day delivery costs $24.99.",
+      "words": 4,
+      "tool_calls": [],
+      "sources_top3": [
+        "/faq",
+        "/pricing",
+        "/returns-warranty"
+      ],
+      "error": null,
+      "timings": [
+        {
+          "retrieval_ms": 12.2,
+          "llm_request_ms": 13.0,
+          "llm_first_token_ms": 13679.3,
+          "tool_ms": 0.0,
+          "total_ms": 13690.3,
+          "llm_rounds": 1
+        }
+      ],
+      "retrieval_hit3": true,
+      "keyword_pass": true,
+      "format_violations": [],
+      "judge": {
+        "correct": false,
+        "hallucination": false,
+        "reason": "The reply only gives the price but omits the required ordering by 2\u202fp.m. Eastern Time Monday\u2011to\u2011Friday, which is part of the key reference answer."
+      }
+    },
+    {
+      "id": "F08",
+      "category": "factual",
+      "reply": "Standard delivery is free on orders of $50 or more, and $5.99 if the order is below $50.",
+      "words": 18,
+      "tool_calls": [],
+      "sources_top3": [
+        "/faq",
+        "/returns-warranty",
+        "/docs/orders-and-tracking"
+      ],
+      "error": null,
+      "timings": [
+        {
+          "retrieval_ms": 9.6,
+          "llm_request_ms": 9.9,
+          "llm_first_token_ms": 12386.7,
+          "tool_ms": 0.0,
+          "total_ms": 12412.9,
+          "llm_rounds": 1
+        }
+      ],
+      "retrieval_hit3": true,
+      "keyword_pass": true,
+      "format_violations": [],
+      "judge": {
+        "correct": true,
+        "hallucination": false,
+        "reason": "The reply accurately states the free shipping threshold and the $5.99 charge for orders under $50, matching the reference answer."
+      }
+    },
+    {
+      "id": "F09",
+      "category": "factual",
+      "reply": "No, we only ship within the United States, including Alaska and Hawaii.",
+      "words": 12,
+      "tool_calls": [],
+      "sources_top3": [
+        "/faq",
+        "/pricing",
+        "/docs/orders-and-tracking"
+      ],
+      "error": null,
+      "timings": [
+        {
+          "retrieval_ms": 5.4,
+          "llm_request_ms": 5.5,
+          "llm_first_token_ms": 13704.0,
+          "tool_ms": 0.0,
+          "total_ms": 13807.7,
+          "llm_rounds": 1
+        }
+      ],
+      "retrieval_hit3": true,
+      "keyword_pass": true,
+      "format_violations": [],
+      "judge": {
+        "correct": true,
+        "hallucination": false,
+        "reason": "The reply correctly states that shipping is limited to the United States (including Alaska and Hawaii), matching the reference answer without adding unsupported information."
+      }
+    },
+    {
+      "id": "F10",
+      "category": "factual",
+      "reply": "No, SafeView cameras only use 2.4\u202fGHz Wi\u2011Fi.",
+      "words": 8,
+      "tool_calls": [],
+      "sources_top3": [
+        "/docs/safeview-camera-setup",
+        "/faq",
+        "/products/vl-c450-safeview-outdoor-camera"
+      ],
+      "error": null,
+      "timings": [
+        {
+          "retrieval_ms": 15.0,
+          "llm_request_ms": 15.7,
+          "llm_first_token_ms": 13442.7,
+          "tool_ms": 0.0,
+          "total_ms": 13469.7,
+          "llm_rounds": 1
+        }
+      ],
+      "retrieval_hit3": true,
+      "keyword_pass": true,
+      "format_violations": [],
+      "judge": {
+        "correct": true,
+        "hallucination": false,
+        "reason": "The reply correctly states that SafeView cameras only work on 2.4\u202fGHz Wi\u2011Fi, matching the reference answer without adding unsupported information."
+      }
+    },
+    {
+      "id": "F11",
+      "category": "factual",
+      "reply": "Yes, the ThermoSense thermostat needs a C\u2011wire for power. That adapter is not included in the box.",
+      "words": 17,
+      "tool_calls": [],
+      "sources_top3": [
+        "/docs/thermosense-installation",
+        "/products/vl-t700-thermosense-thermostat",
+        "/docs/thermosense-installation"
+      ],
+      "error": null,
+      "timings": [
+        {
+          "retrieval_ms": 122.5,
+          "llm_request_ms": 122.6,
+          "llm_first_token_ms": 11667.7,
+          "tool_ms": 0.0,
+          "total_ms": 11699.7,
+          "llm_rounds": 1
+        }
+      ],
+      "retrieval_hit3": true,
+      "keyword_pass": true,
+      "format_violations": [],
+      "judge": {
+        "correct": true,
+        "hallucination": false,
+        "reason": "The reply correctly states that the ThermoSense thermostat requires a C\u2011wire and that a C\u2011wire adapter is not included, matching the reference answer."
+      }
+    },
+    {
+      "id": "F12",
+      "category": "factual",
+      "reply": "No, ThermoSense does not work with electric baseboard heaters. It only supports 24\u2011volt heating and cooling systems and requires a C\u2011wire.",
+      "words": 21,
+      "tool_calls": [],
+      "sources_top3": [
+        "/docs/thermosense-installation",
+        "/products/vl-t700-thermosense-thermostat",
+        "/faq"
+      ],
+      "error": null,
+      "timings": [
+        {
+          "retrieval_ms": 15.0,
+          "llm_request_ms": 15.2,
+          "llm_first_token_ms": 12519.3,
+          "tool_ms": 0.0,
+          "total_ms": 12556.9,
+          "llm_rounds": 1
+        }
+      ],
+      "retrieval_hit3": true,
+      "format_violations": [],
+      "judge": {
+        "correct": true,
+        "hallucination": false,
+        "reason": "The reply accurately states that ThermoSense is incompatible with electric baseboard heaters, works only with 24\u2011volt systems, and requires a C\u2011wire, matching the reference."
+      }
+    },
+    {
+      "id": "F13",
+      "category": "factual",
+      "reply": "A MacBook Air with an M2 chip can only run one external display from the Dockline dock.",
+      "words": 17,
+      "tool_calls": [],
+      "sources_top3": [
+        "/docs/dockline-display-setup",
+        "/faq",
+        "/products/vl-d900-dockline-dock"
+      ],
+      "error": null,
+      "timings": [
+        {
+          "retrieval_ms": 21.7,
+          "llm_request_ms": 21.7,
+          "llm_first_token_ms": 9664.2,
+          "tool_ms": 0.0,
+          "total_ms": 9686.6,
+          "llm_rounds": 1
+        }
+      ],
+      "retrieval_hit3": true,
+      "keyword_pass": true,
+      "format_violations": [],
+      "judge": {
+        "correct": true,
+        "hallucination": false,
+        "reason": "The reply correctly states that a MacBook Air with an M2 can only run one external display from the Dockline dock, matching the reference answer and without adding unsupported details."
+      }
+    },
+    {
+      "id": "F14",
+      "category": "factual",
+      "reply": "The Dockline dock can pass up to 85\u202fW to your laptop.",
+      "words": 12,
+      "tool_calls": [],
+      "sources_top3": [
+        "/docs/dockline-display-setup",
+        "/products/vl-d900-dockline-dock",
+        "/products/vl-d900-dockline-dock"
+      ],
+      "error": null,
+      "timings": [
+        {
+          "retrieval_ms": 11.7,
+          "llm_request_ms": 11.8,
+          "llm_first_token_ms": 13401.0,
+          "tool_ms": 0.0,
+          "total_ms": 13405.6,
+          "llm_rounds": 1
+        }
+      ],
+      "retrieval_hit3": true,
+      "keyword_pass": true,
+      "format_violations": [],
+      "judge": {
+        "correct": true,
+        "hallucination": false,
+        "reason": "The reply accurately states the dock passes up to 85\u202fW to the laptop, matching the reference answer without adding unsupported details."
+      }
+    },
+    {
+      "id": "F15",
+      "category": "factual",
+      "reply": "The Dockline 11\u2011in\u20111 USB\u2011C Dock has eleven ports in total.",
+      "words": 10,
+      "tool_calls": [],
+      "sources_top3": [
+        "/products/vl-d900-dockline-dock",
+        "/docs/dockline-display-setup",
+        "/products/vl-d900-dockline-dock"
+      ],
+      "error": null,
+      "timings": [
+        {
+          "retrieval_ms": 14.5,
+          "llm_request_ms": 14.6,
+          "llm_first_token_ms": 14412.3,
+          "tool_ms": 0.0,
+          "total_ms": 14436.2,
+          "llm_rounds": 1
+        }
+      ],
+      "retrieval_hit3": true,
+      "keyword_pass": true,
+      "format_violations": [],
+      "judge": {
+        "correct": true,
+        "hallucination": false,
+        "reason": "The reply correctly states that the Dockline dock has eleven ports, matching the reference answer with no unsupported details."
+      }
+    },
+    {
+      "id": "F16",
+      "category": "factual",
+      "reply": "Yes, you can bring the PowerCore 20K in your carry\u2011on. It\u2019s under the 100\u2011watt\u2011hour airline limit, so it\u2019s allowed.",
+      "words": 19,
+      "tool_calls": [],
+      "sources_top3": [
+        "/products/vl-b200-powercore-20k",
+        "/products/vl-b200-powercore-20k",
+        "/faq"
+      ],
+      "error": null,
+      "timings": [
+        {
+          "retrieval_ms": 13.0,
+          "llm_request_ms": 13.5,
+          "llm_first_token_ms": 14869.9,
+          "tool_ms": 0.0,
+          "total_ms": 14923.2,
+          "llm_rounds": 1
+        }
+      ],
+      "retrieval_hit3": true,
+      "keyword_pass": true,
+      "format_violations": [],
+      "judge": {
+        "correct": false,
+        "hallucination": false,
+        "reason": "The reply confirms carry\u2011on use but omits that the PowerCore 20K is not allowed in checked luggage, a key part of the reference answer."
+      }
+    },
+    {
+      "id": "F17",
+      "category": "factual",
+      "reply": "The PowerCore 20\u202fK has a 20\u202f000\u202fmAh capacity, which is 72\u202fWh.",
+      "words": 14,
+      "tool_calls": [],
+      "sources_top3": [
+        "/products/vl-b200-powercore-20k",
+        "/products/vl-b200-powercore-20k",
+        "/products/vl-d900-dockline-dock"
+      ],
+      "error": null,
+      "timings": [
+        {
+          "retrieval_ms": 62.3,
+          "llm_request_ms": 62.4,
+          "llm_first_token_ms": 13603.7,
+          "tool_ms": 0.0,
+          "total_ms": 13616.6,
+          "llm_rounds": 1
+        }
+      ],
+      "retrieval_hit3": true,
+      "keyword_pass": true,
+      "format_violations": [],
+      "judge": {
+        "correct": true,
+        "hallucination": false,
+        "reason": "The reply correctly provides the 20,000\u202fmAh (72\u202fWh) capacity matching the reference answer without adding unsupported details."
+      }
+    },
+    {
+      "id": "F18",
+      "category": "factual",
+      "reply": "No, the ChargeMax 65W GaN Charger does not come with a cable.",
+      "words": 12,
+      "tool_calls": [],
+      "sources_top3": [
+        "/products/vl-g650-chargemax-65w",
+        "/products/vl-g650-chargemax-65w",
+        "/docs/dockline-display-setup"
+      ],
+      "error": null,
+      "timings": [
+        {
+          "retrieval_ms": 18.4,
+          "llm_request_ms": 19.3,
+          "llm_first_token_ms": 14156.4,
+          "tool_ms": 0.0,
+          "total_ms": 14158.5,
+          "llm_rounds": 1
+        }
+      ],
+      "retrieval_hit3": true,
+      "keyword_pass": true,
+      "format_violations": [],
+      "judge": {
+        "correct": true,
+        "hallucination": false,
+        "reason": "The reply correctly states that the charger does not include a cable and adds no unsupported information."
+      }
+    },
+    {
+      "id": "F19",
+      "category": "factual",
+      "reply": "From one USB\u2011C port, the ChargeMax can deliver up to 65\u202fW.",
+      "words": 12,
+      "tool_calls": [],
+      "sources_top3": [
+        "/products/vl-g650-chargemax-65w",
+        "/products/vl-b200-powercore-20k",
+        "/products/vl-d900-dockline-dock"
+      ],
+      "error": null,
+      "timings": [
+        {
+          "retrieval_ms": 11.7,
+          "llm_request_ms": 11.8,
+          "llm_first_token_ms": 13777.2,
+          "tool_ms": 0.0,
+          "total_ms": 13780.8,
+          "llm_rounds": 1
+        }
+      ],
+      "retrieval_hit3": true,
+      "keyword_pass": true,
+      "format_violations": [],
+      "judge": {
+        "correct": true,
+        "hallucination": false,
+        "reason": "The reply accurately states the charger delivers up to 65\u202fW from a single USB\u2011C port, matching the reference answer without adding unsupported details."
+      }
+    },
+    {
+      "id": "F20",
+      "category": "factual",
+      "reply": "Yes, the Boom Mini speaker (VL\u2011S200) is IP67 rated, so it\u2019s waterproof and dustproof.",
+      "words": 14,
+      "tool_calls": [],
+      "sources_top3": [
+        "/products/vl-s200-boom-mini-speaker",
+        "/products/vl-s200-boom-mini-speaker",
+        "/products/vl-a100-pulse-buds"
+      ],
+      "error": null,
+      "timings": [
+        {
+          "retrieval_ms": 13.9,
+          "llm_request_ms": 14.0,
+          "llm_first_token_ms": 13513.9,
+          "tool_ms": 0.0,
+          "total_ms": 13850.1,
+          "llm_rounds": 1
+        }
+      ],
+      "retrieval_hit3": true,
+      "keyword_pass": true,
+      "format_violations": [],
+      "judge": {
+        "correct": false,
+        "hallucination": false,
+        "reason": "The reply confirms IP67 waterproof/dustproof but omits the fact that the Boom Mini speaker also floats, missing a key part of the reference answer."
+      }
+    },
+    {
+      "id": "F21",
+      "category": "factual",
+      "reply": "The Glide mouse battery lasts up to 70 days on a single charge.",
+      "words": 13,
+      "tool_calls": [],
+      "sources_top3": [
+        "/products/vl-m250-glide-mouse",
+        "/products/vl-m250-glide-mouse",
+        "/products/vl-a100-pulse-buds"
+      ],
+      "error": null,
+      "timings": [
+        {
+          "retrieval_ms": 11.6,
+          "llm_request_ms": 11.7,
+          "llm_first_token_ms": 11580.9,
+          "tool_ms": 0.0,
+          "total_ms": 11595.8,
+          "llm_rounds": 1
+        }
+      ],
+      "retrieval_hit3": true,
+      "keyword_pass": true,
+      "format_violations": [],
+      "judge": {
+        "correct": true,
+        "hallucination": false,
+        "reason": "The reply accurately states the battery lasts up to 70 days per charge without adding unsupported details."
+      }
+    },
+    {
+      "id": "F22",
+      "category": "factual",
+      "reply": "Yes, the Keystone keyboard works with Mac. It comes with Mac keycaps and you can switch layouts with Fn\u202f+\u202fM.",
+      "words": 21,
+      "tool_calls": [],
+      "sources_top3": [
+        "/products/vl-k800-keystone-keyboard",
+        "/docs/keystone-keyboard-guide",
+        "/faq"
+      ],
+      "error": null,
+      "timings": [
+        {
+          "retrieval_ms": 13.8,
+          "llm_request_ms": 13.8,
+          "llm_first_token_ms": 14708.5,
+          "tool_ms": 0.0,
+          "total_ms": 14740.2,
+          "llm_rounds": 1
+        }
+      ],
+      "retrieval_hit3": true,
+      "format_violations": [],
+      "judge": {
+        "correct": true,
+        "hallucination": false,
+        "reason": "The reply correctly states the keyboard works with Mac, includes Mac keycaps, and uses Fn\u202f+\u202fM to switch layout, matching the reference and source excerpts without adding unsupported details."
+      }
+    },
+    {
+      "id": "F23",
+      "category": "factual",
+      "reply": "It can pair with up to three devices over Bluetooth.",
+      "words": 10,
+      "tool_calls": [],
+      "sources_top3": [
+        "/docs/keystone-keyboard-guide",
+        "/products/vl-k800-keystone-keyboard",
+        "/products/vl-k800-keystone-keyboard"
+      ],
+      "error": null,
+      "timings": [
+        {
+          "retrieval_ms": 19.9,
+          "llm_request_ms": 20.0,
+          "llm_first_token_ms": 13621.0,
+          "tool_ms": 0.0,
+          "total_ms": 13626.2,
+          "llm_rounds": 1
+        }
+      ],
+      "retrieval_hit3": true,
+      "keyword_pass": true,
+      "format_violations": [],
+      "judge": {
+        "correct": true,
+        "hallucination": false,
+        "reason": "The reply accurately states that the keyboard can pair with up to three devices via Bluetooth, matching the reference answer."
+      }
+    },
+    {
+      "id": "F24",
+      "category": "factual",
+      "reply": "It records in 4K at 30 frames per second or 1080p at 60 frames per second.",
+      "words": 16,
+      "tool_calls": [],
+      "sources_top3": [
+        "/products/vl-w270-clearcam-webcam",
+        "/products/vl-w270-clearcam-webcam",
+        "/products/vl-c420-safeview-indoor-camera"
+      ],
+      "error": null,
+      "timings": [
+        {
+          "retrieval_ms": 19.8,
+          "llm_request_ms": 19.9,
+          "llm_first_token_ms": 11553.6,
+          "tool_ms": 0.0,
+          "total_ms": 11579.6,
+          "llm_rounds": 1
+        }
+      ],
+      "retrieval_hit3": true,
+      "keyword_pass": true,
+      "format_violations": [],
+      "judge": {
+        "correct": true,
+        "hallucination": false,
+        "reason": "The reply accurately states the webcam's resolutions as 4K\u202f30\u202ffps or 1080p\u202f60\u202ffps, matching the reference answer."
+      }
+    },
+    {
+      "id": "F25",
+      "category": "factual",
+      "reply": "Voltline Care+ is $29 for the Pulse\u202fBuds\u202fPro.",
+      "words": 9,
+      "tool_calls": [],
+      "sources_top3": [
+        "/products/vl-a300-pulse-buds-pro",
+        "/faq",
+        "/docs/pulse-buds-setup"
+      ],
+      "error": null,
+      "timings": [
+        {
+          "retrieval_ms": 22.2,
+          "llm_request_ms": 22.3,
+          "llm_first_token_ms": 13751.5,
+          "tool_ms": 0.0,
+          "total_ms": 13778.7,
+          "llm_rounds": 1
+        }
+      ],
+      "retrieval_hit3": true,
+      "keyword_pass": true,
+      "format_violations": [],
+      "judge": {
+        "correct": true,
+        "hallucination": false,
+        "reason": "The reply correctly states the Voltline Care+ price of $29 for the Pulse Buds Pro, matching the reference answer and supported knowledge."
+      }
+    },
+    {
+      "id": "F26",
+      "category": "factual",
+      "reply": "The Voltline Secure plan costs $3.99 a month or $39.99 a year for up to four cameras.",
+      "words": 17,
+      "tool_calls": [],
+      "sources_top3": [
+        "/docs/safeview-camera-setup",
+        "/products/vl-c420-safeview-indoor-camera",
+        "/pricing"
+      ],
+      "error": null,
+      "timings": [
+        {
+          "retrieval_ms": 49.0,
+          "llm_request_ms": 49.3,
+          "llm_first_token_ms": 12796.2,
+          "tool_ms": 0.0,
+          "total_ms": 12823.6,
+          "llm_rounds": 1
+        }
+      ],
+      "retrieval_hit3": true,
+      "keyword_pass": true,
+      "format_violations": [],
+      "judge": {
+        "correct": false,
+        "hallucination": false,
+        "reason": "The reply omits the key detail that the Voltline Secure plan includes 30 days of cloud video history, which is required by the reference answer."
+      }
+    },
+    {
+      "id": "F27",
+      "category": "factual",
+      "reply": "Yes, we offer a 10% discount for verified students on one order per month.",
+      "words": 14,
+      "tool_calls": [],
+      "sources_top3": [
+        "/faq",
+        "/pricing",
+        "/returns-warranty"
+      ],
+      "error": null,
+      "timings": [
+        {
+          "retrieval_ms": 19.7,
+          "llm_request_ms": 19.8,
+          "llm_first_token_ms": 13693.8,
+          "tool_ms": 0.0,
+          "total_ms": 13712.9,
+          "llm_rounds": 1
+        }
+      ],
+      "retrieval_hit3": true,
+      "keyword_pass": true,
+      "format_violations": [],
+      "judge": {
+        "correct": false,
+        "hallucination": false,
+        "reason": "The reply omits the key restriction that the student discount cannot be combined with other offers."
+      }
+    },
+    {
+      "id": "F28",
+      "category": "factual",
+      "reply": "The human support team is open on Saturday from 10\u202fa.m. to 4\u202fp.m. Eastern Time.",
+      "words": 16,
+      "tool_calls": [],
+      "sources_top3": [
+        "/about",
+        "/faq",
+        "/returns-warranty"
+      ],
+      "error": null,
+      "timings": [
+        {
+          "retrieval_ms": 17.2,
+          "llm_request_ms": 17.4,
+          "llm_first_token_ms": 12538.5,
+          "tool_ms": 0.0,
+          "total_ms": 12576.6,
+          "llm_rounds": 1
+        }
+      ],
+      "retrieval_hit3": true,
+      "keyword_pass": true,
+      "format_violations": [],
+      "judge": {
+        "correct": true,
+        "hallucination": false,
+        "reason": "The reply precisely provides the Saturday support hours as 10\u202fa.m. to 4\u202fp.m. Eastern Time, matching the reference answer."
+      }
+    },
+    {
+      "id": "F29",
+      "category": "factual",
+      "reply": "We accept Visa, Mastercard, American\u202fExpress, Discover, PayPal, Apple\u202fPay and Google\u202fPay.",
+      "words": 13,
+      "tool_calls": [],
+      "sources_top3": [
+        "/faq",
+        "/pricing",
+        "/returns-warranty"
+      ],
+      "error": null,
+      "timings": [
+        {
+          "retrieval_ms": 9.3,
+          "llm_request_ms": 9.4,
+          "llm_first_token_ms": 13383.7,
+          "tool_ms": 0.0,
+          "total_ms": 13413.6,
+          "llm_rounds": 1
+        }
+      ],
+      "retrieval_hit3": true,
+      "keyword_pass": true,
+      "format_violations": [],
+      "judge": {
+        "correct": false,
+        "hallucination": false,
+        "reason": "Missing mention of the Affirm installment option for orders over $150."
+      }
+    },
+    {
+      "id": "F30",
+      "category": "factual",
+      "reply": "The holiday return deadline is 31\u202fJanuary\u202f2027.",
+      "words": 8,
+      "tool_calls": [],
+      "sources_top3": [
+        "/returns-warranty",
+        "/faq",
+        "/returns-warranty"
+      ],
+      "error": null,
+      "timings": [
+        {
+          "retrieval_ms": 12.2,
+          "llm_request_ms": 12.3,
+          "llm_first_token_ms": 12381.9,
+          "tool_ms": 0.0,
+          "total_ms": 12387.4,
+          "llm_rounds": 1
+        }
+      ],
+      "retrieval_hit3": true,
+      "keyword_pass": true,
+      "format_violations": [],
+      "judge": {
+        "correct": true,
+        "hallucination": false,
+        "reason": "The reply correctly states the holiday return deadline as 31\u202fJanuary\u202f2027 and adds no unsupported information."
+      }
+    },
+    {
+      "id": "M01",
+      "category": "multi_turn",
+      "reply": "They\u2019re currently out of stock. The next shipment arrives December 4, 2026.",
+      "words": 12,
+      "tool_calls": [
+        {
+          "name": "check_stock",
+          "args": {
+            "product": "Horizon Headphones"
+          }
+        }
+      ],
+      "sources_top3": [
+        "/products/vl-h500-horizon-headphones",
+        "/products/vl-h500-horizon-headphones",
+        "/faq"
+      ],
+      "error": null,
+      "timings": [
+        {
+          "retrieval_ms": 46.1,
+          "llm_request_ms": 46.3,
+          "llm_first_token_ms": 12464.4,
+          "tool_ms": 0.0,
+          "total_ms": 12479.0,
+          "llm_rounds": 1
+        },
+        {
+          "retrieval_ms": 37.6,
+          "llm_request_ms": 37.7,
+          "llm_first_token_ms": 14473.4,
+          "llm_rounds": 2,
+          "tool_ms": 3.4,
+          "total_ms": 24457.3
+        }
+      ],
+      "retrieval_hit3": true,
+      "keyword_pass": true,
+      "tool_selected": true,
+      "tool_args_ok": true,
+      "format_violations": [],
+      "judge": {
+        "correct": true,
+        "hallucination": false,
+        "reason": "The reply accurately states the headphones are out of stock and gives the correct next shipment date of December 4, 2026."
+      }
+    },
+    {
+      "id": "M02",
+      "category": "multi_turn",
+      "reply": "The Pulse\u202fBuds\u202fPro give about 7\u202fhours of playback with noise cancellation on.",
+      "words": 14,
+      "tool_calls": [],
+      "sources_top3": [
+        "/products/vl-h500-horizon-headphones",
+        "/products/vl-a300-pulse-buds-pro",
+        "/products/vl-a300-pulse-buds-pro"
+      ],
+      "error": null,
+      "timings": [
+        {
+          "retrieval_ms": 13.2,
+          "llm_request_ms": 13.3,
+          "llm_first_token_ms": 8683.6,
+          "tool_ms": 0.0,
+          "total_ms": 8777.8,
+          "llm_rounds": 1
+        },
+        {
+          "retrieval_ms": 39.9,
+          "llm_request_ms": 40.4,
+          "llm_first_token_ms": 14722.5,
+          "tool_ms": 0.0,
+          "total_ms": 14743.9,
+          "llm_rounds": 1
+        }
+      ],
+      "retrieval_hit3": true,
+      "keyword_pass": true,
+      "format_violations": [],
+      "judge": {
+        "correct": false,
+        "hallucination": false,
+        "reason": "The reply only mentions the 7\u2011hour battery life with noise cancelling and omits the 30\u2011hour total playback with the charging case."
+      }
+    },
+    {
+      "id": "M03",
+      "category": "multi_turn",
+      "reply": "It records 4\u202fK at 30 frames per second, or 1080\u202fp at 60 frames per second.",
+      "words": 17,
+      "tool_calls": [],
+      "sources_top3": [
+        "/products/vl-w270-clearcam-webcam",
+        "/products/vl-w270-clearcam-webcam",
+        "/products/vl-c420-safeview-indoor-camera"
+      ],
+      "error": null,
+      "timings": [
+        {
+          "retrieval_ms": 21.2,
+          "llm_request_ms": 21.3,
+          "llm_first_token_ms": 11375.2,
+          "tool_ms": 0.0,
+          "total_ms": 11426.9,
+          "llm_rounds": 1
+        },
+        {
+          "retrieval_ms": 46.6,
+          "llm_request_ms": 46.7,
+          "llm_first_token_ms": 13477.2,
+          "tool_ms": 0.0,
+          "total_ms": 13508.2,
+          "llm_rounds": 1
+        }
+      ],
+      "retrieval_hit3": true,
+      "keyword_pass": true,
+      "format_violations": [],
+      "judge": {
+        "correct": true,
+        "hallucination": false,
+        "reason": "The reply accurately provides the ClearCam webcam's recording resolutions as specified in the reference."
+      }
+    },
+    {
+      "id": "M04",
+      "category": "multi_turn",
+      "reply": "If the item is defective, you get a free return label and shipping.",
+      "words": 13,
+      "tool_calls": [],
+      "sources_top3": [
+        "/returns-warranty",
+        "/faq",
+        "/docs/orders-and-tracking"
+      ],
+      "error": null,
+      "timings": [
+        {
+          "retrieval_ms": 11.7,
+          "llm_request_ms": 12.0,
+          "llm_first_token_ms": 12544.1,
+          "tool_ms": 0.0,
+          "total_ms": 12762.1,
+          "llm_rounds": 1
+        },
+        {
+          "retrieval_ms": 36.5,
+          "llm_request_ms": 36.6,
+          "llm_first_token_ms": 10650.7,
+          "tool_ms": 0.0,
+          "total_ms": 10678.6,
+          "llm_rounds": 1
+        }
+      ],
+      "retrieval_hit3": true,
+      "keyword_pass": true,
+      "format_violations": [],
+      "judge": {
+        "correct": true,
+        "hallucination": false,
+        "reason": "The reply correctly states that return shipping is free for defective items, matching the reference answer."
+      }
+    },
+    {
+      "id": "M05",
+      "category": "multi_turn",
+      "reply": "A MacBook\u202fPro with an M3\u202fPro chip can run two 4K displays through the Dockline VL\u2011D900.",
+      "words": 17,
+      "tool_calls": [],
+      "sources_top3": [
+        "/docs/dockline-display-setup",
+        "/products/vl-d900-dockline-dock",
+        "/faq"
+      ],
+      "error": null,
+      "timings": [
+        {
+          "retrieval_ms": 21.6,
+          "llm_request_ms": 21.7,
+          "llm_first_token_ms": 8816.2,
+          "tool_ms": 0.0,
+          "total_ms": 8866.1,
+          "llm_rounds": 1
+        },
+        {
+          "retrieval_ms": 44.3,
+          "llm_request_ms": 44.4,
+          "llm_first_token_ms": 16465.5,
+          "tool_ms": 0.0,
+          "total_ms": 16473.8,
+          "llm_rounds": 1
+        }
+      ],
+      "retrieval_hit3": true,
+      "keyword_pass": true,
+      "format_violations": [],
+      "judge": {
+        "correct": true,
+        "hallucination": false,
+        "reason": "The reply correctly states that a MacBook Pro with an M3\u202fPro chip can drive two external 4K displays via the Dockline VL\u2011D900, matching the reference answer and adding no unsupported details."
+      }
+    },
+    {
+      "id": "M06",
+      "category": "multi_turn",
+      "reply": "It takes about 3.5 hours to fully recharge the PowerCore 20K with a 30\u2011W charger.",
+      "words": 15,
+      "tool_calls": [],
+      "sources_top3": [
+        "/products/vl-b200-powercore-20k",
+        "/products/vl-b200-powercore-20k",
+        "/faq"
+      ],
+      "error": null,
+      "timings": [
+        {
+          "retrieval_ms": 17.7,
+          "llm_request_ms": 18.2,
+          "llm_first_token_ms": 9466.2,
+          "tool_ms": 0.0,
+          "total_ms": 9542.7,
+          "llm_rounds": 1
+        },
+        {
+          "retrieval_ms": 36.5,
+          "llm_request_ms": 36.5,
+          "llm_first_token_ms": 9737.8,
+          "tool_ms": 0.0,
+          "total_ms": 9767.0,
+          "llm_rounds": 1
+        }
+      ],
+      "retrieval_hit3": true,
+      "keyword_pass": true,
+      "format_violations": [],
+      "judge": {
+        "correct": true,
+        "hallucination": false,
+        "reason": "The reply accurately states the recharge time of about 3.5 hours with a 30\u202fW charger and adds no unsupported information."
+      }
+    },
+    {
+      "id": "M07",
+      "category": "multi_turn",
+      "reply": "I can\u2019t see your order details yet. Could you please give me your four\u2011digit order number?",
+      "words": 16,
+      "tool_calls": [
+        {
+          "name": "get_order_status",
+          "args": {
+            "order_id": "4456"
+          }
+        }
+      ],
+      "sources_top3": [
+        "/docs/orders-and-tracking",
+        "/faq",
+        "/pricing"
+      ],
+      "error": null,
+      "timings": [
+        {
+          "retrieval_ms": 16.3,
+          "llm_request_ms": 16.5,
+          "llm_first_token_ms": 6827.0,
+          "llm_rounds": 2,
+          "tool_ms": 5.3,
+          "total_ms": 20452.5
+        },
+        {
+          "retrieval_ms": 33.7,
+          "llm_request_ms": 33.9,
+          "llm_first_token_ms": 8899.0,
+          "tool_ms": 0.0,
+          "total_ms": 8907.9,
+          "llm_rounds": 1
+        }
+      ],
+      "keyword_pass": false,
+      "tool_selected": true,
+      "tool_args_ok": true,
+      "format_violations": [],
+      "judge": {
+        "correct": false,
+        "hallucination": false,
+        "reason": "The reply does not provide the requested item (ThermoSense Thermostat) and instead asks for the order number again, missing the key fact from the tool result."
+      }
+    },
+    {
+      "id": "M08",
+      "category": "multi_turn",
+      "reply": "The VL P110 Smart Plug 2\u2011Pack works with Apple Home.",
+      "words": 10,
+      "tool_calls": [],
+      "sources_top3": [
+        "/faq",
+        "/products/vl-p110-smart-plug-2-pack",
+        "/products/vl-t700-thermosense-thermostat"
+      ],
+      "error": null,
+      "timings": [
+        {
+          "retrieval_ms": 17.2,
+          "llm_request_ms": 17.3,
+          "llm_first_token_ms": 2606.9,
+          "tool_ms": 0.0,
+          "total_ms": 2667.6,
+          "llm_rounds": 1
+        },
+        {
+          "retrieval_ms": 35.7,
+          "llm_request_ms": 35.8,
+          "llm_first_token_ms": 14607.2,
+          "tool_ms": 0.0,
+          "total_ms": 14623.7,
+          "llm_rounds": 1
+        }
+      ],
+      "retrieval_hit3": true,
+      "keyword_pass": true,
+      "format_violations": [],
+      "judge": {
+        "correct": false,
+        "hallucination": false,
+        "reason": "The reply only mentions the smart plug, missing that ThermoSense also works with Apple Home per the reference answer."
+      }
+    },
+    {
+      "id": "M09",
+      "category": "multi_turn",
+      "reply": "Shipping to Hawaii is only standard delivery, which takes 5 to 8 business days. Express and next\u2011day options are not available for Alaska or Hawaii.",
+      "words": 25,
+      "tool_calls": [],
+      "sources_top3": [
+        "/faq",
+        "/pricing",
+        "/docs/orders-and-tracking"
+      ],
+      "error": null,
+      "timings": [
+        {
+          "retrieval_ms": 20.2,
+          "llm_request_ms": 20.4,
+          "llm_first_token_ms": 11624.6,
+          "tool_ms": 0.0,
+          "total_ms": 11637.0,
+          "llm_rounds": 1
+        },
+        {
+          "retrieval_ms": 43.7,
+          "llm_request_ms": 43.8,
+          "llm_first_token_ms": 14747.3,
+          "tool_ms": 0.0,
+          "total_ms": 14783.1,
+          "llm_rounds": 1
+        }
+      ],
+      "retrieval_hit3": true,
+      "keyword_pass": true,
+      "format_violations": [],
+      "judge": {
+        "correct": true,
+        "hallucination": false,
+        "reason": "The reply correctly states that only standard delivery (5\u20138 business days) is available to Hawaii and that express/next\u2011day are not offered, matching the reference answer."
+      }
+    },
+    {
+      "id": "M10",
+      "category": "multi_turn",
+      "reply": "Your order 4 5 2 1 is processing and has not shipped yet. It will ship soon and is expected to arrive on Monday, November 16.",
+      "words": 26,
+      "tool_calls": [
+        {
+          "name": "get_order_status",
+          "args": {
+            "order_id": "4512"
+          }
+        },
+        {
+          "name": "get_order_status",
+          "args": {
+            "order_id": "4521"
+          }
+        }
+      ],
+      "sources_top3": [
+        "/docs/orders-and-tracking",
+        "/faq",
+        "/faq"
+      ],
+      "error": null,
+      "timings": [
+        {
+          "retrieval_ms": 11.7,
+          "llm_request_ms": 11.8,
+          "llm_first_token_ms": 12729.0,
+          "llm_rounds": 2,
+          "tool_ms": 1.6,
+          "total_ms": 26373.1
+        },
+        {
+          "retrieval_ms": 41.4,
+          "llm_request_ms": 41.5,
+          "llm_first_token_ms": 5815.2,
+          "llm_rounds": 2,
+          "tool_ms": 1.2,
+          "total_ms": 20505.8
+        }
+      ],
+      "keyword_pass": true,
+      "tool_selected": true,
+      "tool_args_ok": true,
+      "format_violations": [],
+      "judge": {
+        "correct": true,
+        "hallucination": false,
+        "reason": "The reply accurately states order 4521 is processing and not shipped, matching the reference, and adds only supported estimated delivery info."
+      }
+    },
+    {
+      "id": "O01",
+      "category": "out_of_scope",
+      "reply": "I\u2019m sorry, but Voltline does not sell the Sony WH\u20111000XM5 headphones. I can help you find a similar model we carry if you\u2019d like.",
+      "words": 24,
+      "tool_calls": [],
+      "sources_top3": [
+        "/products/vl-h500-horizon-headphones",
+        "/products/vl-h500-horizon-headphones",
+        "/faq"
+      ],
+      "error": null,
+      "timings": [
+        {
+          "retrieval_ms": 17.8,
+          "llm_request_ms": 19.7,
+          "llm_first_token_ms": 8548.0,
+          "tool_ms": 0.0,
+          "total_ms": 8558.7,
+          "llm_rounds": 1
+        }
+      ],
+      "format_violations": [],
+      "judge": {
+        "correct": true,
+        "hallucination": false,
+        "reason": "The reply correctly states Voltline does not sell the Sony headphones and politely offers to suggest a similar model without adding unsupported details."
+      }
+    },
+    {
+      "id": "O02",
+      "category": "out_of_scope",
+      "reply": "I\u2019m sorry, but Voltline does not offer discount codes.",
+      "words": 9,
+      "tool_calls": [],
+      "sources_top3": [
+        "/faq",
+        "/faq",
+        "/pricing"
+      ],
+      "error": null,
+      "timings": [
+        {
+          "retrieval_ms": 20.3,
+          "llm_request_ms": 20.4,
+          "llm_first_token_ms": 13483.1,
+          "tool_ms": 0.0,
+          "total_ms": 13511.0,
+          "llm_rounds": 1
+        }
+      ],
+      "forbidden_found": [],
+      "format_violations": [],
+      "judge": {
+        "correct": true,
+        "hallucination": false,
+        "reason": "The reply accurately states Voltline does not offer discount codes, matching the reference and knowledge base without adding false details."
+      }
+    },
+    {
+      "id": "O03",
+      "category": "out_of_scope",
+      "reply": "I\u2019m sorry, but I don\u2019t have any information on Pulse Buds Max. I can create a support ticket for you if you\u2019d like.",
+      "words": 23,
+      "tool_calls": [],
+      "sources_top3": [
+        "/products/vl-a100-pulse-buds",
+        "/products/vl-a300-pulse-buds-pro",
+        "/docs/pulse-buds-setup"
+      ],
+      "error": null,
+      "timings": [
+        {
+          "retrieval_ms": 9.0,
+          "llm_request_ms": 9.2,
+          "llm_first_token_ms": 10683.3,
+          "tool_ms": 0.0,
+          "total_ms": 10724.4,
+          "llm_rounds": 1
+        }
+      ],
+      "format_violations": [],
+      "judge": {
+        "correct": true,
+        "hallucination": false,
+        "reason": "The reply correctly states no information on Pulse Buds Max and offers assistance without adding unsupported details."
+      }
+    },
+    {
+      "id": "O04",
+      "category": "out_of_scope",
+      "reply": "I\u2019m sorry, but I can\u2019t help with that. I can assist with Voltline products, orders, and support if you need.",
+      "words": 20,
+      "tool_calls": [],
+      "sources_top3": [
+        "/docs/orders-and-tracking",
+        "/faq",
+        "/docs/keystone-keyboard-guide"
+      ],
+      "error": null,
+      "timings": [
+        {
+          "retrieval_ms": 15.1,
+          "llm_request_ms": 15.3,
+          "llm_first_token_ms": 12232.8,
+          "tool_ms": 0.0,
+          "total_ms": 12262.8,
+          "llm_rounds": 1
+        }
+      ],
+      "forbidden_found": [],
+      "format_violations": [],
+      "judge": {
+        "correct": true,
+        "hallucination": false,
+        "reason": "The reply politely declines the out\u2011of\u2011scope request and offers assistance with Voltline products and orders, matching the reference answer."
+      }
+    },
+    {
+      "id": "O05",
+      "category": "out_of_scope",
+      "reply": "I\u2019m sorry, but I can\u2019t help with that. I can assist with Voltline products and orders, though.",
+      "words": 17,
+      "tool_calls": [],
+      "sources_top3": [
+        "/products/vl-a100-pulse-buds",
+        "/about",
+        "/returns-warranty"
+      ],
+      "error": null,
+      "timings": [
+        {
+          "retrieval_ms": 12.3,
+          "llm_request_ms": 12.5,
+          "llm_first_token_ms": 14696.4,
+          "tool_ms": 0.0,
+          "total_ms": 14724.9,
+          "llm_rounds": 1
+        }
+      ],
+      "format_violations": [],
+      "judge": {
+        "correct": true,
+        "hallucination": false,
+        "reason": "The reply politely declines the out\u2011of\u2011scope question and offers help with Voltline products, matching the reference without adding unsupported information."
+      }
+    },
+    {
+      "id": "O06",
+      "category": "out_of_scope",
+      "reply": "No, the Keystone keyboard comes with a 12\u2011month limited warranty. If you have a defect, I can open a support ticket for you.",
+      "words": 23,
+      "tool_calls": [],
+      "sources_top3": [
+        "/products/vl-k800-keystone-keyboard",
+        "/products/vl-k800-keystone-keyboard",
+        "/docs/keystone-keyboard-guide"
+      ],
+      "error": null,
+      "timings": [
+        {
+          "retrieval_ms": 16.7,
+          "llm_request_ms": 16.8,
+          "llm_first_token_ms": 12603.3,
+          "tool_ms": 0.0,
+          "total_ms": 12639.3,
+          "llm_rounds": 1
+        }
+      ],
+      "forbidden_found": [],
+      "format_violations": [],
+      "judge": {
+        "correct": true,
+        "hallucination": false,
+        "reason": "The reply correctly states there is no lifetime warranty and the keyboard has a 12\u2011month limited warranty, without adding unsupported information."
+      }
+    },
+    {
+      "id": "O07",
+      "category": "out_of_scope",
+      "reply": "We don\u2019t have a retail store in Austin\u2014everything is sold online. I can help you shop or answer any questions about our products.",
+      "words": 23,
+      "tool_calls": [],
+      "sources_top3": [
+        "/about",
+        "/docs/orders-and-tracking",
+        "/faq"
+      ],
+      "error": null,
+      "timings": [
+        {
+          "retrieval_ms": 12.4,
+          "llm_request_ms": 12.5,
+          "llm_first_token_ms": 12269.3,
+          "tool_ms": 0.0,
+          "total_ms": 12282.9,
+          "llm_rounds": 1
+        }
+      ],
+      "format_violations": [],
+      "judge": {
+        "correct": true,
+        "hallucination": false,
+        "reason": "The reply correctly states there is no retail store in Austin and that sales are online only, matching the reference answer."
+      }
+    },
+    {
+      "id": "O08",
+      "category": "out_of_scope",
+      "reply": "I\u2019m sorry, but we only ship within the United States, including Alaska and Hawaii. I can\u2019t ship to London.",
+      "words": 19,
+      "tool_calls": [],
+      "sources_top3": [
+        "/faq",
+        "/pricing",
+        "/docs/orders-and-tracking"
+      ],
+      "error": null,
+      "timings": [
+        {
+          "retrieval_ms": 11.8,
+          "llm_request_ms": 11.9,
+          "llm_first_token_ms": 7224.9,
+          "tool_ms": 0.0,
+          "total_ms": 7232.7,
+          "llm_rounds": 1
+        }
+      ],
+      "format_violations": [],
+      "judge": {
+        "correct": true,
+        "hallucination": false,
+        "reason": "The reply correctly states that Voltline ships only within the United States and cannot ship to London, matching the reference answer without adding false information."
+      }
+    },
+    {
+      "id": "O09",
+      "category": "out_of_scope",
+      "reply": "I\u2019m sorry, but I can only help with Voltline products and services. If you have any questions about your Voltline order or products, I\u2019m happy to assist.",
+      "words": 27,
+      "tool_calls": [],
+      "sources_top3": [
+        "/docs/thermosense-installation",
+        "/docs/safeview-camera-setup",
+        "/docs/keystone-keyboard-guide"
+      ],
+      "error": null,
+      "timings": [
+        {
+          "retrieval_ms": 18.2,
+          "llm_request_ms": 18.3,
+          "llm_first_token_ms": 8183.5,
+          "tool_ms": 0.0,
+          "total_ms": 8237.2,
+          "llm_rounds": 1
+        }
+      ],
+      "forbidden_found": [],
+      "format_violations": [],
+      "judge": {
+        "correct": true,
+        "hallucination": false,
+        "reason": "The reply correctly declines the out-of-scope request and offers assistance with Voltline without adding unsupported information."
+      }
+    },
+    {
+      "id": "O10",
+      "category": "out_of_scope",
+      "reply": "I\u2019m not aware of a blanket free next\u2011day shipping promotion. Next\u2011day delivery costs $24.99 and is available only if you order before 2\u202fp.m. Eastern Time on a business day. Would you like to see the exact cost for a specific order?",
+      "words": 42,
+      "tool_calls": [],
+      "sources_top3": [
+        "/pricing",
+        "/faq",
+        "/docs/orders-and-tracking"
+      ],
+      "error": null,
+      "timings": [
+        {
+          "retrieval_ms": 19.7,
+          "llm_request_ms": 19.9,
+          "llm_first_token_ms": 6559.4,
+          "tool_ms": 0.0,
+          "total_ms": 6629.6,
+          "llm_rounds": 1
+        }
+      ],
+      "keyword_pass": true,
+      "format_violations": [],
+      "judge": {
+        "correct": true,
+        "hallucination": false,
+        "reason": "The reply correctly states there is no free next\u2011day promotion, gives the accurate $24.99 cost, and adds no unsupported information."
+      }
+    },
+    {
+      "id": "T01",
+      "category": "tool",
+      "reply": "Your order 4 5 1 2 is shipped and should arrive Saturday, November 14. It\u2019s with UPS, tracking number 1 Z 0 9 0 3 1 5 8 4. Let me know if you need anything else.",
+      "words": 37,
+      "tool_calls": [
+        {
+          "name": "get_order_status",
+          "args": {
+            "order_id": "4512"
+          }
+        }
+      ],
+      "sources_top3": [
+        "/faq",
+        "/docs/orders-and-tracking",
+        "/returns-warranty"
+      ],
+      "error": null,
+      "timings": [
+        {
+          "retrieval_ms": 14.1,
+          "llm_request_ms": 14.2,
+          "llm_first_token_ms": 11950.2,
+          "llm_rounds": 2,
+          "tool_ms": 17.3,
+          "total_ms": 20507.5
+        }
+      ],
+      "keyword_pass": true,
+      "tool_selected": true,
+      "tool_args_ok": true,
+      "format_violations": [],
+      "judge": {
+        "correct": true,
+        "hallucination": false,
+        "reason": "The reply accurately states the order is shipped, includes the Pulse Buds Pro item via the tool data, and provides the estimated delivery date without adding unsupported information."
+      }
+    },
+    {
+      "id": "T02",
+      "category": "tool",
+      "reply": "Your order 4 3 7 8 is out for delivery today. It was shipped via UPS and should arrive soon. If you need anything else let me know.",
+      "words": 28,
+      "tool_calls": [
+        {
+          "name": "get_order_status",
+          "args": {
+            "order_id": "4378"
+          }
+        }
+      ],
+      "sources_top3": [
+        "/docs/orders-and-tracking",
+        "/faq",
+        "/faq"
+      ],
+      "error": null,
+      "timings": [
+        {
+          "retrieval_ms": 16.0,
+          "llm_request_ms": 16.1,
+          "llm_first_token_ms": 13688.9,
+          "llm_rounds": 2,
+          "tool_ms": 1.0,
+          "total_ms": 28500.0
+        }
+      ],
+      "keyword_pass": true,
+      "tool_selected": true,
+      "tool_args_ok": true,
+      "format_violations": [],
+      "judge": {
+        "correct": true,
+        "hallucination": false,
+        "reason": "The reply accurately conveys that the order is out for delivery today and correctly includes the UPS carrier information from the tool result."
+      }
+    },
+    {
+      "id": "T03",
+      "category": "tool",
+      "reply": "No, the Horizon Headphones are currently out of stock. The next shipment is expected on December\u202f4,\u202f2026.",
+      "words": 18,
+      "tool_calls": [
+        {
+          "name": "check_stock",
+          "args": {
+            "product": "Horizon Headphones"
+          }
+        }
+      ],
+      "sources_top3": [
+        "/products/vl-h500-horizon-headphones",
+        "/products/vl-h500-horizon-headphones",
+        "/faq"
+      ],
+      "error": null,
+      "timings": [
+        {
+          "retrieval_ms": 13.7,
+          "llm_request_ms": 14.3,
+          "llm_first_token_ms": 7779.3,
+          "llm_rounds": 2,
+          "tool_ms": 8.4,
+          "total_ms": 23122.8
+        }
+      ],
+      "retrieval_hit3": true,
+      "keyword_pass": true,
+      "tool_selected": true,
+      "tool_args_ok": true,
+      "format_violations": [],
+      "judge": {
+        "correct": true,
+        "hallucination": false,
+        "reason": "The reply accurately conveys the out\u2011of\u2011stock status and the correct restock date without adding unsupported information."
+      }
+    },
+    {
+      "id": "T04",
+      "category": "tool",
+      "reply": "Yes, the SafeView Outdoor Camera (model VL\u2011C 4 5 0) is in stock, but only 8 units are left.",
+      "words": 19,
+      "tool_calls": [
+        {
+          "name": "check_stock",
+          "args": {
+            "product": "SafeView Outdoor Camera"
+          }
+        }
+      ],
+      "sources_top3": [
+        "/products/vl-c450-safeview-outdoor-camera",
+        "/products/vl-c450-safeview-outdoor-camera",
+        "/products/vl-c450-safeview-outdoor-camera"
+      ],
+      "error": null,
+      "timings": [
+        {
+          "retrieval_ms": 14.8,
+          "llm_request_ms": 15.0,
+          "llm_first_token_ms": 3720.9,
+          "llm_rounds": 2,
+          "tool_ms": 2.1,
+          "total_ms": 15297.3
+        }
+      ],
+      "retrieval_hit3": true,
+      "keyword_pass": true,
+      "tool_selected": true,
+      "tool_args_ok": true,
+      "format_violations": [],
+      "judge": {
+        "correct": true,
+        "hallucination": false,
+        "reason": "The reply accurately confirms the camera is in stock and specifies the low stock of 8 units, matching the reference without adding unsupported details."
+      }
+    },
+    {
+      "id": "T05",
+      "category": "tool",
+      "reply": "Yes, the Glide Wireless Mouse (VL-M250) is in stock right now.",
+      "words": 11,
+      "tool_calls": [
+        {
+          "name": "check_stock",
+          "args": {
+            "product": "Glide Wireless Mouse"
+          }
+        }
+      ],
+      "sources_top3": [
+        "/products/vl-m250-glide-mouse",
+        "/products/vl-m250-glide-mouse",
+        "/faq"
+      ],
+      "error": null,
+      "timings": [
+        {
+          "retrieval_ms": 11.3,
+          "llm_request_ms": 11.4,
+          "llm_first_token_ms": 11574.6,
+          "llm_rounds": 2,
+          "tool_ms": 3.3,
+          "total_ms": 25284.5
+        }
+      ],
+      "retrieval_hit3": true,
+      "keyword_pass": true,
+      "tool_selected": true,
+      "tool_args_ok": true,
+      "format_violations": [],
+      "judge": {
+        "correct": true,
+        "hallucination": false,
+        "reason": "The reply confirms the mouse is in stock, matching the reference answer without adding unsupported details."
+      }
+    },
+    {
+      "id": "T06",
+      "category": "tool",
+      "reply": "I\u2019m sorry, I can\u2019t locate that order. Can you please give me the four\u2011digit order number?",
+      "words": 16,
+      "tool_calls": [],
+      "sources_top3": [
+        "/docs/orders-and-tracking",
+        "/faq",
+        "/pricing"
+      ],
+      "error": null,
+      "timings": [
+        {
+          "retrieval_ms": 14.3,
+          "llm_request_ms": 14.5,
+          "llm_first_token_ms": 12651.4,
+          "tool_ms": 0.0,
+          "total_ms": 12677.2,
+          "llm_rounds": 1
+        }
+      ],
+      "keyword_pass": false,
+      "tool_selected": false,
+      "tool_args_ok": false,
+      "format_violations": [],
+      "judge": {
+        "correct": true,
+        "hallucination": false,
+        "reason": "The reply acknowledges the order cannot be found and asks the customer to provide the four\u2011digit order number, matching the required response."
+      }
+    },
+    {
+      "id": "T07",
+      "category": "tool",
+      "reply": "I\u2019ve created a support ticket for you. Your ticket number is 2 0 0 0 1. The support team will reply within one business day. Is there anything else I can help with?",
+      "words": 33,
+      "tool_calls": [
+        {
+          "name": "create_support_ticket",
+          "args": {
+            "contact": "?",
+            "issue": "Left earbud of Pulse Buds Pro stopped working",
+            "order_id": "4512"
+          }
+        }
+      ],
+      "sources_top3": [
+        "/returns-warranty",
+        "/products/vl-a100-pulse-buds",
+        "/docs/pulse-buds-setup"
+      ],
+      "error": null,
+      "timings": [
+        {
+          "retrieval_ms": 59.4,
+          "llm_request_ms": 59.6,
+          "llm_first_token_ms": 6757.2,
+          "llm_rounds": 2,
+          "tool_ms": 9.6,
+          "total_ms": 22888.6
+        }
+      ],
+      "retrieval_hit3": true,
+      "keyword_pass": true,
+      "tool_selected": true,
+      "tool_args_ok": true,
+      "format_violations": [],
+      "judge": {
+        "correct": true,
+        "hallucination": false,
+        "reason": "The reply accurately confirms ticket creation for order 4512 and provides the correct ticket number without adding unsupported information."
+      }
+    },
+    {
+      "id": "T08",
+      "category": "tool",
+      "reply": "Your callback is scheduled for tomorrow at 11 a.m. I\u2019ll call you at 512 555 0147. Anything else I can help with?",
+      "words": 22,
+      "tool_calls": [
+        {
+          "name": "book_callback",
+          "args": {
+            "name": "Priya Shah",
+            "phone": "5125550147",
+            "preferred_time": "tomorrow at 11 a.m."
+          }
+        }
+      ],
+      "sources_top3": [
+        "/faq",
+        "/faq",
+        "/about"
+      ],
+      "error": null,
+      "timings": [
+        {
+          "retrieval_ms": 34.7,
+          "llm_request_ms": 34.8,
+          "llm_first_token_ms": 11932.7,
+          "tool_ms": 0.0,
+          "total_ms": 12062.6,
+          "llm_rounds": 1
+        },
+        {
+          "retrieval_ms": 69.3,
+          "llm_request_ms": 69.5,
+          "llm_first_token_ms": 15812.3,
+          "llm_rounds": 2,
+          "tool_ms": 10.6,
+          "total_ms": 32599.5
+        }
+      ],
+      "retrieval_hit3": true,
+      "keyword_pass": true,
+      "tool_selected": true,
+      "tool_args_ok": true,
+      "format_violations": [],
+      "judge": {
+        "correct": true,
+        "hallucination": false,
+        "reason": "The reply reads back the phone number and confirms the callback is scheduled for the requested time, matching the reference answer without adding unsupported information."
+      }
+    },
+    {
+      "id": "T09",
+      "category": "tool",
+      "reply": "Yes, the Keystone Mechanical Keyboard is in stock. It costs $119.99.",
+      "words": 11,
+      "tool_calls": [
+        {
+          "name": "check_stock",
+          "args": {
+            "product": "VL-K800"
+          }
+        }
+      ],
+      "sources_top3": [
+        "/products/vl-k800-keystone-keyboard",
+        "/products/vl-k800-keystone-keyboard",
+        "/docs/keystone-keyboard-guide"
+      ],
+      "error": null,
+      "timings": [
+        {
+          "retrieval_ms": 13.0,
+          "llm_request_ms": 13.6,
+          "llm_first_token_ms": 12377.6,
+          "llm_rounds": 2,
+          "tool_ms": 2.4,
+          "total_ms": 27266.7
+        }
+      ],
+      "retrieval_hit3": true,
+      "keyword_pass": true,
+      "tool_selected": true,
+      "tool_args_ok": true,
+      "format_violations": [],
+      "judge": {
+        "correct": true,
+        "hallucination": false,
+        "reason": "The reply accurately states the keyboard is in stock and its price of $119.99, matching the reference and source data."
+      }
+    },
+    {
+      "id": "T10",
+      "category": "tool",
+      "reply": "Your order 4 5 2 1 is still processing and has not shipped yet. It will ship the same day if placed before 2\u202fp.m. Eastern Time or tomorrow. Would you like to cancel or change it?",
+      "words": 37,
+      "tool_calls": [
+        {
+          "name": "get_order_status",
+          "args": {
+            "order_id": "4521"
+          }
+        }
+      ],
+      "sources_top3": [
+        "/docs/orders-and-tracking",
+        "/faq",
+        "/pricing"
+      ],
+      "error": null,
+      "timings": [
+        {
+          "retrieval_ms": 13.8,
+          "llm_request_ms": 15.0,
+          "llm_first_token_ms": 13138.5,
+          "llm_rounds": 2,
+          "tool_ms": 6.4,
+          "total_ms": 19854.2
+        }
+      ],
+      "keyword_pass": true,
+      "tool_selected": true,
+      "tool_args_ok": true,
+      "format_violations": [],
+      "judge": {
+        "correct": false,
+        "hallucination": false,
+        "reason": "The reply states the order is processing but omits the specific items (Keystone keyboard and Glide mouse) required by the reference answer."
+      }
+    }
+  ]
+}

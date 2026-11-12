@@ -1,3 +1,4 @@
+import asyncio
 import datetime as dt
 from types import SimpleNamespace as NS
 
@@ -15,7 +16,7 @@ TODAY = dt.date(2026, 11, 12)
 @pytest.fixture(scope="session")
 def settings(tmp_path_factory):
     return Settings(db_path=tmp_path_factory.mktemp("db") / "test.db", retrieval_dense=False,
-                    llm_api_key=None, openai_api_key=None, _env_file=None)
+                    llm_provider="openai", llm_api_key=None, openai_api_key=None, groq_api_key=None, _env_file=None)
 
 
 @pytest.fixture(scope="session")
@@ -40,8 +41,11 @@ class FakeLLM:
     """Replays scripted streaming responses. Each script item is either a string (streamed as
     text in small pieces) or a list of (tool_name, json_args) tool calls."""
 
-    def __init__(self, script):
+    is_fake = True
+
+    def __init__(self, script, delay: float = 0.0):
         self.script = list(script)
+        self.delay = delay
         self.requests = []
         self.chat = NS(completions=NS(create=self._create))
 
@@ -50,8 +54,15 @@ class FakeLLM:
         step = self.script.pop(0)
 
         async def gen():
-            if isinstance(step, str):
+            if isinstance(step, tuple) and step[0] == "mixed":
+                _, text, (name, args) = step
+                yield NS(choices=[NS(delta=NS(content=text, tool_calls=None))], usage=None)
+                yield NS(choices=[NS(delta=NS(content=None, tool_calls=[
+                    NS(index=0, id="call_0", function=NS(name=name, arguments=args))]))], usage=None)
+            elif isinstance(step, str):
                 for i in range(0, len(step), 7):
+                    if self.delay:
+                        await asyncio.sleep(self.delay)
                     yield NS(choices=[NS(delta=NS(content=step[i:i + 7], tool_calls=None))], usage=None)
             else:
                 for idx, (name, args) in enumerate(step):

@@ -101,7 +101,54 @@ class Database:
                 fields[key] = json.dumps(fields[key])
         return self._insert("turns", fields)
 
-    def recent_turns(self, limit: int = 20) -> list[dict]:
+    def update_turn_extra(self, turn_id: int, updates: dict) -> None:
+        """Merge keys into a turn's `extra` JSON (client timings arrive after the turn is logged)."""
         with self.lock:
-            rows = self.conn.execute("SELECT * FROM turns ORDER BY id DESC LIMIT ?", (limit,)).fetchall()
+            row = self.conn.execute("SELECT extra FROM turns WHERE id = ?", (turn_id,)).fetchone()
+            if row is None:
+                return
+            extra = json.loads(row["extra"] or "{}")
+            extra.update(updates)
+            self.conn.execute("UPDATE turns SET extra = ? WHERE id = ?", (json.dumps(extra), turn_id))
+            self.conn.commit()
+
+    def turn_summary(self, since_hours: float = 24 * 7) -> list[dict]:
+        """Median and 95th percentile per channel and mode, for the benchmarks page."""
+        since = (dt.datetime.now(dt.timezone.utc) - dt.timedelta(hours=since_hours)).isoformat(timespec="seconds")
+        with self.lock:
+            rows = self.conn.execute("SELECT channel, mode, retrieval_ms, llm_first_token_ms, total_ms, extra "
+                                     "FROM turns WHERE created_at >= ? AND channel != 'eval'", (since,)).fetchall()
+        groups: dict[tuple[str, str], dict[str, list[float]]] = {}
+        for r in rows:
+            g = groups.setdefault((r["channel"], r["mode"]), {})
+            extra = json.loads(r["extra"] or "{}")
+            voice, client = extra.get("voice") or {}, extra.get("client") or {}
+            values = {
+                "response_ms": client.get("client_response_ms") or voice.get("server_response_ms") or r["total_ms"],
+                "end_of_turn_ms": voice.get("end_of_turn_ms"),
+                "llm_first_token_ms": r["llm_first_token_ms"],
+                "tts_first_byte_ms": voice.get("tts_first_byte_ms"),
+                "retrieval_ms": r["retrieval_ms"],
+            }
+            for key, value in values.items():
+                if value is not None:
+                    g.setdefault(key, []).append(float(value))
+        out = []
+        for (channel, mode), metrics in sorted(groups.items()):
+            entry: dict = {"channel": channel, "mode": mode, "turns": max((len(v) for v in metrics.values()), default=0)}
+            for key, values in metrics.items():
+                values.sort()
+                entry[key] = {"median": round(values[len(values) // 2], 1),
+                              "p95": round(values[min(len(values) - 1, int(len(values) * 0.95))], 1),
+                              "n": len(values)}
+            out.append(entry)
+        return out
+
+    def recent_turns(self, limit: int = 20, session_id: str | None = None) -> list[dict]:
+        with self.lock:
+            if session_id:
+                rows = self.conn.execute("SELECT * FROM turns WHERE session_id = ? ORDER BY id DESC LIMIT ?",
+                                         (session_id, limit)).fetchall()
+            else:
+                rows = self.conn.execute("SELECT * FROM turns ORDER BY id DESC LIMIT ?", (limit,)).fetchall()
         return [dict(r) for r in rows]
