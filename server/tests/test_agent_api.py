@@ -98,3 +98,85 @@ async def test_falls_back_when_main_llm_fails(tool_ctx, retriever):
     assert done["reply"] == "Pulse Buds Pro cost $149.99."
     assert done["model"] == "backup" and "429" in done["fallback_reason"]
     assert backup.requests[0]["model"] == "backup"
+
+
+def test_rate_limit_pause_parsing():
+    from app.agent import MAX_PAUSE_S, rate_limit_pause_s
+
+    class Err(Exception):
+        status_code = 429
+
+    assert rate_limit_pause_s(Err("Please try again in 7.5s.")) == 7.5
+    assert rate_limit_pause_s(Err("Please try again in 1m30s.")) == 90
+    assert rate_limit_pause_s(Err("tokens per day. Please try again in 2h5m")) == MAX_PAUSE_S
+    assert rate_limit_pause_s(Err("slow down")) == 30
+    assert rate_limit_pause_s(TimeoutError("timed out")) is None
+
+
+async def test_rate_limited_main_is_skipped_until_pause_ends(tool_ctx, retriever):
+    from app.agent import Fallback
+
+    class Limited:
+        calls = 0
+
+        class chat:
+            class completions:
+                @staticmethod
+                async def create(**_):
+                    Limited.calls += 1
+                    raise RuntimeError("429 Rate limit reached. Please try again in 1m0s.")
+
+    backup = FakeLLM(["First.", "Second."])
+    agent = Agent(Limited, retriever, tool_ctx, TurnConfig(model="main"), fallback=Fallback(backup, "backup"))
+    msgs = [{"role": "user", "content": "hi"}]
+    first = (await _run(agent, msgs))[-1]
+    second = (await _run(agent, msgs))[-1]
+    assert Limited.calls == 1  # the second turn went straight to the fallback
+    assert first["reply"] == "First." and second["reply"] == "Second."
+    assert "paused" in second["fallback_reason"]
+    agent._paused_until["main"] = 0  # pause over: the main model is tried again
+    await _run(agent, msgs)
+    assert Limited.calls == 2
+
+
+def test_gemini_tool_calls_keep_thought_signature():
+    from types import SimpleNamespace as NS
+
+    from app.agent import _call_slot, _ToolCall
+
+    calls: dict[int, _ToolCall] = {}
+    sig = {"google": {"thought_signature": "abc"}}
+    # Gemini: no index, each call whole, a signature that must be sent back.
+    for cid, name in (("call_1", "check_stock"), ("call_2", "get_price")):
+        tc = NS(index=None, id=cid, function=NS(name=name, arguments="{}"), extra_content=sig)
+        slot = _call_slot(calls, tc)
+        calls.setdefault(slot, _ToolCall(id=cid, name=name, extra_content=tc.extra_content))
+    assert [c.name for c in calls.values()] == ["check_stock", "get_price"]
+    assert calls[0].message()["extra_content"] == sig
+    assert "extra_content" not in _ToolCall(id="x", name="y").message()
+    # OpenAI: index given, later deltas carry no id.
+    calls = {0: _ToolCall(id="a")}
+    assert _call_slot(calls, NS(index=0, id=None)) == 0
+    assert _call_slot(calls, NS(index=None, id=None)) == 0
+
+
+async def test_fallback_mid_turn_drops_provider_fields(tool_ctx, retriever):
+    from app.agent import Fallback
+
+    main = FakeLLM([[("check_stock", json.dumps({"product": "Glide mouse"}))]])
+    real_create = main.chat.completions.create
+    state = {"n": 0}
+
+    async def create(**kw):
+        state["n"] += 1
+        if state["n"] == 2:
+            raise RuntimeError("503 overloaded")
+        return await real_create(**kw)
+
+    main.chat.completions.create = create
+    backup = FakeLLM(["Yes, it is in stock."])
+    agent = Agent(main, retriever, tool_ctx, TurnConfig(model="main"), fallback=Fallback(backup, "backup"))
+    events = await _run(agent, [{"role": "user", "content": "Is the Glide mouse in stock?"}])
+    assert events[-1]["reply"] == "Yes, it is in stock." and events[-1]["model"] == "backup"
+    calls = [c for m in backup.requests[0]["messages"] for c in m.get("tool_calls") or []]
+    assert calls and all("extra_content" not in c for c in calls)

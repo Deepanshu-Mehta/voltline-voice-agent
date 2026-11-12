@@ -15,8 +15,10 @@ message only, after the cached prefix.
 from __future__ import annotations
 
 import asyncio
+import contextlib
 import datetime as dt
 import json
+import re
 import time
 from dataclasses import dataclass, field, replace
 from pathlib import Path
@@ -53,6 +55,25 @@ class _ToolCall:
     id: str = ""
     name: str = ""
     arguments: str = ""
+    # Provider data that must go back unchanged with the call, such as Gemini's
+    # {"google": {"thought_signature": ...}}: without it the next round is a 400.
+    extra_content: dict | None = None
+
+    def message(self) -> dict:
+        msg = {"id": self.id, "type": "function", "function": {"name": self.name, "arguments": self.arguments or "{}"}}
+        if self.extra_content:
+            msg["extra_content"] = self.extra_content
+        return msg
+
+
+def _call_slot(calls: dict[int, _ToolCall], tc: Any) -> int:
+    """Which call a streamed tool-call delta belongs to. OpenAI sends `index`; Gemini omits it
+    and sends each call whole, so a new id means a new call."""
+    if getattr(tc, "index", None) is not None:
+        return tc.index
+    if not calls or (tc.id and tc.id not in {c.id for c in calls.values()}):
+        return len(calls)
+    return max(calls)
 
 
 @dataclass
@@ -94,6 +115,26 @@ def retrieval_query(messages: list[dict]) -> str:
     return users[-1]
 
 
+MAX_PAUSE_S = 300.0  # re-try the main model at least this often, so it comes back on its own
+
+
+def rate_limit_pause_s(exc: Exception) -> float | None:
+    """How long to stop calling a model that answered 429: the provider's own hint
+    ("try again in 7m42s", or a Retry-After header), capped at MAX_PAUSE_S."""
+    text = str(exc)
+    if getattr(exc, "status_code", None) != 429 and "rate limit" not in text.lower():
+        return None
+    secs = None
+    headers = getattr(getattr(exc, "response", None), "headers", None) or {}
+    with contextlib.suppress(TypeError, ValueError):
+        secs = float(headers.get("retry-after"))
+    m = re.search(r"try again in (?:(\d+)h)?(?:(\d+)m)?(?:([\d.]+)s)?", text)
+    if secs is None and m and any(m.groups()):
+        h, mi, s = (float(g) if g else 0.0 for g in m.groups())
+        secs = h * 3600 + mi * 60 + s
+    return min(max(secs if secs is not None else 30.0, 1.0), MAX_PAUSE_S)
+
+
 class Agent:
     def __init__(self, llm: Any, retriever: Retriever, tool_ctx: ToolContext, default: TurnConfig,
                  fallback: Fallback | None = None):
@@ -103,6 +144,10 @@ class Agent:
         self.tool_ctx = tool_ctx
         self.default = default
         self.base_prompt = load_system_prompt()
+        self._paused_until: dict[str, float] = {}  # model -> monotonic time it may be tried again
+
+    def _paused_s(self, model: str) -> float:
+        return max(0.0, self._paused_until.get(model, 0.0) - time.monotonic())
 
     def system_prompt(self, today: dt.date | None = None) -> str:
         today = today or self.tool_ctx.today()
@@ -139,6 +184,11 @@ class Agent:
         reply_parts: list[str] = []
         tool_ms = 0.0
         client, model, effort = self.llm, cfg.model, cfg.reasoning_effort
+        paused_s = self._paused_s(model)
+        if self.fallback is not None and paused_s > 0:
+            # The main model just rate-limited us: skip the request that would fail anyway.
+            rec.fallback_reason = f"{model} paused after a rate limit ({paused_s:.0f} s left)"
+            client, model, effort = self.fallback.client, self.fallback.model, self.fallback.reasoning_effort
 
         try:
             for round_no in range(cfg.max_tool_rounds + 1):
@@ -157,8 +207,14 @@ class Agent:
                         raise
                     # Switch provider for the rest of this turn, so tool rounds stay consistent.
                     rec.fallback_reason = f"{type(exc).__name__}: {str(exc)[:160]}"
+                    pause = rate_limit_pause_s(exc)
+                    if pause:
+                        self._paused_until[model] = time.monotonic() + pause
                     fb = self.fallback
                     client, model, effort = fb.client, fb.model, fb.reasoning_effort
+                    for m in convo:  # the first provider's private fields mean nothing to the second
+                        for call in m.get("tool_calls") or []:
+                            call.pop("extra_content", None)
                     kwargs["model"] = model
                     kwargs.pop("reasoning_effort", None)
                     if effort:
@@ -180,8 +236,12 @@ class Agent:
                         yield {"type": "token", "text": delta.content}
                     for tc in delta.tool_calls or []:
                         rec.timings.setdefault("llm_first_token_ms", ms())
-                        call = calls.setdefault(tc.index, _ToolCall())
+                        call = calls.setdefault(_call_slot(calls, tc), _ToolCall())
                         call.id = tc.id or call.id
+                        extra = getattr(tc, "extra_content", None) or (getattr(tc, "model_extra", None) or {}).get(
+                            "extra_content")
+                        if extra:
+                            call.extra_content = extra
                         if tc.function and tc.function.name:
                             call.name = tc.function.name
                         if tc.function and tc.function.arguments:
@@ -192,9 +252,8 @@ class Agent:
                     break
 
                 ordered = [calls[i] for i in sorted(calls)]
-                convo.append({"role": "assistant", "content": "".join(round_text) or None, "tool_calls": [
-                    {"id": c.id, "type": "function", "function": {"name": c.name, "arguments": c.arguments or "{}"}}
-                    for c in ordered]})
+                convo.append({"role": "assistant", "content": "".join(round_text) or None,
+                              "tool_calls": [c.message() for c in ordered]})
                 for c in ordered:
                     try:
                         args = json.loads(c.arguments or "{}")

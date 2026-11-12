@@ -117,13 +117,13 @@ def chunk_page(page: Page) -> list[Chunk]:
 
 def product_summary_chunk(p: Product) -> Chunk:
     """A short fact card per product, so price, warranty and category questions always have a
-    precise hit. Stock is left out on purpose: it changes, so it comes from check_stock."""
-    restock = f" Next shipment expected {p.restock_date}." if p.restock_date else ""
+    precise hit. Stock and restock dates are left out on purpose: they change, and a restock
+    date gives away "out of stock", so the model would answer without calling check_stock."""
     text = (
         f"{p.name} (model {p.sku}) | Summary\n"
         f"{p.name}, model number {p.sku}, is in the {p.category} category. {p.tagline} "
         f"Price: ${p.price:.2f}. Warranty: {p.warranty_months} months. "
-        f"Colors: {', '.join(p.colors)}.{restock}"
+        f"Colors: {', '.join(p.colors)}."
     )
     return Chunk(f"{p.url}#summary", p.url, p.name, "Summary", text)
 

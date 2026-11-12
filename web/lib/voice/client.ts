@@ -83,7 +83,10 @@ export class VoiceClient {
       (turn, playStartPerf) => {
         if (this.reported.has(turn)) return;
         this.reported.add(turn);
+        // Each speech end is measured against one reply only: if the VAD missed the user's
+        // words, report nothing rather than a time measured from older speech.
         const latency = this.lastSpeechEndAt ? Math.round(playStartPerf - this.lastSpeechEndAt) : null;
+        this.lastSpeechEndAt = 0;
         this.send({ type: "playback", turn, event: "started", client_response_ms: latency });
         this.ev.onMetrics({ turn, client_response_ms: latency });
       },
@@ -137,7 +140,11 @@ export class VoiceClient {
         startOnLoad: true,
         onSpeechStart: () => this.onSpeechStart(),
         onSpeechRealStart: () => this.onSpeechConfirmed(),
-        onVADMisfire: () => this.player?.duck(false),
+        onVADMisfire: () => {
+          this.player?.duck(false);
+          // Too short to count as speech, but it may be a one-word reply ("okay").
+          if (!this.lastSpeechEndAt) this.lastSpeechEndAt = performance.now() - REDEMPTION_MS;
+        },
         onSpeechEnd: () => {
           this.lastSpeechEndAt = performance.now() - REDEMPTION_MS;
         },

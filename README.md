@@ -8,7 +8,7 @@ Voltline Electronics is a fictional online store created for this project.
 
 | Phase | State |
 | --- | --- |
-| 1. Foundation: site, knowledge base, tools, text agent, eval set | Built; text eval 81.7% correct (target 90%) |
+| 1. Foundation: site, knowledge base, tools, text agent, eval set | Built; text eval 98.3% correct, 0% hallucination (target 90%) |
 | 2. Cascaded web agent | Built; 8 of 8 browser scenarios pass |
 | 3. Low Latency Mode and speech-to-speech | Not started |
 | 4. Phone | Not started |
@@ -19,11 +19,11 @@ Voltline Electronics is a fictional online store created for this project.
 ## Quick start
 
 ```bash
-cp .env.example .env          # add GROQ_API_KEY (or another provider), DEEPGRAM_API_KEY, CARTESIA_API_KEY
+cp .env.example .env          # add GEMINI_API_KEY (or another provider), DEEPGRAM_API_KEY, CARTESIA_API_KEY
 make install
 make server                   # API on http://localhost:8000
 make web                      # website on http://localhost:3000 (second terminal)
-make test                     # 43 offline tests, no keys needed
+make test                     # 52 offline tests, no keys needed
 make eval-text                # 60-question eval with an LLM judge
 make audio-clips              # synthesise the audio test set (needs CARTESIA_API_KEY)
 make eval-audio               # stream the clips into /voice: WER and latency
@@ -55,7 +55,7 @@ Browser microphone -> 16 kHz PCM over one WebSocket (`/voice`) -> Deepgram Nova-
 - **Turn-taking:** a server-side Silero VAD ends the turn after 700 ms of silence (2.5 s when the sentence sounds unfinished, such as "...work with"), or on Deepgram's own end-of-speech signal. A `Finalize` sent at 300 ms of silence has the last words transcribed by the time the turn ends.
 - **Barge-in:** Silero VAD in the browser ducks the agent at the first sign of speech and stops it once speech is confirmed; the server cancels the LLM and TTS and keeps only the words the user heard (from Cartesia word timestamps).
 - **Fillers:** if a tool runs before anything has been said, a short line ("Let me look up that order.") keeps the line alive.
-- **LLM fallback:** if the main LLM fails before answering (rate limit, outage), the turn moves to `LLM_FALLBACK_PROVIDER`.
+- **LLM fallback:** if the main LLM fails before answering (rate limit, outage), the turn moves to `LLM_FALLBACK_PROVIDER`. After a rate limit the main model is skipped for as long as the provider asks (up to 5 minutes), so later turns do not pay for a request that will fail.
 - **Timings per turn** (to the `turns` table and the Benchmarks page): end of turn, LLM first token, TTS first byte, server response, and the browser's own end-of-speech-to-first-sound measure.
 
 ## API

@@ -225,3 +225,122 @@ def test_model_preamble_replaces_filler(settings, retriever):
     assert msgs[-1]["filler"] is None
     row = client.get("/turns/recent").json()[0]
     assert row["reply"] == "I'll check that for you now. Order 4 5 1 2 has shipped."
+
+
+def test_speech_end_ignores_stale_vad():
+    from app.voice.session import speech_end_s
+
+    assert speech_end_s(12.3, 12.1) == 12.3  # VAD is more precise than word times
+    assert speech_end_s(3.0, 31.0) == 31.0  # VAD missed a short "okay": its end is from older speech
+    assert speech_end_s(None, 5.0) == 5.0
+    assert speech_end_s(4.0, None) == 4.0
+
+
+async def test_final_text_ending_mid_sentence_waits_for_longer_timeout():
+    """S2 regression: the 700 ms timeout fired on the interim "...Headphones"; the final transcript
+    then read "...Headphones in" and must not be committed until the 2.5 s timeout."""
+    from app.voice.session import VoiceSession
+
+    class StubVAD:
+        speaking, last_speech_end_s = False, 1.0
+        silence = 800.0
+
+        def silence_ms(self):
+            return self.silence
+
+    committed: list[str] = []
+    session = VoiceSession(None, None, None, None, stt_factory=None, tts_factory=None)
+    session.vad = StubVAD()
+
+    async def fake_commit(text, speech_end):
+        committed.append(text)
+
+    async def no_send(msg):
+        pass
+
+    session.commit, session.send = fake_commit, no_send
+    session.interim, session.finalizing = "Do you have the Horizon Headphones", True
+    await session._on_stt(STTEvent("final", "Do you have the Horizon Headphones in", 1.0, 0.0))
+    assert committed == [] and not session.finalizing  # still waiting
+
+    session.vad.silence = 2600.0  # nothing more was said: the longer timeout ends the turn
+    await session._check_silence()
+    assert committed == ["Do you have the Horizon Headphones in"]
+
+
+def test_provider_out_of_credits_is_reported_and_cleaned_up(settings, retriever):
+    from types import SimpleNamespace
+
+    from starlette.websockets import WebSocketDisconnect
+
+    stt = FakeSTT()
+    closed = []
+
+    async def close():
+        closed.append("stt")
+        await FakeSTT.close(stt)
+
+    stt.close = close
+
+    class Refused(Exception):
+        response = SimpleNamespace(status_code=402)
+
+    async def stt_factory(rate):
+        return stt
+
+    async def tts_factory():
+        raise Refused("server rejected WebSocket connection: HTTP 402")
+
+    app = create_app(settings, llm=FakeLLM([]), retriever=retriever, stt_factory=stt_factory, tts_factory=tts_factory)
+    with TestClient(app).websocket_connect("/voice") as ws:
+        ws.send_text(json.dumps({"type": "start", "sample_rate": 16000}))
+        err = json.loads(ws.receive_text())
+        assert err["type"] == "error"
+        assert "Text-to-speech (Cartesia) is out of credits" in err["message"]
+        try:
+            ws.receive_text()
+            raise AssertionError("socket should be closed")
+        except WebSocketDisconnect as exc:
+            assert exc.code == 1011
+    assert closed == ["stt"]  # the Deepgram connection that did open was closed
+
+
+def test_barge_in_after_reply_was_fully_generated(settings, retriever):
+    """S5 regression: a fast LLM and TTS finish the whole reply while the browser has played only
+    the start of it. Cutting in then must still trim the history to what was heard."""
+    reply = "Pulse Buds Pro cost $149.99 and come in black or silver with a wireless charging case."
+    client, llm, tts = make_client(settings, retriever, [reply, "Sure, what else?"])
+    with client.websocket_connect("/voice") as ws:
+        ws.send_text(json.dumps({"type": "start"}))
+        collect_until(ws, "state")
+        ws.send_bytes(b"SAY:How much are the Pulse Buds Pro?")
+        msgs, _ = collect_until(ws, "metrics")  # generation done: audio_end came first
+        assert any(m["type"] == "audio_end" for m in msgs) and msgs[-1]["interrupted"] is False
+        ws.send_text(json.dumps({"type": "barge_in", "turn": 1, "played_ms": 350, "stop_latency_ms": 90}))
+        msgs, _ = collect_until(ws, "clear")
+        ws.send_bytes(b"SAY:Actually, never mind.")
+        collect_until(ws, "metrics")
+        ws.send_text(json.dumps({"type": "stop"}))
+    assistant = [m for m in llm.requests[1]["messages"] if m["role"] == "assistant"]
+    assert assistant[-1]["content"] == "Pulse Buds Pro cost..."
+    rows = client.get("/turns/recent").json()
+    first = next(r for r in rows if r["user_text"].startswith("How much"))
+    extra = first["extra"] if isinstance(first["extra"], dict) else json.loads(first["extra"])
+    assert extra["voice"]["interrupted"] is True and extra["client"]["interrupted_by"] == "client"
+
+
+def test_finished_and_played_reply_is_not_interrupted(settings, retriever):
+    client, llm, tts = make_client(settings, retriever, ["Hello there.", "Second."])
+    with client.websocket_connect("/voice") as ws:
+        ws.send_text(json.dumps({"type": "start"}))
+        collect_until(ws, "state")
+        ws.send_bytes(b"SAY:Hi")
+        collect_until(ws, "metrics")
+        ws.send_text(json.dumps({"type": "playback", "turn": 1, "event": "finished"}))
+        ws.send_text(json.dumps({"type": "barge_in", "turn": 1, "played_ms": 100}))
+        ws.send_bytes(b"SAY:Next question")
+        msgs, _ = collect_until(ws, "metrics")
+        ws.send_text(json.dumps({"type": "stop"}))
+    assert not any(m["type"] == "clear" and m["turn"] == 1 for m in msgs)
+    assistant = [m for m in llm.requests[1]["messages"] if m["role"] == "assistant"]
+    assert assistant[-1]["content"] == "Hello there."

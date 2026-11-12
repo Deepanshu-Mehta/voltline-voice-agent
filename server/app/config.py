@@ -13,7 +13,7 @@ LLM_PRESETS: dict[str, dict[str, str | None]] = {
     "groq": {"base_url": "https://api.groq.com/openai/v1", "key_env": "groq_api_key",
              "model": "openai/gpt-oss-20b", "judge": "openai/gpt-oss-120b", "reasoning_effort": "low"},
     "gemini": {"base_url": "https://generativelanguage.googleapis.com/v1beta/openai/", "key_env": "gemini_api_key",
-               "model": "gemini-2.5-flash", "judge": "gemini-2.5-pro", "reasoning_effort": None},
+               "model": "gemini-3.5-flash-lite", "judge": "gemini-3.1-pro-preview", "reasoning_effort": "minimal"},
     "deepseek": {"base_url": "https://api.deepseek.com", "key_env": "deepseek_api_key",
                  "model": "deepseek-chat", "judge": "deepseek-chat", "reasoning_effort": None},
     "openai": {"base_url": None, "key_env": "openai_api_key",
@@ -32,7 +32,7 @@ class Settings(BaseSettings):
     db_path: Path = REPO_ROOT / "server" / "data" / "voltline.db"
 
     # LLM. Pick a preset; any field set explicitly below overrides the preset.
-    llm_provider: str = "groq"
+    llm_provider: str = "gemini"
     groq_api_key: str | None = None
     gemini_api_key: str | None = None
     deepseek_api_key: str | None = None

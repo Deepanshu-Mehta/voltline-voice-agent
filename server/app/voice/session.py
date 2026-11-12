@@ -53,6 +53,38 @@ log = logging.getLogger(__name__)
 # The server stops the agent itself if the transcript shows the user talking over it with at
 # least this many words (a backup for the browser's own voice-activity barge-in).
 SERVER_BARGE_IN_WORDS = 3
+PLAYBACK_SLACK_S = 1.0  # network and buffering between sending audio and the browser playing it
+STALE_VAD_S = 0.5  # a VAD speech end this far before the last word's end belongs to older speech
+
+
+class ProviderStartError(Exception):
+    def __init__(self, who: str, exc: BaseException):
+        super().__init__(describe_start_error(who, exc))
+
+
+def describe_start_error(who: str, exc: BaseException) -> str:
+    """A provider refusing the connection, in words a person can act on."""
+    status = getattr(getattr(exc, "response", None), "status_code", None)
+    if status is None:
+        return f"{who} could not connect: {exc}"
+    if status == 402:
+        return f"{who} is out of credits (HTTP 402). Top up the account or enable overages."
+    if status in (401, 403):
+        return f"{who} rejected the API key (HTTP {status}). Check the key in .env."
+    if status == 429:
+        return f"{who} is rate limiting this account (HTTP 429). Try again shortly."
+    return f"{who} refused the connection (HTTP {status})."
+
+
+def speech_end_s(vad_end: float | None, words_end: float | None) -> float | None:
+    """When the user stopped talking, on the audio clock. The VAD is more precise than word
+    timings, but it can miss a short, soft word ("okay"); its time then belongs to the previous
+    utterance and would make the turn look many seconds slow."""
+    if vad_end is None:
+        return words_end
+    if words_end is not None and vad_end < words_end - STALE_VAD_S:
+        return words_end
+    return vad_end
 
 
 @dataclass
@@ -80,6 +112,15 @@ class Turn:
     @property
     def speaking(self) -> bool:
         return self.first_audio_at is not None and not self.finished
+
+    def audible(self, sample_rate: int, now: float | None = None) -> bool:
+        """Still being heard: audio was sent and the browser has not finished playing it. A fast
+        reply is fully generated long before it finishes playing. Clients that do not report
+        playback are covered by the audio's own length."""
+        if self.first_audio_at is None or self.interrupted or self.client.get("playback_finished"):
+            return False
+        audio_s = self.audio_bytes / 2 / sample_rate
+        return (now or time.perf_counter()) - self.first_audio_at < audio_s + PLAYBACK_SLACK_S
 
 
 class VoiceSession:
@@ -156,12 +197,25 @@ class VoiceSession:
             self.mode = start.get("mode", "standard")
             self.session_id = start.get("session_id") or uuid.uuid4().hex[:8]
             self.source = start.get("source", "mic")
-            self.stt, self.tts = await asyncio.gather(self.stt_factory(self.sample_rate), self.tts_factory())
+            stt, tts = await asyncio.gather(self.stt_factory(self.sample_rate), self.tts_factory(),
+                                            return_exceptions=True)
+            failed = next((ProviderStartError(who, r) for who, r in
+                           (("Speech-to-text (Deepgram)", stt), ("Text-to-speech (Cartesia)", tts))
+                           if isinstance(r, BaseException)), None)
+            if failed is not None:
+                for ok in (stt, tts):  # don't leak the provider connection that did open
+                    if not isinstance(ok, BaseException):
+                        with contextlib.suppress(Exception):
+                            await ok.close()
+                raise failed
+            self.stt, self.tts = stt, tts
             if self.use_vad and self.sample_rate == 16000:
                 self.vad = SileroVAD()
         except Exception as exc:
-            log.exception("Voice session could not start")
+            log.error("Voice session could not start: %s", exc)
             await self.send({"type": "error", "message": f"Voice is unavailable: {exc}"})
+            with contextlib.suppress(Exception):
+                await self.ws.close(code=1011)
             return
 
         await self.send({"type": "ready", "session_id": self.session_id, "sample_rate_out": self.tts_sample_rate})
@@ -236,8 +290,8 @@ class VoiceSession:
         text = " ".join(self.pending).strip()
         if not text:
             return
-        # The server VAD knows when speech stopped more precisely than the word timings do.
-        end_s = self.vad.last_speech_end_s if self.vad and self.vad.last_speech_end_s else word_end_s
+        words_end = word_end_s if word_end_s is not None else self.pending_end_s
+        end_s = speech_end_s(self.vad.last_speech_end_s if self.vad else None, words_end)
         self.pending, self.pending_end_s, self.interim = [], None, ""
         self.finalizing = self.finalize_sent = False
         await self.send({"type": "transcript", "text": text, "final": True})
@@ -248,7 +302,8 @@ class VoiceSession:
             self.interim = ev.text
             await self.send({"type": "transcript", "text": " ".join(self.pending + [ev.text]), "final": False})
             turn = self.active
-            if turn and turn.speaking and len(ev.text.split()) >= SERVER_BARGE_IN_WORDS:
+            if (turn and (turn.speaking or turn.audible(self.tts_sample_rate))
+                    and len(ev.text.split()) >= SERVER_BARGE_IN_WORDS):
                 await self.interrupt(None, reason="server")
         elif ev.kind == "final":
             self.pending.append(ev.text)
@@ -256,6 +311,13 @@ class VoiceSession:
             self.interim = ""
             await self.send({"type": "transcript", "text": " ".join(self.pending), "final": False})
             if self.finalizing and not (self.vad and self.vad.speaking):
+                text = " ".join(self.pending)
+                if (self.vad and sounds_unfinished(text)
+                        and self.vad.silence_ms() < self.unfinished_silence_ms):
+                    # The timeout was judged on the interim text ("...Headphones"); the final one
+                    # ends mid-sentence ("...Headphones in"): wait for the longer timeout instead.
+                    self.finalizing = False
+                    return
                 await self._commit_pending(ev.audio_end_s)  # the timeout already passed
         elif ev.kind == "end_of_turn" and self.pending:
             vad = self.vad
@@ -279,6 +341,8 @@ class VoiceSession:
                 text = f"{prev.user_text} {text}"
             else:
                 await self.interrupt(None, reason="new_turn")
+        elif prev and prev.audible(self.tts_sample_rate):
+            await self.interrupt(None, reason="new_turn")
         self.turn_no += 1
         turn = Turn(self.turn_no, text, speech_end, time.perf_counter())
         self.turns[turn.id] = turn
@@ -362,7 +426,11 @@ class VoiceSession:
                         turn_id: int | None = None) -> None:
         """Stop the agent mid-reply and keep only what the user heard in the history."""
         turn = self.active
-        if not turn or turn.finished or (turn_id is not None and turn_id != turn.id):
+        if not turn or (turn_id is not None and turn_id != turn.id):
+            return
+        if turn.finished:
+            if turn.audible(self.tts_sample_rate):
+                await self._interrupt_playback(turn, played_ms, reason, stop_latency_ms)
             return
         await self._cancel(turn)
         if played_ms is not None and turn.words:
@@ -376,6 +444,29 @@ class VoiceSession:
         await self.send({"type": "clear", "turn": turn.id})
         await self.send({"type": "state", "state": "listening"})
         await self._finish_metrics(turn)
+
+    async def _interrupt_playback(self, turn: Turn, played_ms: float | None, reason: str,
+                                  stop_latency_ms: float | None) -> None:
+        """The reply was fully generated but the user cut in while it was still playing: the
+        history must hold only what they heard, not the whole reply."""
+        turn.interrupted = True
+        if played_ms is None:  # estimate from when the audio started reaching the browser
+            played_ms = (time.perf_counter() - turn.first_audio_at) * 1000
+        spoken = heard_text(turn.words, turn.starts, played_ms) if turn.words else turn.reply.strip()
+        full = {"role": "assistant", "content": turn.reply.strip()}
+        for i in range(len(self.history) - 1, -1, -1):
+            if self.history[i] == full:
+                if spoken:
+                    self.history[i] = {"role": "assistant", "content": spoken + "..."}
+                else:
+                    del self.history[i]
+                break
+        turn.client.update({"interrupted_by": reason, "played_ms": round(played_ms), "stop_latency_ms": stop_latency_ms,
+                            "heard_text": spoken})
+        await self.send({"type": "clear", "turn": turn.id})
+        await self.send({"type": "state", "state": "listening"})
+        if turn.db_row is not None:
+            self.db.update_turn_extra(turn.db_row, {"voice": self.metrics(turn), "client": turn.client})
 
     async def _on_playback(self, data: dict) -> None:
         turn = self.turns.get(data.get("turn"))

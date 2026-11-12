@@ -20,6 +20,7 @@ from __future__ import annotations
 
 import argparse
 import asyncio
+import contextlib
 import datetime as dt
 import json
 import re
@@ -78,6 +79,7 @@ def read_pcm(path: Path) -> bytes:
 
 async def run_clip(url: str, clip: dict) -> dict:
     from websockets.asyncio.client import connect
+    from websockets.exceptions import ConnectionClosed
 
     pcm = read_pcm(ROOT / clip["path"])
     frame = 16000 * 2 * FRAME_MS // 1000
@@ -109,16 +111,22 @@ async def run_clip(url: str, clip: dict) -> dict:
         start = time.perf_counter()
         sent = 0
         # Stream the clip, then silence, at real-time pace until the reply's metrics arrive.
-        while not done.is_set() and time.perf_counter() - start < TURN_TIMEOUT_S:
-            chunk = pcm[sent:sent + frame] if sent < len(pcm) else silence
-            sent += frame
-            await ws.send(chunk)
-            target = start + sent / (16000 * 2)
-            await asyncio.sleep(max(0, target - time.perf_counter()))
-        if not done.is_set():
-            out["error"] = out["error"] or "timed out waiting for a reply"
-        await ws.send(json.dumps({"type": "stop"}))
+        try:
+            while not done.is_set() and time.perf_counter() - start < TURN_TIMEOUT_S:
+                chunk = pcm[sent:sent + frame] if sent < len(pcm) else silence
+                sent += frame
+                await ws.send(chunk)
+                target = start + sent / (16000 * 2)
+                await asyncio.sleep(max(0, target - time.perf_counter()))
+            if not done.is_set():
+                out["error"] = out["error"] or "timed out waiting for a reply"
+            await ws.send(json.dumps({"type": "stop"}))
+        except ConnectionClosed:
+            await asyncio.sleep(0.1)  # let the reader record the server's error message
+            out["error"] = out["error"] or "the server closed the connection"
         task.cancel()
+        with contextlib.suppress(asyncio.CancelledError, ConnectionClosed):
+            await task
     return out
 
 
@@ -147,7 +155,7 @@ async def main() -> int:
     if args.limit:
         clips = clips[: args.limit]
 
-    results = []
+    results, stopped = [], False
     for n, clip in enumerate(clips):  # one at a time: concurrent calls would distort latency
         if n and args.gap:
             await asyncio.sleep(args.gap)
@@ -160,6 +168,11 @@ async def main() -> int:
         m = r["metrics"] or {}
         print(f"{clip['condition']:5} {clip['id']:4} wer={row['wer']:.2f} resp={m.get('server_response_ms')} "
               f"{r['transcript'][:60]!r}{'  ERROR ' + r['error'] if r['error'] else ''}")
+        if r["error"] and "Voice is unavailable" in r["error"]:
+            print(f"Stopping: {r['error']}", file=sys.stderr)
+            results.pop()  # a provider outage says nothing about this clip
+            stopped = True
+            break
 
     summary = {}
     for condition in ("clean", "noisy", "phone"):
@@ -180,10 +193,13 @@ async def main() -> int:
               "summary": summary, "results": results}
     RESULTS.mkdir(exist_ok=True)
     stamp = dt.datetime.now().strftime("%Y%m%d-%H%M%S")
-    for path in (RESULTS / f"audio-{stamp}.json", RESULTS / "audio-latest.json"):
+    paths = [RESULTS / f"audio-{stamp}.json"]
+    if results and not stopped:  # a partial run must not replace the last complete one
+        paths.append(RESULTS / "audio-latest.json")
+    for path in paths:
         path.write_text(json.dumps(report, indent=2))
     print(json.dumps(summary, indent=2))
-    return 0
+    return 1 if stopped or not results else 0
 
 
 if __name__ == "__main__":

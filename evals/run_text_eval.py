@@ -147,7 +147,9 @@ def score(item: dict, run: dict, products, retrieved_top3: list[str]) -> dict:
     calls = [c for t in run["turns"] for c in t["tool_calls"]]
     out: dict = {"reply": reply, "words": len(reply.split()), "tool_calls": [{"name": c["name"], "args": c["args"]} for c in calls],
                  "sources_top3": retrieved_top3, "error": next((t["error"] for t in run["turns"] if t.get("error")), None),
-                 "timings": [t["timings"] for t in run["turns"]]}
+                 "timings": [t["timings"] for t in run["turns"]],
+                 # the main model must answer for the score to describe it
+                 "fallback_reason": next((t["fallback_reason"] for t in run["turns"] if t.get("fallback_reason")), None)}
     if item["sources"] and item["category"] != "out_of_scope":
         out["retrieval_hit3"] = any(s in retrieved_top3 for s in item["sources"])
     if item["must_include"]:
@@ -176,6 +178,7 @@ def summarise(results: list[dict]) -> dict:
     s = {
         "n": len(results),
         "errors": sum(1 for r in results if r.get("error")),
+        "fallback_items": sum(1 for r in results if r.get("fallback_reason")),
         "retrieval_hit3_pct": _pct([r.get("retrieval_hit3") for r in results]),
         "keyword_pass_pct": _pct([r.get("keyword_pass") for r in results]),
         "tool_selection_pct": _pct([r.get("tool_selected") for r in results]),
@@ -269,7 +272,9 @@ async def main() -> int:
     paths = [RESULTS / f"text-{stamp}.json"]
     # A run where every LLM call failed is not a result; keep it out of latest.json, which the
     # benchmarks page shows.
-    if summary["errors"] < summary["n"]:
+    if args.only:
+        print("\nA partial run (--only), so latest.json was not updated.", file=sys.stderr)
+    elif summary["errors"] < summary["n"]:
         paths.append(RESULTS / "latest.json")
     else:
         print("\nEvery turn failed, so latest.json was not updated.", file=sys.stderr)
