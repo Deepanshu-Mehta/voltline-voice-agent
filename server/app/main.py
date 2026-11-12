@@ -12,6 +12,7 @@ Run: uv run uvicorn --factory app.main:create_app --reload --port 8000
 
 from __future__ import annotations
 
+import asyncio
 import json
 import logging
 import subprocess
@@ -78,8 +79,8 @@ def _commit_hash() -> str | None:
 
 
 def create_app(settings: Settings | None = None, llm: Any = None, retriever: Retriever | None = None,
-               stt_factory: Any = None, tts_factory: Any = None) -> FastAPI:
-    """Build the app. Tests inject fake LLM, speech-to-text and text-to-speech factories."""
+               stt_factory: Any = None, tts_factory: Any = None, live_factory: Any = None) -> FastAPI:
+    """Build the app. Tests inject fake LLM, speech-to-text, text-to-speech and Live factories."""
     settings = settings or get_settings()
     t0 = time.perf_counter()
 
@@ -125,6 +126,7 @@ def create_app(settings: Settings | None = None, llm: Any = None, retriever: Ret
     @app.get("/health")
     def health():
         return {"ok": True, "retrieval": retriever.mode, "chunks": len(retriever.chunks), "model": settings.resolved_llm_model, "provider": settings.llm_provider, "fallback": fallback.model if fallback else None, "voice_configured": stt_factory is not None and tts_factory is not None,
+                "s2s_model": settings.s2s_model if live_factory is not None else None,
                 "llm_configured": not isinstance(llm, _MissingKeyLLM), "commit": commit}
 
     @app.post("/retrieve")
@@ -171,9 +173,31 @@ def create_app(settings: Settings | None = None, llm: Any = None, retriever: Ret
                                      model=settings.tts_model, voice_id=settings.tts_voice_id,
                                      sample_rate=settings.tts_sample_rate).connect()
 
+    if live_factory is None and settings.s2s_configured:
+        from .voice.s2s import gemini_live_factory
+
+        live_factory = gemini_live_factory(settings.gemini_api_key, settings.s2s_model,
+                                           settings.s2s_api_version, settings.s2s_voice)
+
     @app.websocket("/voice")
     async def voice(ws: WebSocket):
         await ws.accept()
+        try:
+            start = json.loads(await asyncio.wait_for(ws.receive_text(), timeout=10))
+        except Exception:
+            await ws.close(code=1003)
+            return
+        if start.get("type") == "start" and start.get("mode") == "s2s":
+            if live_factory is None:
+                await ws.send_text(json.dumps({"type": "error", "message":
+                    "Speech-to-speech is not configured on this server: set GEMINI_API_KEY."}))
+                await ws.close()
+                return
+            from .voice.s2s import S2SSession
+
+            await S2SSession(ws, db, tool_ctx, agent.system_prompt(), live_factory=live_factory,
+                             model=settings.s2s_model, commit_hash=commit).run(start)
+            return
         if stt_factory is None or tts_factory is None:
             await ws.send_text(json.dumps({"type": "error", "message":
                 "Voice is not configured on this server: set DEEPGRAM_API_KEY and CARTESIA_API_KEY."}))
@@ -182,7 +206,7 @@ def create_app(settings: Settings | None = None, llm: Any = None, retriever: Ret
         session = VoiceSession(ws, agent, db, default_cfg, stt_factory=stt_factory, tts_factory=tts_factory,
                                tts_sample_rate=settings.tts_sample_rate, commit_hash=commit,
                                silence_ms=settings.stt_endpointing_ms)
-        await session.run()
+        await session.run(start)
 
     @app.post("/chat")
     async def chat(req: ChatRequest):

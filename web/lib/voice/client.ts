@@ -12,6 +12,7 @@ export type TurnMetrics = {
   retrieval_ms?: number | null;
   llm_first_token_ms?: number | null;
   tts_first_byte_ms?: number | null;
+  first_tool_call_ms?: number | null;
   server_response_ms?: number | null;
   client_response_ms?: number | null;
   interrupted?: boolean;

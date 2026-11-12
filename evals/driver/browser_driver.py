@@ -58,6 +58,18 @@ async def wait_for(predicate, timeout_s: float, interval_s: float = 0.1):
     return None
 
 
+_DIGIT_WORDS = {w: str(i) for i, w in enumerate("zero one two three four five six seven eight nine".split())}
+
+
+def normalise(text: str) -> str:
+    """Spoken answers are right in more than one spelling: "24-month" / "24 month",
+    "two point four" / "2.4". Compare them in one form."""
+    t = re.sub(r"[-\u2010\u2011]", " ", text.lower())
+    t = re.sub(r"\b(\w+) point (\w+)\b",
+               lambda m: f"{_DIGIT_WORDS.get(m[1], m[1])}.{_DIGIT_WORDS.get(m[2], m[2])}", t)
+    return re.sub(r"\s+", " ", t)
+
+
 def check_expectations(expect: dict, rows: list[dict]) -> list[str]:
     """Problems found; an empty list means the scenario passed."""
     problems = []
@@ -69,7 +81,7 @@ def check_expectations(expect: dict, rows: list[dict]) -> list[str]:
         if not any(re.sub(r"\D", "", str(c.get("args", {}).get(key, ""))) == re.sub(r"\D", "", want) for c in calls):
             problems.append(f"no tool call with {key}={want}")
     final = rows[-1]["reply"] if rows else ""
-    if expect.get("final_includes_any") and not any(p.lower() in final.lower() for p in expect["final_includes_any"]):
+    if expect.get("final_includes_any") and not any(normalise(p) in normalise(final) for p in expect["final_includes_any"]):
         problems.append(f"final reply lacks any of {expect['final_includes_any']}: {final[:80]!r}")
     if "interrupted_turns" in expect:
         n = sum(1 for r in rows if json.loads(r["extra"] or "{}").get("voice", {}).get("interrupted"))
@@ -106,8 +118,13 @@ def write_stereo(path: Path, clips: list[tuple[float, np.ndarray]], agent: dict)
         w.writeframes((np.clip(stereo, -1, 1) * 32767).astype("<i2").tobytes())
 
 
-async def run_scenario(page, site: str, api: str, scenario: dict, out_dir: Path) -> dict:
+MODE_LABEL = {"standard": "Cascade", "s2s": "Speech-to-speech"}
+
+
+async def run_scenario(page, site: str, api: str, scenario: dict, out_dir: Path, mode: str = "standard") -> dict:
     await page.goto(f"{site}/talk")
+    # Pick the pipeline with the same switch a person uses.
+    await page.get_by_role("radio", name=MODE_LABEL[mode]).click()
     await page.get_by_role("button", name="Start talking").click()
     if not await wait_for(lambda: page.evaluate("__driver.state() === 'Listening'"), 20):
         raise RuntimeError(f"voice call did not start (state: {await page.evaluate('__driver.state()')})")
@@ -166,6 +183,8 @@ async def main() -> int:
     ap.add_argument("--api", default="http://localhost:8000")
     ap.add_argument("--scenarios", help="Comma-separated scenario ids or prefixes, e.g. S1,S5")
     ap.add_argument("--headed", action="store_true")
+    ap.add_argument("--mode", choices=["standard", "s2s"], default="standard",
+                    help="standard = cascade (system A), s2s = speech-to-speech (system B)")
     ap.add_argument("--gap", type=float, default=0.0, help="Seconds between scenarios (rate-limited LLM tiers)")
     args = ap.parse_args()
 
@@ -178,7 +197,7 @@ async def main() -> int:
         print(f"Missing clips for {missing}: run `make audio-clips` first.", file=sys.stderr)
         return 1
 
-    out_dir = ROOT / "evals" / "results" / f"driver-{dt.datetime.now().strftime('%Y%m%d-%H%M%S')}"
+    out_dir = ROOT / "evals" / "results" / f"driver-{args.mode}-{dt.datetime.now().strftime('%Y%m%d-%H%M%S')}"
     out_dir.mkdir(parents=True)
     results = []
     async with async_playwright() as p:
@@ -201,7 +220,7 @@ async def main() -> int:
             if n and args.gap:
                 await asyncio.sleep(args.gap)
             try:
-                result = await run_scenario(page, args.site, args.api, scenario, out_dir)
+                result = await run_scenario(page, args.site, args.api, scenario, out_dir, args.mode)
             except Exception as exc:  # keep going; report the failure
                 result = {"id": scenario["id"], "passed": False, "problems": [f"driver error: {exc}"], "turns": []}
             results.append(result)
@@ -211,7 +230,7 @@ async def main() -> int:
         await browser.close()
 
     measured = sorted(t["measured_response_ms"] for r in results for t in r["turns"] if t["measured_response_ms"])
-    summary = {"scenarios": len(results), "passed": sum(r["passed"] for r in results),
+    summary = {"mode": args.mode, "scenarios": len(results), "passed": sum(r["passed"] for r in results),
                "measured_response_ms_median": measured[len(measured) // 2] if measured else None,
                "measured_response_ms_p95": measured[min(len(measured) - 1, int(len(measured) * 0.95))] if measured else None}
     (out_dir / "report.json").write_text(json.dumps({"summary": summary, "results": results}, indent=2))

@@ -1218,3 +1218,26 @@ textarea {
   font-size: var(--step--1);
   margin-top: -0.5em;
 }
+
+/* Voice pipeline switch (cascade / speech-to-speech) in the call header */
+.chat-head {
+  flex-wrap: wrap;
+}
+.segmented-small .segment {
+  padding: 3px 11px;
+}
+.segment:disabled {
+  cursor: not-allowed;
+  opacity: 0.55;
+}
+.segment[aria-checked="true"]:disabled {
+  opacity: 1;
+}
+.segment:focus-visible {
+  outline: 2px solid var(--ink);
+  outline-offset: 2px;
+}
+.mode-note {
+  color: var(--slate);
+  font-size: var(--step--1);
+}

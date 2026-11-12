@@ -24,6 +24,13 @@ const TOOL_LABEL: Record<string, string> = {
   create_support_ticket: "Opened a support ticket",
 };
 
+export type VoiceMode = "standard" | "s2s";
+
+const MODES: { id: VoiceMode; label: string; note: string }[] = [
+  { id: "standard", label: "Cascade", note: "Deepgram hears, Gemini thinks, Cartesia speaks." },
+  { id: "s2s", label: "Speech-to-speech", note: "One Gemini Live model hears and speaks." },
+];
+
 function ms(v: number | null | undefined) {
   return v === null || v === undefined ? null : `${Math.round(v)} ms`;
 }
@@ -33,6 +40,7 @@ export default function VoiceAgent() {
   const [lines, setLines] = useState<Line[]>([]);
   const [error, setError] = useState<string | null>(null);
   const [level, setLevel] = useState(0);
+  const [mode, setMode] = useState<VoiceMode>("standard");
   const client = useRef<VoiceClient | null>(null);
   const log = useRef<HTMLDivElement>(null);
 
@@ -72,7 +80,7 @@ export default function VoiceAgent() {
       onTool: (turn, name) => upsertAgent(turn, (l) => ({ ...l, tools: [...l.tools, name] })),
       onInterrupted: (turn) => upsertAgent(turn, (l) => ({ ...l, interrupted: true })),
       onMetrics: (m) => upsertAgent(m.turn, (l) => ({ ...l, metrics: { ...(l.metrics ?? { turn: m.turn }), ...m } })),
-    });
+    }, mode);
     client.current = c;
     await c.start();
   }
@@ -92,6 +100,14 @@ export default function VoiceAgent() {
           <span className="lamp" data-on={live && state !== "connecting"} aria-hidden="true" />
           {STATE_LABEL[state]}
         </span>
+        <div className="segmented segmented-small" role="radiogroup" aria-label="Voice pipeline">
+          {MODES.map((m) => (
+            <button key={m.id} type="button" role="radio" className="segment" aria-checked={mode === m.id}
+              title={m.note} disabled={live} onClick={() => setMode(m.id)}>
+              {m.label}
+            </button>
+          ))}
+        </div>
         <span className="meter" aria-hidden="true">
           <span style={{ transform: `scaleX(${live ? level : 0})` }} />
         </span>
@@ -108,6 +124,7 @@ export default function VoiceAgent() {
             >
               {state === "connecting" ? "Connecting" : "Start talking"}
             </button>
+            <p className="mode-note">{MODES.find((m) => m.id === mode)?.note}</p>
             <p>
               Ask about a product or say an order number, such as <strong>4512</strong>. You can interrupt Volt at any
               time. Headphones work best: on speakers, Volt may hear itself.
@@ -142,6 +159,7 @@ export default function VoiceAgent() {
                   {ms(l.metrics.end_of_turn_ms) && <span>End of turn {ms(l.metrics.end_of_turn_ms)}</span>}
                   {ms(l.metrics.llm_first_token_ms) && <span>LLM first token {ms(l.metrics.llm_first_token_ms)}</span>}
                   {ms(l.metrics.tts_first_byte_ms) && <span>Voice first byte {ms(l.metrics.tts_first_byte_ms)}</span>}
+                  {ms(l.metrics.first_tool_call_ms) && <span>First tool call {ms(l.metrics.first_tool_call_ms)}</span>}
                 </div>
               )}
             </div>

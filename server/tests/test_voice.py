@@ -138,7 +138,7 @@ def test_spoken_turn_with_tool_and_filler(settings, retriever):
     row = client.get("/turns/recent").json()[0]
     assert row["channel"] == "web" and row["reply"].startswith("Let me look up that order.")
     assert json.loads(row["extra"])["client"]["client_response_ms"] == 812
-    web = [g for g in client.get("/turns/summary").json() if g["channel"] == "web"]
+    web = [g for g in client.get("/turns/summary").json() if g["channel"] == "web" and g["mode"] == "standard"]
     assert web and web[0]["response_ms"]["median"] == 812
 
 
@@ -170,6 +170,7 @@ def test_voice_not_configured(settings, retriever):
     client = TestClient(create_app(settings, llm=FakeLLM([]), retriever=retriever))
     assert client.get("/health").json()["voice_configured"] is False
     with client.websocket_connect("/voice") as ws:
+        ws.send_text(json.dumps({"type": "start"}))
         assert "not configured" in json.loads(ws.receive_text())["message"]
 
 
@@ -344,3 +345,45 @@ def test_finished_and_played_reply_is_not_interrupted(settings, retriever):
     assert not any(m["type"] == "clear" and m["turn"] == 1 for m in msgs)
     assistant = [m for m in llm.requests[1]["messages"] if m["role"] == "assistant"]
     assert assistant[-1]["content"] == "Hello there."
+
+
+def test_speech_to_text_reconnects_after_the_stream_dies(settings, retriever):
+    """13 November: Deepgram dropped mid-call ("keepalive ping timeout") and the next user turn was
+    never heard. The session must open a new stream and answer the next turn."""
+    streams = []
+
+    class DyingSTT(FakeSTT):
+        async def send_audio(self, pcm):
+            if pcm == b"DIE":
+                await self.q.put(STTEvent("error", "keepalive ping timeout", None, time.perf_counter()))
+                await self.q.put(None)
+                return
+            await super().send_audio(pcm)
+
+    async def stt_factory(rate):
+        streams.append(DyingSTT())
+        return streams[-1]
+
+    tts = FakeTTS()
+
+    async def tts_factory():
+        return tts
+
+    llm = FakeLLM(["First answer.", "Second answer."])
+    client = TestClient(create_app(settings, llm=llm, retriever=retriever, stt_factory=stt_factory,
+                                   tts_factory=tts_factory))
+    with client.websocket_connect("/voice") as ws:
+        ws.send_text(json.dumps({"type": "start"}))
+        collect_until(ws, "state")
+        ws.send_bytes(b"SAY:Where is order 4521?")
+        collect_until(ws, "metrics")
+        ws.send_bytes(b"DIE")
+        for _ in range(50):  # wait for the new stream
+            if len(streams) == 2:
+                break
+            time.sleep(0.05)
+        ws.send_bytes(b"SAY:No, sorry, I said 4512.")
+        msgs, _ = collect_until(ws, "metrics")
+        ws.send_text(json.dumps({"type": "stop"}))
+    assert len(streams) == 2 and msgs[-1]["stt_reconnects"] == 1
+    assert llm.requests[1]["messages"][-1]["content"].endswith("No, sorry, I said 4512.")

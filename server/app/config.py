@@ -72,6 +72,11 @@ class Settings(BaseSettings):
     tts_voice_id: str = "9626c31c-bec5-4cca-baa8-f8ba9e84c8bc"  # Jacqueline, en-US
     tts_sample_rate: int = 24000
 
+    # Speech-to-speech (system B): Gemini Live, on the Gemini key
+    s2s_model: str = "gemini-3.1-flash-live-preview"
+    s2s_api_version: str = "v1beta"  # the SDK's default, v1, has no Live endpoint
+    s2s_voice: str | None = None  # a prebuilt Gemini voice name; the model's default if empty
+
     # HTTP
     cors_origins: str = "http://localhost:3000"
 
@@ -118,6 +123,10 @@ class Settings(BaseSettings):
     @property
     def voice_configured(self) -> bool:
         return bool(self.deepgram_api_key and self.cartesia_api_key)
+
+    @property
+    def s2s_configured(self) -> bool:
+        return bool(self.gemini_api_key)
 
     @property
     def cors_origin_list(self) -> list[str]:

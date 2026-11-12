@@ -16,7 +16,7 @@ TODAY = dt.date(2026, 11, 12)
 @pytest.fixture(scope="session")
 def settings(tmp_path_factory):
     return Settings(db_path=tmp_path_factory.mktemp("db") / "test.db", retrieval_dense=False,
-                    llm_provider="openai", llm_api_key=None, openai_api_key=None, groq_api_key=None, _env_file=None)
+                    llm_provider="openai", llm_api_key=None, openai_api_key=None, groq_api_key=None, gemini_api_key=None, _env_file=None)
 
 
 @pytest.fixture(scope="session")

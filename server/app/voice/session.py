@@ -36,7 +36,7 @@ import struct
 import time
 import uuid
 from collections import deque
-from dataclasses import dataclass, field
+from dataclasses import dataclass, field, replace
 from typing import Any, Awaitable, Callable
 
 from fastapi import WebSocket, WebSocketDisconnect
@@ -54,7 +54,8 @@ log = logging.getLogger(__name__)
 # least this many words (a backup for the browser's own voice-activity barge-in).
 SERVER_BARGE_IN_WORDS = 3
 PLAYBACK_SLACK_S = 1.0  # network and buffering between sending audio and the browser playing it
-STALE_VAD_S = 0.5  # a VAD speech end this far before the last word's end belongs to older speech
+STALE_VAD_S = 0.5
+STT_MAX_RECONNECTS = 3  # in a row, without a transcript in between  # a VAD speech end this far before the last word's end belongs to older speech
 
 
 class ProviderStartError(Exception):
@@ -151,6 +152,8 @@ class VoiceSession:
         self.use_vad = use_vad
         self.vad: SileroVAD | None = None
         self.interim = ""  # the not-yet-final tail of the user's words
+        self.stt_offset_s = 0.0  # audio already sent when the current speech-to-text stream opened
+        self.stt_reconnects = 0
         self.finalizing = False  # silence timeout reached; commit as soon as the final transcript lands
         self.finalize_sent = False
         # Deepgram takes ~400 ms to answer a Finalize, so ask early and decide at the timeout.
@@ -187,9 +190,9 @@ class VoiceSession:
 
     # ------------------------------------------------------------ lifecycle
 
-    async def run(self) -> None:
+    async def run(self, start: dict | None = None) -> None:
         try:
-            start = json.loads(await self.ws.receive_text())
+            start = start if start is not None else json.loads(await self.ws.receive_text())
             if start.get("type") != "start":
                 await self.send({"type": "error", "message": "The first message must be {\"type\": \"start\"}."})
                 return
@@ -264,8 +267,37 @@ class VoiceSession:
                     await self.commit(str(data["text"]).strip(), time.perf_counter())
 
     async def _stt_loop(self) -> None:
-        async for ev in self.stt.events():
-            await self._on_stt(ev)
+        """Feed transcripts to the turn logic. If the speech-to-text stream dies mid-call (Deepgram
+        "keepalive ping timeout" on 13 November), open a new one instead of going deaf."""
+        failures = 0
+        while not self.closed:
+            async for ev in self.stt.events():
+                if ev.kind == "error":
+                    log.warning("Speech-to-text stream failed: %s", ev.text)
+                    continue
+                failures = 0
+                if ev.audio_end_s is not None and self.stt_offset_s:
+                    ev = replace(ev, audio_end_s=ev.audio_end_s + self.stt_offset_s)
+                await self._on_stt(ev)
+            if self.closed:
+                return
+            failures += 1
+            if failures > STT_MAX_RECONNECTS:
+                await self.send({"type": "error", "message": "Speech recognition stopped and could not reconnect."})
+                return
+            await asyncio.sleep(0.2 * failures)
+            try:
+                old, self.stt = self.stt, await self.stt_factory(self.sample_rate)
+            except Exception as exc:
+                log.warning("Speech-to-text reconnect %d failed: %s", failures, exc)
+                continue
+            with contextlib.suppress(Exception):
+                await old.close()
+            # The new stream's audio clock starts at zero; ours keeps counting.
+            self.stt_offset_s = self.audio_bytes / (2 * self.sample_rate)
+            self.interim, self.finalizing, self.finalize_sent = "", False, False
+            self.stt_reconnects += 1
+            log.warning("Speech-to-text reconnected (%d so far this call)", self.stt_reconnects)
 
     async def _check_silence(self) -> None:
         """End the turn on our own silence timeout instead of waiting for the provider's, which
@@ -498,6 +530,7 @@ class VoiceSession:
             "tools": turn.tools,
             "filler": turn.filler,
             "interrupted": turn.interrupted,
+            "stt_reconnects": self.stt_reconnects,
         }
 
     async def _finish_metrics(self, turn: Turn) -> None:

@@ -67,9 +67,13 @@ class DeepgramSTT:
         return self
 
     async def send_audio(self, pcm: bytes) -> None:
-        if self.ws is not None:
+        if self.ws is None:
+            return
+        try:
             await self.ws.send(pcm)
             self._last_send = time.monotonic()
+        except Exception:  # the stream died; the reader reports it and the session reconnects
+            self.ws = None
 
     async def events(self) -> AsyncIterator[STTEvent]:
         while (event := await self.queue.get()) is not None:
