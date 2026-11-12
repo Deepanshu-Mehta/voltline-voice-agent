@@ -1,0 +1,28 @@
+.env
+.env.*
+!.env.example
+.DS_Store
+
+# server
+server/.venv/
+server/data/
+__pycache__/
+.pytest_cache/
+
+# web
+web/node_modules/
+web/.next/
+web/next-env.d.ts
+
+# eval runs (latest.json is kept so the benchmarks page has data)
+evals/results/*
+!evals/results/latest.json
+
+# browser test artifacts
+.playwright-mcp/
+
+# logs and editor/OS files
+*.log
+*.tsbuildinfo
+.vscode/
+.idea/
