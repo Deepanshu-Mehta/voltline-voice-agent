@@ -340,6 +340,27 @@ def main() -> int:
 
     transcribe.save()
     DATA.mkdir(exist_ok=True)
+    # The owner's recordings: full details only in the git-ignored private copy; the public files
+    # keep the clip id and question, not who spoke, how, or what Whisper heard.
+    private_ids = {r["clip_id"] for r in manifest_rows if r["private"] == "yes"}
+    if private_ids:
+        (DATA / "private").mkdir(parents=True, exist_ok=True)
+        with open(DATA / "private" / "manifest-private.csv", "w", newline="") as f:
+            w = csv.DictWriter(f, fieldnames=list(manifest_rows[0]))
+            w.writeheader()
+            w.writerows(r for r in manifest_rows if r["clip_id"] in private_ids)
+
+    def public(r: dict) -> dict:
+        if r.get("clip_id") not in private_ids:
+            return r
+        hidden = {"speaker", "gender", "accent", "path", "whisper_text", "median_f0_hz", "gender_label",
+                  "gender_from_pitch", "sha256_16", "origin"}
+        return {k: ("private" if k in hidden and v not in ("", None) else v) for k, v in r.items()}
+
+    manifest_rows = [public(r) for r in manifest_rows]
+    qc_rows = [public(r) for r in qc_rows]
+    speaker_rows = [r if r["speaker"] != "owner" else {**r, "label": "private", "median_f0_hz": "private", "from_pitch": "private", "verdict": "private"}
+                    for r in speaker_rows]
     for name, rows in (("manifest.csv", manifest_rows), ("qc-report.csv", qc_rows), ("speakers.csv", speaker_rows)):
         cols: list[str] = []
         for r in rows:

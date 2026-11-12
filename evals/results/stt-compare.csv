@@ -545,26 +545,26 @@ phone-T05,T05,core,phone,US English,female,skylar-us,gnani-v2.5,Is the Glide mou
 phone-T05,T05,core,phone,US English,female,skylar-us,gnani-v3.0,Is the Glide mouse available right now?,Is the glide mouse available right now?,0.0,1,,1
 phone-T05,T05,core,phone,US English,female,skylar-us,gnani-v3.0-kt,Is the Glide mouse available right now?,Is the Glide mouse available right now?,0.0,1,,1
 phone-T05,T05,core,phone,US English,female,skylar-us,whisper,Is the Glide mouse available right now?,Is the glide mouse available right now?,0.0,1,,1
-clean-T06,T06,core,clean,British English,male,archie-gb,deepgram,Where is order 9999?,Where is order 9900 and 99?,0.75,1,9999,0
-clean-T06,T06,core,clean,British English,male,archie-gb,deepgram-nokt,Where is order 9999?,Where is order 9900 and 99?,0.75,1,9999,0
-clean-T06,T06,core,clean,British English,male,archie-gb,deepgram-nosmart,Where is order 9999?,Where is order nine thousand nine hundred and ninety nine?,1.5,1,9999,0
-clean-T06,T06,core,clean,British English,male,archie-gb,gnani-v2.5,Where is order 9999?,"where is order 9,999",0.0,1,,1
-clean-T06,T06,core,clean,British English,male,archie-gb,gnani-v3.0,Where is order 9999?,"Where is order 9,999?",0.0,1,,1
-clean-T06,T06,core,clean,British English,male,archie-gb,gnani-v3.0-kt,Where is order 9999?,"Where is order 9,999?",0.0,1,,1
+clean-T06,T06,core,clean,British English,male,archie-gb,deepgram,Where is order 9999?,Where is order 9999?,0.0,1,,1
+clean-T06,T06,core,clean,British English,male,archie-gb,deepgram-nokt,Where is order 9999?,Where is order 9999?,0.0,1,,1
+clean-T06,T06,core,clean,British English,male,archie-gb,deepgram-nosmart,Where is order 9999?,Where is order nine nine nine nine?,0.0,1,,1
+clean-T06,T06,core,clean,British English,male,archie-gb,gnani-v2.5,Where is order 9999?,where is order 9999,0.0,1,,1
+clean-T06,T06,core,clean,British English,male,archie-gb,gnani-v3.0,Where is order 9999?,Where is order 9999?,0.0,1,,1
+clean-T06,T06,core,clean,British English,male,archie-gb,gnani-v3.0-kt,Where is order 9999?,Where is order 9999?,0.0,1,,1
 clean-T06,T06,core,clean,British English,male,archie-gb,whisper,Where is order 9999?,Where is order 9999?,0.0,1,,1
-noisy-T06,T06,core,noisy,British English,male,archie-gb,deepgram,Where is order 9999?,Where is order 9900 and 99?,0.75,1,9999,0
-noisy-T06,T06,core,noisy,British English,male,archie-gb,deepgram-nokt,Where is order 9999?,Where is order 9900 and 99?,0.75,1,9999,0
-noisy-T06,T06,core,noisy,British English,male,archie-gb,deepgram-nosmart,Where is order 9999?,Where is order nine thousand nine hundred and ninety nine?,1.5,1,9999,0
-noisy-T06,T06,core,noisy,British English,male,archie-gb,gnani-v2.5,Where is order 9999?,"where is order 9,999",0.0,1,,1
-noisy-T06,T06,core,noisy,British English,male,archie-gb,gnani-v3.0,Where is order 9999?,"Where is order 9,999?",0.0,1,,1
-noisy-T06,T06,core,noisy,British English,male,archie-gb,gnani-v3.0-kt,Where is order 9999?,"Where is order 9,999?",0.0,1,,1
+noisy-T06,T06,core,noisy,British English,male,archie-gb,deepgram,Where is order 9999?,Where is order 9999,0.0,1,,1
+noisy-T06,T06,core,noisy,British English,male,archie-gb,deepgram-nokt,Where is order 9999?,Where is order 9999,0.0,1,,1
+noisy-T06,T06,core,noisy,British English,male,archie-gb,deepgram-nosmart,Where is order 9999?,Where is order nine nine nine nine,0.0,1,,1
+noisy-T06,T06,core,noisy,British English,male,archie-gb,gnani-v2.5,Where is order 9999?,where is order 9999,0.0,1,,1
+noisy-T06,T06,core,noisy,British English,male,archie-gb,gnani-v3.0,Where is order 9999?,Where is order 9999.,0.0,1,,1
+noisy-T06,T06,core,noisy,British English,male,archie-gb,gnani-v3.0-kt,Where is order 9999?,Where is order 9999?,0.0,1,,1
 noisy-T06,T06,core,noisy,British English,male,archie-gb,whisper,Where is order 9999?,Where is order 9999?,0.0,1,,1
-phone-T06,T06,core,phone,British English,male,archie-gb,deepgram,Where is order 9999?,Where is order 9900 and 99?,0.75,1,9999,0
-phone-T06,T06,core,phone,British English,male,archie-gb,deepgram-nokt,Where is order 9999?,Where is order 9900 and 99?,0.75,1,9999,0
-phone-T06,T06,core,phone,British English,male,archie-gb,deepgram-nosmart,Where is order 9999?,Where is order nine thousand nine hundred and ninety nine?,1.5,1,9999,0
-phone-T06,T06,core,phone,British English,male,archie-gb,gnani-v2.5,Where is order 9999?,"where is order 9,999",0.0,1,,1
-phone-T06,T06,core,phone,British English,male,archie-gb,gnani-v3.0,Where is order 9999?,"Where is order 9,999.",0.0,1,,1
-phone-T06,T06,core,phone,British English,male,archie-gb,gnani-v3.0-kt,Where is order 9999?,"Where is order 9,999?",0.0,1,,1
+phone-T06,T06,core,phone,British English,male,archie-gb,deepgram,Where is order 9999?,Where is order 9999?,0.0,1,,1
+phone-T06,T06,core,phone,British English,male,archie-gb,deepgram-nokt,Where is order 9999?,Where is order 9999?,0.0,1,,1
+phone-T06,T06,core,phone,British English,male,archie-gb,deepgram-nosmart,Where is order 9999?,Where is order nine nine nine nine?,0.0,1,,1
+phone-T06,T06,core,phone,British English,male,archie-gb,gnani-v2.5,Where is order 9999?,where is order 9999,0.0,1,,1
+phone-T06,T06,core,phone,British English,male,archie-gb,gnani-v3.0,Where is order 9999?,Where is order 9999.,0.0,1,,1
+phone-T06,T06,core,phone,British English,male,archie-gb,gnani-v3.0-kt,Where is order 9999?,Where is order 9999?,0.0,1,,1
 phone-T06,T06,core,phone,British English,male,archie-gb,whisper,Where is order 9999?,Where is order 9999?,0.0,1,,1
 clean-T07,T07,core,clean,British English,female,gemma-gb,deepgram,The left earbud of my Pulse Buds Pro from order 4512 stopped working. Please open a warranty ticket.,The left earbud of my Pulse Buds Pro from order 4512 stopped working. Please open a warranty ticket.,0.0,3,,1
 clean-T07,T07,core,clean,British English,female,gemma-gb,deepgram-nokt,The left earbud of my Pulse Buds Pro from order 4512 stopped working. Please open a warranty ticket.,The left earbud of my PulseBuds Pro from order 4512 stopped working. Please open a warranty ticket.,0.0,3,,1
