@@ -1,0 +1,132 @@
+{
+  "version": 1,
+  "run": "v1",
+  "pairs": [
+    {
+      "pair": "p01",
+      "clips": [
+        "c979",
+        "c557"
+      ],
+      "type": "explanation"
+    },
+    {
+      "pair": "p02",
+      "clips": [
+        "c500",
+        "c133"
+      ],
+      "type": "explanation"
+    },
+    {
+      "pair": "p03",
+      "clips": [
+        "c478",
+        "c313"
+      ],
+      "type": "explanation"
+    },
+    {
+      "pair": "p04",
+      "clips": [
+        "c532",
+        "c205"
+      ],
+      "type": "explanation"
+    },
+    {
+      "pair": "p05",
+      "clips": [
+        "c992",
+        "c879"
+      ],
+      "type": "short"
+    },
+    {
+      "pair": "p06",
+      "clips": [
+        "c346",
+        "c466"
+      ],
+      "type": "short"
+    },
+    {
+      "pair": "p07",
+      "clips": [
+        "c667",
+        "c421"
+      ],
+      "type": "short"
+    },
+    {
+      "pair": "p08",
+      "clips": [
+        "c704",
+        "c663"
+      ],
+      "type": "short"
+    },
+    {
+      "pair": "p09",
+      "clips": [
+        "c110",
+        "c190"
+      ],
+      "type": "numbers"
+    },
+    {
+      "pair": "p10",
+      "clips": [
+        "c338",
+        "c723"
+      ],
+      "type": "numbers"
+    },
+    {
+      "pair": "p11",
+      "clips": [
+        "c727",
+        "c168"
+      ],
+      "type": "numbers"
+    },
+    {
+      "pair": "p12",
+      "clips": [
+        "c842",
+        "c441"
+      ],
+      "type": "numbers"
+    },
+    {
+      "pair": "p13",
+      "clips": [
+        "c557",
+        "c979"
+      ],
+      "type": "explanation",
+      "repeat_of": "p01"
+    }
+  ],
+  "singles": [
+    "c123",
+    "c109",
+    "c547",
+    "c645"
+  ],
+  "scale": [
+    "Clearly machine-like or broken",
+    "Mostly machine-like",
+    "Acceptable",
+    "Mostly natural",
+    "Like a person"
+  ],
+  "defects": [
+    "Glitch or click",
+    "Cut off",
+    "Wrong or slurred word",
+    "Odd pacing or pause",
+    "Robotic tone",
+    "Background noise"
+  ]
+}

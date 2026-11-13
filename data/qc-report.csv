@@ -134,3 +134,23 @@ TT6-cough-2,evals/audio/clips/scenarios/TT6-cough-2.wav,16000,1,16,0.92,0.3,0.18
 TT6-cough-3,evals/audio/clips/scenarios/TT6-cough-3.wav,16000,1,16,1.98,0.42,0.18,-11.6,0.0,0572692795ff1cd4,315.4,female,female,,skylar-us,scenario,And what colors does it come in?,0.143,,ok,
 TT7-self-correction-1,evals/audio/clips/scenarios/TT7-self-correction-1.wav,16000,1,16,6.3,0.46,0.16,-22.0,0.0,f08490ab9bfaee00,117.8,male,male,,archie-gb,scenario,"Where is order 4521 – no, wait, sorry – 4512?",0.0,,ok,
 TT8-hesitation-1,evals/audio/clips/scenarios/TT8-hesitation-1.wav,16000,1,16,6.62,0.38,0.06,-18.4,0.0,f18607e47b1a7ffd,221.6,female,female,,gemma-gb,scenario,"Um, so I was wondering, uh, do you ship to, um, Canada?",0.0,,ok,
+R01,private,16000,1,16,4.7,0.0,0.0,-35.2,0.0,private,private,private,private,,private,recorded,private,0.375,Pulse Buds Pro,warn,level -35.20000076293945 dBFS; content WER 0.375; key term not heard: Pulse Buds Pro
+R02,private,16000,1,16,6.69,0.0,0.0,-36.8,0.0,private,private,private,private,,private,recorded,private,0.556,Pulse Buds,warn,level -36.79999923706055 dBFS; content WER 0.556; key term not heard: Pulse Buds
+R03,private,16000,1,16,6.76,0.0,0.0,-37.6,0.0,private,private,private,private,,private,recorded,private,0.375,Pulse Buds,warn,level -37.599998474121094 dBFS; content WER 0.375; key term not heard: Pulse Buds
+R04,private,16000,1,16,5.02,0.0,0.0,-29.1,0.0,private,private,private,private,,private,recorded,private,0.111,,ok,
+R05,private,16000,1,16,3.2,0.0,0.0,-31.4,0.0,private,private,private,private,,private,recorded,private,0.25,,ok,
+R06,private,16000,1,16,6.52,0.0,0.0,-30.6,0.0,private,private,private,private,,private,recorded,private,0.556,Pulse Buds,warn,content WER 0.556; key term not heard: Pulse Buds
+R07,private,16000,1,16,3.26,0.0,0.0,-29.4,0.0,private,private,private,private,,private,recorded,private,0.5,,warn,content WER 0.5
+R08,private,16000,1,16,3.01,0.0,0.0,-32.5,0.0,private,private,private,private,,private,recorded,private,1.0,,warn,content WER 1.0
+R09,private,16000,1,16,4.89,0.0,0.0,-33.7,0.0,private,private,private,private,,private,recorded,private,0.2,,ok,
+R10,private,16000,1,16,5.45,0.0,0.0,-29.6,0.0,private,private,private,private,,private,recorded,private,0.3,SafeView,warn,content WER 0.3; key term not heard: SafeView
+R11,private,16000,1,16,3.79,0.0,0.0,-31.2,0.0,private,private,private,private,,private,recorded,private,0.333,,warn,content WER 0.333
+R12,private,16000,1,16,5.7,0.0,0.0,-24.1,0.0,private,private,private,private,,private,recorded,private,0.125,,ok,
+R13,private,16000,1,16,3.64,0.0,0.0,-30.0,0.0,private,private,private,private,,private,recorded,private,0.0,,ok,
+R14,private,16000,1,16,5.14,0.0,0.0,-29.8,0.0,private,private,private,private,,private,recorded,private,0.556,SafeView Outdoor Camera,warn,content WER 0.556; key term not heard: SafeView Outdoor Camera
+R15,private,16000,1,16,5.08,0.0,0.0,-25.3,0.0,private,private,private,private,,private,recorded,private,0.143,Glide,warn,key term not heard: Glide
+R16,private,16000,1,16,7.22,0.0,0.0,-24.8,0.0,private,private,private,private,,private,recorded,private,0.25,ThermoSense,warn,key term not heard: ThermoSense
+R17,private,16000,1,16,5.04,0.0,0.0,-31.3,0.0,private,private,private,private,,private,recorded,private,0.111,,ok,
+R18,private,16000,1,16,9.92,0.0,0.0,-32.9,0.0,private,private,private,private,,private,recorded,private,0.25,MacBook Air,warn,key term not heard: MacBook Air
+R19,private,16000,1,16,5.34,0.0,0.0,-34.4,0.0,private,private,private,private,,private,recorded,private,0.0,,ok,
+R20,private,16000,1,16,3.44,0.0,0.0,-31.8,0.0,private,private,private,private,,private,recorded,private,0.429,Dockline,warn,content WER 0.429; key term not heard: Dockline

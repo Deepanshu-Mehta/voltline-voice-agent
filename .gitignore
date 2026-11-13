@@ -45,3 +45,7 @@ evals/audio/manifest-extra.jsonl
 !evals/results/stt-compare.csv
 !evals/results/stt-compare-summary.csv
 evals/runs/*/wav/
+evals/demo/out/
+qa/annotation/key.json
+qa/annotation/*.wav
+qa/listening/key.json

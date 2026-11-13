@@ -81,10 +81,13 @@ async def main() -> int:
     run_dir = ROOT / "evals" / "runs" / args.run
     private_dir = ROOT / "data" / "private" / "runs" / args.run
     records_path = run_dir / "records.jsonl"
+    private_records = private_dir / "records.jsonl"  # calls on the owner's voice: what was heard stays local
     run_dir.mkdir(parents=True, exist_ok=True)
     done = set()
-    if records_path.exists():
-        for line in records_path.read_text().splitlines():
+    for path in (records_path, private_records):
+        if not path.exists():
+            continue
+        for line in path.read_text().splitlines():
             r = json.loads(line)
             if any("driver error" in p for p in r.get("problems") or []):
                 continue  # retried on the next run; the scorer keeps the latest attempt
@@ -116,7 +119,9 @@ async def main() -> int:
                       "question_id": item["question_id"], "private": item["private"], "seconds": round(time.perf_counter() - t, 1),
                       **{k: result.get(k) for k in ("passed", "problems", "session_id", "recording_t0_ms", "turns",
                                                     "rows", "recording")}}
-            with open(records_path, "a") as f:
+            target = private_records if item["private"] else records_path
+            target.parent.mkdir(parents=True, exist_ok=True)
+            with open(target, "a") as f:
                 f.write(json.dumps(record) + "\n")
             lat = [x.get("measured_response_ms") for x in result.get("turns", [])]
             flag = "" if not result.get("problems") or item["kind"] == "question" else f"  {result['problems']}"

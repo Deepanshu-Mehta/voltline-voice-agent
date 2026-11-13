@@ -107,16 +107,25 @@ def main() -> int:
             ok.setdefault(row["item"], set()).add(row["system"])
     eligible = sorted(i for i, s in ok.items() if s == {"A", "B"})
 
-    def kind_of(item: str) -> str:
-        q = questions[item.split("-", 1)[1]]
-        if any(re.search(r"\d", p) for g in q.get("must_include", []) for p in g) or q.get("expected_tool"):
-            return "numbers"
-        return "explanation" if len(q["reference"]) > 70 else "short"
+    # Types by measured reply length (mean of A and B), fixed before anyone listens: the 4 longest
+    # replies are "explanation", the 4 shortest of the rest "short", then the first 4 by id of the rest
+    # whose answer has a number or a tool result are "numbers".
+    length = {}
+    for row in scored:
+        if row["item"] in eligible and row["rep"] == "1":
+            length.setdefault(row["item"], []).append(float(row["reply_s"]))
+    mean_len = {i: sum(v) / len(v) for i, v in length.items()}
 
-    groups: dict[str, list[str]] = {"short": [], "numbers": [], "explanation": []}
-    for item in eligible:
-        groups[kind_of(item)].append(item)
-    pairs = {k: v[:4] for k, v in groups.items()}
+    def has_number(item: str) -> bool:
+        q = questions[item.split("-", 1)[1]]
+        return any(re.search(r"\d", p) for g in q.get("must_include", []) for p in g) or bool(q.get("expected_tool"))
+
+    by_len = sorted(eligible, key=lambda i: mean_len[i])
+    pairs = {"explanation": by_len[-4:]}
+    rest = [i for i in by_len if i not in pairs["explanation"]]
+    pairs["short"] = rest[:4]
+    pairs["numbers"] = sorted(i for i in rest if i not in pairs["short"] and has_number(i))[:4]
+    groups = pairs
     used = {i for v in pairs.values() for i in v}
     spare = [i for i in eligible if i not in used]
     if any(len(v) < 4 for v in pairs.values()) or len(spare) < 4:

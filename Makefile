@@ -40,7 +40,7 @@ stt-compare:        ## Hearing A/B: the question clips through Deepgram, Gnani a
 	uv run --project server python evals/stt_compare.py
 
 record:             ## Record the 20-question set in your own voice (stays local, data/private/)
-	uv run --project server python evals/audio/record.py
+	uv run --project server python evals/audio/record.py $(ARGS)
 
 compare:            ## Paired run of both systems through the web page (RUN=name)
 	uv run --project server python evals/compare.py --run $(or $(RUN),v1)

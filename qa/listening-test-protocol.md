@@ -9,7 +9,7 @@ When the two voice agents answer the same customer question, which one do listen
 ## Material
 
 - **12 pairs.** In each pair, system A (the cascade) and system B (speech-to-speech) answer the same question, taken from the paired run `evals/runs/v1`. There are 4 short facts, 4 answers containing numbers (prices, order numbers, dates) and 4 longer explanations.
-- **Selection rule:** pairs are chosen by question type before listening. Only calls where both systems answered without a driver error qualify. If more than four qualify in a type, the first four by question id are used. No clip is chosen or swapped after being heard.
+- **Selection rule:** pairs are chosen by a fixed rule before listening (see Changes below for the version used). Only clean-condition calls where both systems answered without a driver error qualify. No clip is chosen or swapped after being heard.
 - **4 hidden anchors**, made worse on purpose from A or B replies outside the 12 pairs: hard clipping, a 300 ms dropout mid-word, telephone band (300 to 3,400 Hz) and cafe noise at 5 dB. They appear as single clips among the others.
 - **1 hidden repeat:** one pair is played a second time, with A and B in the other order.
 - **Only agent audio.** Each clip is the agent's reply alone, cut from the right channel of the recording: no customer voice, and never the owner's recordings.
@@ -55,4 +55,4 @@ When the two voice agents answer the same customer question, which one do listen
 
 ## Changes after 13 November
 
-(none yet)
+- **13 November, before any ratings:** typing by the reference answer gave only 2 "longer explanation" questions, because most answers contain a number. Pairs are now typed by measured reply length, the mean of A and B: the 4 longest are explanations, the 4 shortest of the rest are short facts, then the first 4 by id of the rest whose answer contains a number or a tool result. The rule is still mechanical, and nothing was heard before choosing it.

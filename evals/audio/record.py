@@ -4,7 +4,8 @@ The files stay on this machine: data/private/ is git-ignored and never published
 Each prompt: press Enter to start, Enter to stop, then keep it, redo it or play it back.
 Speak naturally, as you would to a support line; small hesitations are fine and useful.
 
-Usage: uv run --project server python evals/audio/record.py [--from R07]
+Usage: uv run --project server python evals/audio/record.py [--from R07] [--device iphone]
+       --device picks the input whose name contains this text (default: the system's input)
 """
 
 from __future__ import annotations
@@ -39,9 +40,20 @@ def prompts() -> list[dict]:
     return [{"rid": f"R{n:02d}", "qid": q["id"], "text": q["turns"][0]} for n, q in enumerate(chosen, start=1)]
 
 
-def record() -> np.ndarray:
+def dropouts(pcm: np.ndarray, min_ms: int = 20) -> int:
+    """Stretches of exact digital silence (all-zero samples) of at least min_ms: a microphone that
+    stopped delivering audio, as the iPhone's wireless link did on 13 November. Real rooms are
+    never exactly silent."""
+    z = np.concatenate([[False], pcm == 0, [False]])
+    edges = np.flatnonzero(np.diff(z.astype(int)))
+    starts, ends = edges[::2], edges[1::2]
+    return int(((ends - starts) >= RATE * min_ms // 1000).sum())
+
+
+def record(device: int | None) -> np.ndarray:
     frames: queue.Queue = queue.Queue()
-    with sd.InputStream(samplerate=RATE, channels=1, dtype="int16", callback=lambda d, *_: frames.put(d.copy())):
+    with sd.InputStream(samplerate=RATE, channels=1, dtype="int16", device=device,
+                        callback=lambda d, *_: frames.put(d.copy())):
         input("  recording... press Enter to stop ")
     chunks = []
     while not frames.empty():
@@ -52,15 +64,28 @@ def record() -> np.ndarray:
 def main() -> int:
     ap = argparse.ArgumentParser()
     ap.add_argument("--from", dest="start", help="Start at this prompt id, e.g. R07")
+    ap.add_argument("--device", help="Use the input whose name contains this text, e.g. iphone")
+    ap.add_argument("--only", help="Redo only these prompts, e.g. R02,R10")
     args = ap.parse_args()
+    device_index = None
+    if args.device:
+        inputs = [(i, d["name"]) for i, d in enumerate(sd.query_devices()) if d["max_input_channels"] > 0]
+        match = [(i, n) for i, n in inputs if args.device.lower() in n.lower()]
+        if not match:
+            print(f"No input matches {args.device!r}. Inputs: {[n for _, n in inputs]}")
+            return 1
+        device_index = match[0][0]
     items = prompts()
+    if args.only:
+        wanted = {x.strip().upper() for x in args.only.split(",")}
+        items = [p for p in items if p["rid"] in wanted]
     if args.start:
         items = items[next(i for i, p in enumerate(items) if p["rid"] == args.start):]
     OUT.mkdir(parents=True, exist_ok=True)
     existing = {}
     if MANIFEST.exists():
         existing = {m["rid"]: m for m in map(json.loads, MANIFEST.read_text().splitlines())}
-    device = sd.query_devices(kind="input")["name"]
+    device = sd.query_devices(device_index)["name"] if device_index is not None else sd.query_devices(kind="input")["name"]
     gender = input("Speaker gender for the manifest (f / m / other / skip): ").strip().lower() or "skip"
     accent = input("Your accent, in your own words (e.g. Indian English; Enter to skip): ").strip() or "unspecified"
     print(f"Microphone: {device}. Hold it as you normally would; a quiet room is best.\n")
@@ -68,10 +93,16 @@ def main() -> int:
     for p in items:
         print(f"{p['rid']}  ({p['qid']})  \"{p['text']}\"")
         while True:
-            input("  press Enter, then speak ")
-            pcm = record()
+            input("  press Enter, wait for 'recording', count one silently, then speak ")
+            pcm = record(device_index)
             peak = int(np.abs(pcm).max()) if len(pcm) else 0
-            note = " (clipped: speak a little softer)" if peak >= 32000 else " (very quiet: move closer)" if peak < 2000 else ""
+            gaps = dropouts(pcm)
+            note = (f" (DROPOUT: the microphone lost audio {gaps} time(s); press r to redo,"
+                    f" and keep the phone close to the Mac)" if gaps and peak else "")
+            note = note or (" (no sound at all: allow microphone access for this terminal app in System Settings >"
+                    " Privacy & Security > Microphone, or check the device)" if peak == 0 else
+                    " (clipped: speak a little softer)" if peak >= 32000 else
+                    " (very quiet: move closer)" if peak < 2000 else "")
             print(f"  {len(pcm) / RATE:.1f} s, peak {peak}{note}")
             choice = input("  [Enter] keep  [r] redo  [p] play  [q] quit: ").strip().lower()
             if choice == "p":

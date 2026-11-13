@@ -49,9 +49,29 @@ def read_wav(path: Path) -> np.ndarray:
 
 
 def speech_end_offset_ms(samples: np.ndarray, threshold: float = 0.02) -> float:
-    """Where speech ends inside a clip (clips can carry a little trailing silence)."""
-    loud = np.nonzero(np.abs(samples) > threshold)[0]
-    return (loud[-1] + 1) / RATE * 1000 if len(loud) else len(samples) / RATE * 1000
+    """Where speech ends inside a clip: the end of the last stretch of at least 80 ms of sound.
+    A short transient after the speech (the Enter-key click that ends a real recording) is not
+    speech; with a single loud sample as the end, real recordings measured responses of 4 ms.
+    `threshold` is kept for callers; the level is relative to the clip's own peak and noise."""
+    hop = RATE // 100  # 10 ms
+    n = len(samples) // hop
+    if n == 0:
+        return 0.0
+    lv = 20 * np.log10(np.sqrt((samples[: n * hop].reshape(n, hop) ** 2).mean(axis=1)) + 1e-9)
+    floor = np.percentile(lv, 10)
+    loud = lv > max(floor + 12, lv.max() - 35)
+    end, run = None, 0
+    for i, v in enumerate(loud):
+        run = run + 1 if v else 0
+        if run >= 8:
+            end = i + 1
+            # extend through the rest of this stretch
+    if end is None:
+        return len(samples) / RATE * 1000
+    j = end
+    while j < n and loud[j]:
+        j += 1
+    return j * hop / RATE * 1000
 
 
 async def wait_for(predicate, timeout_s: float, interval_s: float = 0.1):
@@ -168,6 +188,7 @@ async def run_scenario(page, site: str, api: str, scenario: dict, out_dir: Path,
             reply_onset = await wait_for(lambda: page.evaluate(
                 f"(__driver.events.find(e => e.kind === 'onset' && e.t > {speech_end}) || {{}}).t"), 30)
         turns.append({"turn": n, "text": turn.get("text") or f"[{turn.get('noise')}]", "speech_end": speech_end,
+                      "speech_end_method": 2,
                       "measured_response_ms": round(reply_onset - speech_end) if reply_onset else None})
 
     await wait_for(lambda: page.evaluate("__driver.state() === 'Listening'"), 45)

@@ -45,6 +45,7 @@ from app.content import load_products  # noqa: E402
 
 CACHE = ROOT / "data" / ".cache" / "stt.json"
 OUT = ROOT / "evals" / "results"
+RECORDED_QIDS = {f"F{n:02d}" for n in range(1, 16)} | {f"T{n:02d}" for n in range(1, 6)}
 ENGINES = ["deepgram", "deepgram-nokt", "deepgram-nosmart", "gnani-v2.5", "gnani-v3.0", "gnani-v3.0-kt", "whisper"]
 
 
@@ -97,6 +98,10 @@ def main() -> int:
     whisper = Transcriber(True)
 
     manifest = list(csv.DictReader(open(ROOT / "data" / "manifest.csv")))
+    private_manifest = ROOT / "data" / "private" / "manifest-private.csv"
+    if private_manifest.exists():  # the recorded set's real paths and details live only here
+        real = {r["clip_id"]: r for r in csv.DictReader(open(private_manifest))}
+        manifest = [real.get(m["clip_id"], m) for m in manifest]
     clips = [m for m in manifest if m["set"] in ("core", "accent", "recorded")]
     rows = []
     with httpx.Client() as client:
@@ -142,13 +147,21 @@ def main() -> int:
     whisper.save()
 
     OUT.mkdir(exist_ok=True)
-    with open(OUT / "stt-compare.csv", "w", newline="") as f:
-        w = csv.DictWriter(f, fieldnames=list(rows[0]))
-        w.writeheader()
-        w.writerows(rows)
+    # Per-clip transcripts of the owner's voice stay private; the public file has the rest.
+    private_rows = [r for r in rows if r["set"] == "recorded"]
+    for path, subset in ((OUT / "stt-compare.csv", [r for r in rows if r["set"] != "recorded"]),
+                         (ROOT / "data" / "private" / "stt-compare-recorded.csv", private_rows)):
+        if subset:
+            path.parent.mkdir(parents=True, exist_ok=True)
+            with open(path, "w", newline="") as f:
+                w = csv.DictWriter(f, fieldnames=list(rows[0]))
+                w.writeheader()
+                w.writerows(subset)
 
     groups = [("all", lambda r: True)] + [(c, (lambda c: lambda r: r["condition"] == c)(c))
                                           for c in ("clean", "noisy", "phone", "accent", "recorded")]
+    groups.append(("acc-match", lambda r: r["set"] == "accent" or (r["set"] == "core" and r["condition"] == "clean"
+                                                                   and r["question_id"] in RECORDED_QIDS)))
     summary = []
     print(f"\n{'engine':11} {'group':9} {'n':>3}  {'mean WER [95% CI]':24} {'key terms heard [95% CI]':26}")
     for engine in engines:
