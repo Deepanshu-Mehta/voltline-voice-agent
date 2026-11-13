@@ -83,6 +83,8 @@ def test_s2s_turn_uses_shared_prompt_and_tools(settings, retriever):
 
     kinds = [m["type"] for m in msgs]
     assert "tool" in kinds and "audio_start" in kinds and "audio_end" in kinds
+    finals = [i for i, m in enumerate(msgs) if m["type"] == "transcript" and m.get("final")]
+    assert len(finals) == 1 and finals[0] < kinds.index("tool")  # the question once, above the answer
     assert frames and int.from_bytes(frames[0][:4], "little") == 1  # same framing as the cascade
     assert msgs[-1]["interrupted"] is False and msgs[-1]["tools"] == ["get_order_status"]
     # Same prompt file and the same tool registry, plus knowledge-base search.

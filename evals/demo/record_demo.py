@@ -34,6 +34,11 @@ CAPTION_JS = """(text) => {
     document.body.appendChild(bar);
   }
   bar.textContent = text;
+  if (!document.getElementById('__demo_hide')) {  // the Next.js development badge is not part of the product
+    const st = document.createElement('style'); st.id = '__demo_hide';
+    st.textContent = 'nextjs-portal { display: none !important; }';
+    document.head.appendChild(st);
+  }
 }"""
 
 

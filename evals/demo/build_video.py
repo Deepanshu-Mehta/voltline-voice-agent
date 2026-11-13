@@ -97,8 +97,7 @@ def main() -> int:
     if not args.no_live:
         for mode, label in (("standard", "System A: the cascade"), ("s2s", "System B: speech-to-speech")):
             subprocess.run([sys.executable, str(HERE / "record_demo.py"), "--scenario", "S2-stock-then-price",
-                            "--mode", mode, "--caption", f"{label}. Caller: \"Do you have the Horizon Headphones "
-                            "in stock?\" then \"And how much are they?\"", "--out",
+                            "--mode", mode, "--caption", label, "--out",
                             str((OUT / f"live-{mode}.mp4").relative_to(ROOT))], check=True, cwd=ROOT)
     card("03-live-intro", "<span class=tag>LIVE ON THE TALK PAGE</span><h2>The same two-question call, on each system</h2>"
          "<p class=muted>The caller is a synthetic voice played into the page by the test driver.</p>", 4)

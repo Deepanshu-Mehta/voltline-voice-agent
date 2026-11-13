@@ -54,6 +54,7 @@ class S2STurn:
     tools: list[dict] = field(default_factory=list)
     interrupted: bool = False
     finished: bool = False
+    announced: bool = False  # the caller's final text was sent to the page
     client: dict[str, Any] = field(default_factory=dict)
     db_row: int | None = None
 
@@ -242,6 +243,13 @@ class S2SSession:
         self.turn = self.turns[turn.id] = turn
         return turn
 
+    async def _announce(self, turn: S2STurn) -> None:
+        """Send the caller's words as final once, before any tool note or audio of the reply, so
+        the page shows the question above the answer (and only once)."""
+        if not turn.announced:
+            turn.announced = True
+            await self.send({"type": "transcript", "text": turn.user_text, "final": True})
+
     async def _on_live(self, msg: Any) -> None:
         if getattr(msg, "usage_metadata", None):
             u = msg.usage_metadata
@@ -276,13 +284,14 @@ class S2SSession:
                     continue
                 if turn.first_audio_at is None:
                     turn.first_audio_at = time.perf_counter()
-                    await self.send({"type": "transcript", "text": turn.user_text, "final": True})
+                    await self._announce(turn)
                     await self.send({"type": "audio_start", "turn": turn.id, "sample_rate": OUT_RATE})
                     await self.send({"type": "state", "state": "speaking"})
                 turn.audio_bytes += len(data)
                 await self.send_audio(turn, data)
         if sc.output_transcription and sc.output_transcription.text:
             turn = self._open_turn()
+            await self._announce(turn)
             turn.reply += sc.output_transcription.text
             await self.send({"type": "agent_text", "turn": turn.id, "text": sc.output_transcription.text})
         if sc.turn_complete and self.turn and not self.turn.finished:
@@ -292,6 +301,7 @@ class S2SSession:
         from google.genai import types
 
         turn = self._open_turn()
+        await self._announce(turn)
         if turn.first_tool_at is None:
             turn.first_tool_at = time.perf_counter()
             await self.send({"type": "state", "state": "thinking"})

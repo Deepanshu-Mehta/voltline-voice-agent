@@ -38,8 +38,13 @@ async def _render(html: str, png: Path) -> None:
     async with async_playwright() as p:
         browser = await p.chromium.launch()
         page = await browser.new_page(viewport={"width": 1280, "height": 720})
-        await page.set_content(f"<!doctype html><html><head><meta charset='utf-8'>{STYLE}</head><body>{html}</body></html>")
-        await page.wait_for_timeout(600)  # fonts
+        await page.set_content(f"<!doctype html><html><head><meta charset='utf-8'>{STYLE}</head><body>{html}</body></html>",
+                               wait_until="domcontentloaded")
+        try:  # fonts come from Google Fonts; never let a slow request stop the build
+            await page.wait_for_function("document.fonts.status === 'loaded'", timeout=8000)
+        except Exception:
+            pass
+        await page.wait_for_timeout(300)
         await page.screenshot(path=str(png))
         await browser.close()
 
