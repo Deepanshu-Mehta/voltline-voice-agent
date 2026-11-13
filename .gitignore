@@ -49,3 +49,4 @@ evals/demo/out/
 qa/annotation/key.json
 qa/annotation/*.wav
 qa/listening/key.json
+qa/listening/results.csv

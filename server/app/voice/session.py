@@ -77,6 +77,13 @@ def describe_start_error(who: str, exc: BaseException) -> str:
     return f"{who} refused the connection (HTTP {status})."
 
 
+def speech_truncated(reply: str, audio_s: float, interrupted: bool) -> bool:
+    """The reply's audio is far shorter than its text: under a quarter of ~300 ms per word.
+    An interrupted reply is short on purpose."""
+    words = len(reply.split())
+    return bool(words >= 4 and not interrupted and audio_s < 0.25 * 0.3 * words)
+
+
 def speech_end_s(vad_end: float | None, words_end: float | None) -> float | None:
     """When the user stopped talking, on the audio clock. The VAD is more precise than word
     timings, but it can miss a short, soft word ("okay"); its time then belongs to the previous
@@ -103,6 +110,7 @@ class Turn:
     audio_bytes: int = 0
     tools: list[str] = field(default_factory=list)
     filler: str | None = None
+    tts_error: str | None = None
     finished: bool = False
     interrupted: bool = False
     record: TurnRecord = field(default_factory=TurnRecord)
@@ -441,6 +449,11 @@ class VoiceSession:
                 turn.words += chunk.words
                 turn.starts += chunk.starts
             elif chunk.kind == "error":
+                # Recorded and logged: a reply that goes silent with no trace cannot be debugged
+                # (QA-023: R19 had 0 ms of audio, R20 stopped mid-word, nothing in the log).
+                turn.tts_error = chunk.message or "unknown"
+                log.warning("Text-to-speech error on turn %d after %d ms of audio: %s", turn.id,
+                            round(turn.audio_bytes / 2 / self.tts_sample_rate * 1000), chunk.message)
                 await self.send({"type": "error", "message": f"Speech output: {chunk.message}"})
                 return
 
@@ -531,6 +544,9 @@ class VoiceSession:
             "filler": turn.filler,
             "interrupted": turn.interrupted,
             "stt_reconnects": self.stt_reconnects,
+            "tts_error": turn.tts_error,
+            "speech_truncated": speech_truncated(turn.reply, turn.audio_bytes / 2 / self.tts_sample_rate,
+                                                 turn.interrupted),
         }
 
     async def _finish_metrics(self, turn: Turn) -> None:

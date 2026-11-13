@@ -1,0 +1,147 @@
+{
+  "listeners": [
+    {
+      "listener": "L1",
+      "excluded": false,
+      "reason": "",
+      "anchor_ratings": {
+        "c645": 3,
+        "c109": 3,
+        "c547": 3,
+        "c123": 2
+      },
+      "repeat": {
+        "same_preference": true,
+        "mean_rating_change": 0.0
+      }
+    },
+    {
+      "listener": "L2",
+      "excluded": false,
+      "reason": "",
+      "anchor_ratings": {
+        "c123": 2,
+        "c547": 3,
+        "c109": 2,
+        "c645": 2
+      },
+      "repeat": {
+        "same_preference": true,
+        "mean_rating_change": 0.5
+      }
+    }
+  ],
+  "counted": [
+    "L1",
+    "L2"
+  ],
+  "naturalness_A": {
+    "mean": 3.58,
+    "ci": [
+      3.25,
+      3.92
+    ],
+    "n": 24
+  },
+  "naturalness_B": {
+    "mean": 2.92,
+    "ci": [
+      2.67,
+      3.17
+    ],
+    "n": 24
+  },
+  "naturalness_B_minus_A": {
+    "mean": -0.67,
+    "ci": [
+      -1.17,
+      -0.17
+    ],
+    "pairs": 24
+  },
+  "preference": {
+    "A": 19,
+    "B": 4,
+    "none": 1,
+    "sign_test_p": 0.0026
+  },
+  "naturalness_by_type": {
+    "short": {
+      "A": 3.25,
+      "B": 3.12
+    },
+    "numbers": {
+      "A": 3.5,
+      "B": 3.0
+    },
+    "explanation": {
+      "A": 4.0,
+      "B": 2.62
+    }
+  },
+  "defects": {
+    "A": {
+      "clips_rated": 24,
+      "ticked": {
+        "Robotic tone": 3
+      }
+    },
+    "B": {
+      "clips_rated": 24,
+      "ticked": {
+        "Robotic tone": 4
+      }
+    }
+  },
+  "anchors": {
+    "clipped": 2.0,
+    "telephone": 3.0,
+    "noise": 2.5,
+    "dropout": 2.5
+  },
+  "kendalls_w": 0.681,
+  "dnsmos_vs_people": {
+    "all": {
+      "spearman": 0.386,
+      "ci": [
+        -0.01,
+        0.7
+      ],
+      "clips": 28
+    },
+    "A": {
+      "spearman": 0.551,
+      "ci": [
+        0.04,
+        0.85
+      ],
+      "clips": 12
+    },
+    "B": {
+      "spearman": 0.199,
+      "ci": [
+        -0.45,
+        0.78
+      ],
+      "clips": 12
+    },
+    "pairs only": {
+      "spearman": 0.194,
+      "ci": [
+        -0.25,
+        0.58
+      ],
+      "clips": 24
+    }
+  },
+  "dnsmos_by_system": {
+    "A": 4.01,
+    "B": 4.12
+  },
+  "dnsmos_anchors": {
+    "noise": 2.761,
+    "dropout": 3.54,
+    "telephone": 3.256,
+    "clipped": 3.015
+  }
+}

@@ -77,7 +77,11 @@ def correct_turns(record: dict, clip_paths: list[Path]) -> None:
         if turn.get("speech_end_method") == 2 or turn.get("measured_response_ms") is None or not path.exists():
             continue
         x = read_wav(path)
-        shift = old_speech_end_ms(x) - speech_end_offset_ms(x)
+        # Noisy and telephone clips are made from the clean clip with identical timing, so the
+        # clean clip gives the true speech end; noise 10 dB below speech confuses any detector.
+        clean = path.parent.parent / "clean" / path.name
+        truth = read_wav(clean) if path.parent.name in ("noisy", "phone") and clean.exists() else x
+        shift = old_speech_end_ms(x) - speech_end_offset_ms(truth)
         turn["measured_response_ms_v1"] = turn["measured_response_ms"]
         turn["measured_response_ms"] = round(turn["measured_response_ms"] + shift)
         turn["speech_end"] = turn["speech_end"] - shift
@@ -102,7 +106,19 @@ def frame_levels(x: np.ndarray, hop: int = 320) -> np.ndarray:
 _DNSMOS = None
 
 
+_DNSMOS_CACHE_PATH = None
+_DNSMOS_CACHE: dict = {}
+
+
 def dnsmos(seg: np.ndarray) -> dict:
+    key = hashlib.sha256(seg.astype(np.float32).tobytes()).hexdigest()[:16]
+    if key in _DNSMOS_CACHE:
+        return _DNSMOS_CACHE[key]
+    _DNSMOS_CACHE[key] = _dnsmos(seg)
+    return _DNSMOS_CACHE[key]
+
+
+def _dnsmos(seg: np.ndarray) -> dict:
     global _DNSMOS
     if _DNSMOS is None:
         import torch
@@ -271,6 +287,9 @@ async def main() -> int:
     products = load_products(get_settings().content_dir)
     whisper = Transcriber(True)
     cache = json.loads(JUDGE_CACHE.read_text()) if JUDGE_CACHE.exists() else {}
+    dnsmos_cache = ROOT / "data" / ".cache" / "dnsmos.json"
+    if dnsmos_cache.exists():
+        _DNSMOS_CACHE.update(json.loads(dnsmos_cache.read_text()))
     s = get_settings()
     judge_client = None
     from app.config import LLM_PRESETS
@@ -322,6 +341,12 @@ async def main() -> int:
             out["words_per_s"] = round(words / out["reply_s"], 2) if out["reply_s"] else None
             out["agent_f0_hz"] = median_f0(reply_audio, RATE)
         own = (srv[-1]["reply"] if srv else "") or ""
+        # A reply whose audio is far shorter than its text, without an interruption, is a speech
+        # provider failure (QA-023: credits ran out mid-reply). Reported separately, not judged.
+        v_last = json.loads(srv[-1]["extra"] or "{}").get("voice", {}) if srv else {}
+        words = len(own.split())
+        if words >= 4 and not v_last.get("interrupted") and (v_last.get("audio_ms") or 0) < 0.25 * 300 * words:
+            out["infra_failure"] = f"speech output missing ({v_last.get('audio_ms') or 0} ms for {words} words)"
         out["own_text"] = own
         out["own_vs_heard_wer"] = wer(own, spoken or "") if own and spoken else None
         out["model"] = srv[-1]["model"] if srv else ""
@@ -336,7 +361,7 @@ async def main() -> int:
             got = "".join(merge_compounds(norm_words(ref_text), norm_words(heard)))
             out["key_terms_heard"] = int(all("".join(norm_words(t)) in got for t in terms)) if terms else None
             facts = q.get("must_include") or []
-            out["key_facts"] = int(all(any(phrase_in(p, spoken or "") or normalise(p) in normalise(spoken or "")
+            out["key_facts"] = None if out.get("infra_failure") else int(all(any(phrase_in(p, spoken or "") or normalise(p) in normalise(spoken or "")
                                            for p in group) for group in facts)) if facts else None
             exp = q.get("expected_tool")
             calls = [c for row in srv for c in json.loads(row["tool_calls"] or "[]")]
@@ -349,7 +374,7 @@ async def main() -> int:
                 out["spoken_deepgram"] = deepgram_text(dg_key, reply_audio, cache)
             if out.get("spoken_deepgram") is not None:
                 out["number_mismatch"] = number_mismatch(own, spoken or "", out["spoken_deepgram"])
-            if judge_client and q:
+            if judge_client and q and not out.get("infra_failure"):
                 chunks, seen_urls = [], set()
                 for query in (q["turns"][0], spoken or ""):  # facts for the question, and for what was said
                     if not query:
@@ -392,6 +417,7 @@ async def main() -> int:
             JUDGE_CACHE.write_text(json.dumps(cache, indent=0))
             print(f"  scored {len(rows)}/{len(records)}", flush=True)
     whisper.save()
+    dnsmos_cache.write_text(json.dumps(_DNSMOS_CACHE))
     JUDGE_CACHE.parent.mkdir(parents=True, exist_ok=True)
     JUDGE_CACHE.write_text(json.dumps(cache, indent=0))
     await http.aclose()

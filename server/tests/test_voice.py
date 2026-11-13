@@ -387,3 +387,14 @@ def test_speech_to_text_reconnects_after_the_stream_dies(settings, retriever):
         ws.send_text(json.dumps({"type": "stop"}))
     assert len(streams) == 2 and msgs[-1]["stt_reconnects"] == 1
     assert llm.requests[1]["messages"][-1]["content"].endswith("No, sorry, I said 4512.")
+
+
+def test_speech_truncated():
+    from app.voice.session import speech_truncated
+
+    reply = "The Dockline dock passes up to 85 watts of power to your laptop."
+    assert speech_truncated(reply, 0.0, False)  # R19: silent
+    assert speech_truncated(reply, 0.5, False)
+    assert not speech_truncated(reply, 3.5, False)
+    assert not speech_truncated(reply, 0.5, True)  # interrupted on purpose
+    assert not speech_truncated("Sure.", 0.0, False)

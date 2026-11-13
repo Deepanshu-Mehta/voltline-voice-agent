@@ -1,76 +1,76 @@
-# Voltline voice agent
+# Voltline voice agents: cascade against speech-to-speech
 
-One agent brain (prompt, knowledge base, tools), exposed through five channels: a website agent with cascaded and speech-to-speech modes, a Twilio phone number, LiveKit and Vapi. A benchmark page compares their latency. It is built in seven phases, from the shared agent brain to a deployed demo; the status table below tracks them.
+Two voice agents for a fictional electronics store, built on the same prompt, knowledge base and tools, and evaluated side by side from what a caller actually hears:
 
-Voltline Electronics is a fictional online store created for this project.
+- **A, cascade:** Deepgram Nova-3 speech-to-text, Gemini 3.5 Flash-Lite, Cartesia Sonic 3.6 text-to-speech.
+- **B, speech-to-speech:** Gemini 3.1 Flash Live, one model that hears and speaks.
 
-## Status
+The point of the project is the evaluation: a curated test set, paired black-box runs, a blind listening test, annotation, an issue log with reproduction rates, and checks on the measuring tools themselves. **Results: [qa/findings.md](qa/findings.md).**
 
-| Phase | State |
-| --- | --- |
-| 1. Foundation: site, knowledge base, tools, text agent, eval set | Built; text eval 98.3% correct, 0% hallucination (target 90%) |
-| 2. Cascaded web agent | Built; 8 of 8 browser scenarios pass |
-| 3. Low Latency Mode and speech-to-speech | Not started |
-| 4. Phone | Not started |
-| 5. LiveKit and Vapi | Not started |
-| 6. Benchmark dashboard | Not started |
-| 7. Hardening, deploy, video | Not started |
+Voltline Electronics is fictional.
 
-## Quick start
+## Headline results
+
+| | A: cascade | B: speech-to-speech |
+|---|---|---|
+| Response time, median | 2.53 s | **2.12 s** (344 ms faster) |
+| Correct, judged on what was heard | **100%** | 98% |
+| Said a different number than it meant | **0%** | 6% |
+| Scripted conversations passed | **88%** | 62% |
+| Listener preference (2 listeners, 24 pairs) | **19** | 4 |
+| DNSMOS predicted quality | 3.95 | **4.05**, the opposite of the listeners |
+
+On synthetic speech every speech-to-text engine tested (Deepgram, Gnani Prisma v2.5 and v3.0, Whisper) scores 0 to 1% word error. On real Indian English speech they range from 13% to 32%.
+
+## What is in the repository
+
+| Path | What it is |
+|---|---|
+| [qa/findings.md](qa/findings.md) | The results, what they mean, and their limits |
+| [qa/issue-log.csv](qa/issue-log.csv) | Every defect found: system, evidence, how to reproduce, reproduction rate, status |
+| [qa/datasheet.md](qa/datasheet.md) | The test set: contents, how each part was made, quality checks, known gaps |
+| [qa/listening-test-protocol.md](qa/listening-test-protocol.md) | The listening test, fixed before any ratings |
+| [qa/annotation-guide.md](qa/annotation-guide.md) | Labelling defects in Audacity |
+| `data/manifest.csv` | One row per clip: speaker, accent, condition, licence, expected answer |
+| `evals/` | Dataset builder, quality check, paired runner, scorer, hearing comparison, listening-test builder and analysis |
+| `server/` | FastAPI backend: the shared agent brain, the cascade session, the speech-to-speech bridge |
+| `web/` | Next.js site with the Talk page and its Cascade / Speech-to-speech switch |
+
+The owner's own recordings are kept in `data/private/`, which git ignores. Public files list them by clip id only.
+
+## Running it
 
 ```bash
-cp .env.example .env          # add GEMINI_API_KEY (or another provider), DEEPGRAM_API_KEY, CARTESIA_API_KEY
+cp .env.example .env     # GEMINI_API_KEY, DEEPGRAM_API_KEY, CARTESIA_API_KEY (GNANI_API_KEY for the hearing comparison)
 make install
-make server                   # API on http://localhost:8000
-make web                      # website on http://localhost:3000 (second terminal)
-make test                     # 52 offline tests, no keys needed
-make eval-text                # 60-question eval with an LLM judge
-make audio-clips              # synthesise the audio test set (needs CARTESIA_API_KEY)
-make eval-audio               # stream the clips into /voice: WER and latency
-make eval-scenarios           # browser test driver: 8 scripted voice conversations
+make server              # API on :8000
+make web                 # site on :3000; open /talk and pick Cascade or Speech-to-speech
+make test                # 56 offline tests
 ```
 
-Requires Python 3.12+ with [uv](https://docs.astral.sh/uv/), and Node.js 20+.
+The evaluation:
 
-## Layout
-
+```bash
+make audio-clips         # synthesise the core clips (Cartesia)
+make data-check          # build data/manifest.csv and check every clip
+make stt-compare         # hearing A/B: Deepgram, Gnani, Whisper on every question clip
+make record              # record your own voice into data/private/ (stays local)
+make compare RUN=v1      # paired run: every clip through A then B via the real page
+make score RUN=v1        # score from the recordings
+uv run --project server python evals/listening/build.py --run v1    # build the listening test
+uv run --project server python evals/listening/analyse.py           # analyse the responses
+uv run --project server python evals/compare_runs.py v1 a-400 --system A   # what changed between runs
 ```
-content/    Markdown source of truth: 14 products, policies, setup guides, FAQ, 20 demo orders
-server/     FastAPI backend: retrieval, tools, the agent brain, SQLite store
-evals/      Question set, eval runner, results
-web/        Next.js website, built from content/
-```
 
-## How the brain works
+## How the scoring stays honest
 
-1. **Retrieval before the LLM.** The latest customer message (prefixed with the previous one for short follow-ups) is searched with BM25 plus local `bge-small` embeddings, fused by reciprocal rank. It runs in process: about 3 ms per query, no network call. Each product also gets a short fact card so price and warranty questions always have a precise hit.
-2. **Streaming LLM with tools.** Any OpenAI-compatible Chat Completions model. Tools: `get_order_status`, `check_stock`, `get_price`, `book_callback`, `create_support_ticket`, plus `search_knowledge_base` for channels that cannot prefetch retrieval (speech-to-speech, Vapi).
-3. **Cache-friendly prompts.** The system prompt and tool list are identical at the front of every request; retrieved text is attached to the latest user message only.
-4. **Timings on every turn**, written to a `turns` table: retrieval, first LLM token, tool time, total.
+- **Black box:** both systems are driven through the same page and judged from the recorded audio, never from their own text.
+- **Two transcripts:** each reply is transcribed by Whisper and by Deepgram. A number counts against an agent only when both agree, and a separate metric catches a spoken number that differs from the system's own text.
+- **Same evidence for both:** the judge sees the knowledge-base excerpts and the agent's real tool calls.
+- **Uncertainty:** 95% bootstrap intervals and McNemar's test on paired outcomes.
+- **Provider failures apart:** a reply whose audio never arrived (for example, credits running out mid-run) is reported as an infrastructure failure, not a wrong answer.
+- **Measured instruments:** the judge, Whisper, DNSMOS and the speech-end detector were each checked, and the problems found are in the findings and the issue log.
 
-## Voice pipeline (Phase 2)
+## Earlier phases
 
-Browser microphone -> 16 kHz PCM over one WebSocket (`/voice`) -> Deepgram Nova-3 streaming speech-to-text -> the same agent brain as `/chat` -> sentences streamed into Cartesia Sonic -> PCM back to the browser, played gaplessly.
-
-- **Turn-taking:** a server-side Silero VAD ends the turn after 700 ms of silence (2.5 s when the sentence sounds unfinished, such as "...work with"), or on Deepgram's own end-of-speech signal. A `Finalize` sent at 300 ms of silence has the last words transcribed by the time the turn ends.
-- **Barge-in:** Silero VAD in the browser ducks the agent at the first sign of speech and stops it once speech is confirmed; the server cancels the LLM and TTS and keeps only the words the user heard (from Cartesia word timestamps).
-- **Fillers:** if a tool runs before anything has been said, a short line ("Let me look up that order.") keeps the line alive.
-- **LLM fallback:** if the main LLM fails before answering (rate limit, outage), the turn moves to `LLM_FALLBACK_PROVIDER`. After a rate limit the main model is skipped for as long as the provider asks (up to 5 minutes), so later turns do not pay for a request that will fail.
-- **Timings per turn** (to the `turns` table and the Benchmarks page): end of turn, LLM first token, TTS first byte, server response, and the browser's own end-of-speech-to-first-sound measure.
-
-## API
-
-| Endpoint | Purpose |
-| --- | --- |
-| `POST /chat` | `{messages, stream?}`; Server-Sent Events: `retrieval`, `token`, `tool_call`, `tool_result`, `done` |
-| `POST /retrieve` | `{query, top_k?}`; top chunks with their source page |
-| `GET /tools`, `POST /tools/{name}` | Tool schemas, and each tool as plain HTTP for LiveKit and Vapi |
-| `WS /voice` | Voice call: PCM audio in, events and reply audio out (protocol in `server/app/voice/session.py`) |
-| `GET /turns/recent`, `GET /turns/summary` | Latest logged turns; median and 95th percentile latency per channel and mode |
-| `GET /health` | Retrieval mode, model, whether an LLM key is configured |
-
-## Evals
-
-`make eval-text` runs 60 questions (30 factual, 10 tool tasks, 10 multi-turn, 10 out-of-scope) through `/chat` and scores retrieval hit rate, key facts, tool choice and arguments, spoken style, latency, and, with an LLM judge, correctness and hallucination. Results go to `evals/results/`, and `latest.json` feeds the website's Benchmarks page.
-
-`make audio-clips` synthesises the voice test set with Cartesia: 30 questions in three conditions (clean, cafe noise at 10 dB, telephone quality) plus the 8 scripted scenarios. `make eval-audio` streams each clip into `/voice` in real time and reports word error rate, key-term accuracy and per-stage latency. `make eval-scenarios` runs the browser test driver: Playwright opens the site with a stubbed microphone, plays each scenario turn, records both sides, measures latency from the audio, and checks the expected tools and answers.
+The project began as a single agent served on several channels (phone, LiveKit, Vapi). Phases 1 and 2 (site, knowledge base, tools, text agent, cascade voice agent) are what system A is built on; the build log is in [BUILD_LOG.md](BUILD_LOG.md).
