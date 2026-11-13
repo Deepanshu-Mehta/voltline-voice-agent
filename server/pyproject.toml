@@ -18,6 +18,7 @@ dependencies = [
 dev = [
     "faster-whisper>=1.2.1",
     "librosa>=1.0.1",
+    "matplotlib>=3.11.2",
     "playwright>=1.65.1",
     "praat-parselmouth>=0.4.7",
     "pytest>=9.2.0",

@@ -50,3 +50,6 @@ score:              ## Score a paired run from its recordings (RUN=name)
 
 annotations:        ## Merge Audacity labels and check the detectors against them
 	uv run --project server python evals/annotation.py merge
+
+figures:            ## Rebuild the README charts in docs/images/ from the committed results
+	uv run --project server python evals/figures.py

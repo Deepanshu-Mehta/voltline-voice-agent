@@ -1,7 +1,18 @@
+# secrets
 .env
 .env.*
 !.env.example
+
+# OS, editors, logs
 .DS_Store
+.vscode/
+.idea/
+*.log
+*.tsbuildinfo
+
+# local notes, kept out of the repository
+CLAUDE.md
+PLAN.md
 
 # server
 server/.venv/
@@ -13,40 +24,42 @@ __pycache__/
 web/node_modules/
 web/.next/
 web/next-env.d.ts
-
-# eval runs (latest.json is kept so the benchmarks page has data)
-evals/results/*
-!evals/results/latest.json
-
-# browser test artifacts
-.playwright-mcp/
-
-# logs and editor/OS files
-*.log
-*.tsbuildinfo
-.vscode/
-.idea/
-
 # copied from node_modules by web/scripts/copy-vad-assets.mjs
 web/public/vad/
 
-# synthesised by make audio-clips
+# browser automation
+.playwright-mcp/
+
+# the owner's own voice and anything derived from it: local only
+data/private/
+
+# caches
+data/.cache/
+
+# generated audio: rebuilt by the scripts
+# make audio-clips
 evals/audio/clips/
 evals/audio/manifest.jsonl
-
-# local agent notes and planning docs (kept out of the repository)
-CLAUDE.md
-PLAN.md
-
-# your own recorded voice: local only, never committed
-data/private/
-data/.cache/
 evals/audio/manifest-extra.jsonl
-!evals/results/stt-compare.csv
-!evals/results/stt-compare-summary.csv
-evals/runs/*/wav/
-evals/demo/out/
-qa/annotation/key.json
+# evals/listening/build.py
+qa/listening/clips/
+# evals/annotation.py prepare
 qa/annotation/*.wav
+# evals/demo/build_video.py
+evals/demo/out/
+
+# raw run data: the scored results and summaries are kept
+evals/runs/*/wav/
+evals/runs/*/records.jsonl
+evals/runs/pilot/
+
+# answer keys: they would unblind listeners and annotators
 qa/listening/key.json
 qa/listening/results.csv
+qa/annotation/key.json
+
+# evaluation results: only the published summaries are kept
+evals/results/*
+!evals/results/latest.json
+!evals/results/stt-compare.csv
+!evals/results/stt-compare-summary.csv
