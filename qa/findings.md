@@ -83,10 +83,15 @@ These shaped the result as much as the systems did.
 
 ## Regression cycle
 
-_Pending: the cascade with a 400 ms end-of-turn timeout instead of 700 ms, against an unchanged repeat run as the noise band._
+The cascade's end-of-turn timeout was cut from 700 to 400 ms and measured against a repeat run of the unchanged system (the noise band). Details: [eval-log.md](eval-log.md).
+
+- **Rejected.** Correctness and scripted conversations were unchanged. Response time moved +61 ms [−303, +525], far inside the noise band: the unchanged repeat itself drifted +466 ms.
+- **The timeout is not the bottleneck.** The server's end of turn fell only from 712 to 663 ms, because the turn waits for Deepgram's final transcript, which arrives about 400 ms after the session asks for it at 300 ms of silence.
+- **Hosted-model latency drifts.** The language model's first token moved from 1,286 to 1,657 ms in one afternoon with nothing changed. Latency comparisons need same-day repeat runs.
 
 ## What to test next
 
 1. **More listeners** (at least 5) and more real speakers, starting with telephone audio.
 2. **Number rendering in B,** with a dedicated set of prices, dates and order numbers.
-3. **A backchannel rule for A,** such as ignoring speech under 600 ms that contains "mm-hm" or "okay" while the agent talks, measured against TT3 and the interruption scenarios.
+3. **The real end-of-turn bottleneck:** send Finalize earlier, or end on a stable interim transcript.
+4. **A backchannel rule for A,** such as ignoring speech under 600 ms that contains "mm-hm" or "okay" while the agent talks, measured against TT3 and the interruption scenarios.

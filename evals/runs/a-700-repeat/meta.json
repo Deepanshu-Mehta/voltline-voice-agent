@@ -1,0 +1,8 @@
+{
+  "run": "a-700-repeat",
+  "commit": "c5c134e",
+  "started": "2026-11-13T08:43:04",
+  "sets": "core,turn-taking,scenario",
+  "systems": "A",
+  "repeat": 1
+}

@@ -1,0 +1,174 @@
+{
+  "systems": {
+    "A": {
+      "response_ms": {
+        "value": 2769.0,
+        "ci": [
+          2467.0,
+          2882.0
+        ],
+        "n": 15
+      },
+      "correct": {
+        "value": 1.0,
+        "ci": [
+          1.0,
+          1.0
+        ],
+        "n": 15
+      },
+      "hallucination": {
+        "value": 0.0,
+        "ci": [
+          0.0,
+          0.0
+        ],
+        "n": 15
+      },
+      "key_facts": {
+        "value": 0.929,
+        "ci": [
+          0.786,
+          1.0
+        ],
+        "n": 14
+      },
+      "hearing_wer": {
+        "value": 0.004,
+        "ci": [
+          0.0,
+          0.012
+        ],
+        "n": 15
+      },
+      "key_terms_heard": {
+        "value": 0.917,
+        "ci": [
+          0.75,
+          1.0
+        ],
+        "n": 12
+      },
+      "own_vs_heard_wer": {
+        "value": 0.024,
+        "ci": [
+          0.008,
+          0.044
+        ],
+        "n": 31
+      },
+      "number_mismatch": {
+        "value": 0.0,
+        "ci": [
+          0.0,
+          0.0
+        ],
+        "n": 4
+      },
+      "longest_gap_ms": {
+        "value": 380.0,
+        "ci": [
+          300.0,
+          400.0
+        ],
+        "n": 31
+      },
+      "abrupt_end": {
+        "value": 0.0,
+        "ci": [
+          0.0,
+          0.0
+        ],
+        "n": 31
+      },
+      "clipped_pct": {
+        "value": 0.0,
+        "ci": [
+          0.0,
+          0.0
+        ],
+        "n": 31
+      },
+      "words_per_s": {
+        "value": 2.87,
+        "ci": [
+          2.69,
+          3.05
+        ],
+        "n": 31
+      },
+      "dnsmos_p808": {
+        "value": 3.908,
+        "ci": [
+          3.802,
+          4.002
+        ],
+        "n": 31
+      },
+      "dnsmos_sig": {
+        "value": 3.589,
+        "ci": [
+          3.536,
+          3.632
+        ],
+        "n": 31
+      },
+      "scenario_pass": {
+        "value": 0.875,
+        "ci": [
+          0.688,
+          1.0
+        ],
+        "n": 16
+      },
+      "stop_ms": {
+        "value": 191.5,
+        "ci": [
+          191.0,
+          255.0
+        ],
+        "n": 4
+      }
+    }
+  },
+  "paired": {},
+  "by_condition": {
+    "clean": {
+      "A": {
+        "correct": {
+          "value": 1.0,
+          "ci": [
+            1.0,
+            1.0
+          ],
+          "n": 15
+        },
+        "key_terms_heard": {
+          "value": 0.917,
+          "ci": [
+            0.75,
+            1.0
+          ],
+          "n": 12
+        },
+        "hearing_wer": {
+          "value": 0.004,
+          "ci": [
+            0.0,
+            0.012
+          ],
+          "n": 15
+        },
+        "response_ms": {
+          "value": 2769.0,
+          "ci": [
+            2467.0,
+            2882.0
+          ],
+          "n": 15
+        }
+      }
+    }
+  },
+  "judge_model": "deepseek-chat"
+}
