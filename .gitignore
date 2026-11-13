@@ -44,3 +44,4 @@ data/.cache/
 evals/audio/manifest-extra.jsonl
 !evals/results/stt-compare.csv
 !evals/results/stt-compare-summary.csv
+evals/runs/*/wav/

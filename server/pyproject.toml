@@ -17,11 +17,16 @@ dependencies = [
 [dependency-groups]
 dev = [
     "faster-whisper>=1.2.1",
+    "librosa>=1.0.1",
     "playwright>=1.65.1",
     "praat-parselmouth>=0.4.7",
     "pytest>=9.2.0",
     "pytest-asyncio>=1.4.1.post1",
+    "requests>=2.34.2",
     "sounddevice>=0.5.6",
+    "torch>=2.15.0",
+    "torchaudio>=2.11.1",
+    "torchmetrics>=1.9.0",
 ]
 
 [tool.pytest.ini_options]

@@ -32,6 +32,13 @@ import numpy as np
 
 ROOT = Path(__file__).resolve().parents[2]
 CLIPS = ROOT / "evals" / "audio" / "clips"
+PRIVATE_CLIPS = ROOT / "data" / "private" / "recorded"  # the owner's voice: played locally, never published
+CLIP_ROOTS = (CLIPS, PRIVATE_CLIPS)
+
+
+def turn_clip(scenario: dict, n: int, turn: dict) -> Path:
+    """A turn's audio: an explicit repo-relative "clip" path, or the scenario's own clip."""
+    return ROOT / turn["clip"] if turn.get("clip") else CLIPS / "scenarios" / f"{scenario['id']}-{n}.wav"
 STUB = (Path(__file__).parent / "mic_stub.js").read_text()
 RATE = 16000
 
@@ -96,7 +103,7 @@ def check_expectations(expect: dict, rows: list[dict]) -> list[str]:
     return problems
 
 
-def write_stereo(path: Path, clips: list[tuple[float, np.ndarray]], agent: dict) -> None:
+def write_stereo(path: Path, clips: list[tuple[float, np.ndarray]], agent: dict) -> float:
     """Left channel: user clips at their play times. Right: everything the agent played."""
     agent_pcm = np.frombuffer(base64.b64decode(agent["pcm"]), "<i2").astype(np.float32) / 32768
     if agent["rate"] and agent["rate"] != RATE and len(agent_pcm):
@@ -120,6 +127,7 @@ def write_stereo(path: Path, clips: list[tuple[float, np.ndarray]], agent: dict)
         w.setsampwidth(2)
         w.setframerate(RATE)
         w.writeframes((np.clip(stereo, -1, 1) * 32767).astype("<i2").tobytes())
+    return t0  # page-clock ms of the recording's first sample
 
 
 MODE_LABEL = {"standard": "Cascade", "s2s": "Speech-to-speech"}
@@ -137,7 +145,7 @@ async def run_scenario(page, site: str, api: str, scenario: dict, out_dir: Path,
     played: list[tuple[float, np.ndarray]] = []
     turns = []
     for n, turn in enumerate(scenario["turns"], start=1):
-        clip_path = CLIPS / "scenarios" / f"{scenario['id']}-{n}.wav"
+        clip_path = turn_clip(scenario, n, turn)
         samples = read_wav(clip_path)
         if turn.get("interrupt_after_ms") and turns:
             # Start talking while the agent is mid-reply.
@@ -149,7 +157,7 @@ async def run_scenario(page, site: str, api: str, scenario: dict, out_dir: Path,
         else:
             await wait_for(lambda: page.evaluate("__driver.state() === 'Listening'"), 45)
             await asyncio.sleep(0.4)
-        timing = await page.evaluate(f"__driver.play('/__clips/scenarios/{clip_path.name}')")
+        timing = await page.evaluate(f"__driver.play('/__clips/{clip_path.relative_to(ROOT).as_posix()}')")
         speech_end = timing["start"] + speech_end_offset_ms(samples)
         played.append((timing["start"], samples))
         if turn.get("backchannel") or turn.get("no_reply"):
@@ -174,14 +182,34 @@ async def run_scenario(page, site: str, api: str, scenario: dict, out_dir: Path,
             rows = (await client.get(f"{api}/turns/recent", params={"session_id": session_id, "limit": 50})).json()
         rows.reverse()
     wav = out_dir / f"{scenario['id']}.wav"
-    write_stereo(wav, played, agent_audio)
+    t0 = write_stereo(wav, played, agent_audio)
     problems = check_expectations(scenario.get("expect", {}), rows)
     server = [{"user": r["user_text"], "reply": r["reply"],
                "server_response_ms": json.loads(r["extra"] or "{}").get("voice", {}).get("server_response_ms"),
                "client_response_ms": json.loads(r["extra"] or "{}").get("client", {}).get("client_response_ms")}
               for r in rows]
     return {"id": scenario["id"], "passed": not problems, "problems": problems, "session_id": session_id,
+            "recording_t0_ms": t0, "rows": rows,
             "turns": turns, "server_turns": server, "recording": str(wav.relative_to(ROOT))}
+
+
+async def open_driver_page(p, headed: bool = False):
+    """A Chromium page with the stubbed microphone and the test clips served at /__clips/."""
+    browser = await p.chromium.launch(headless=not headed, args=[
+        "--use-fake-ui-for-media-stream", "--autoplay-policy=no-user-gesture-required"])
+    context = await browser.new_context(permissions=["microphone"])
+    await context.add_init_script(STUB)
+
+    async def serve_clip(route):
+        name = route.request.url.split("/__clips/", 1)[1]
+        path = (ROOT / name).resolve()
+        if not any(r.resolve() in path.parents for r in CLIP_ROOTS) or not path.exists():
+            await route.fulfill(status=404)
+            return
+        await route.fulfill(body=path.read_bytes(), content_type="audio/wav")
+
+    await context.route("**/__clips/**", serve_clip)
+    return browser, await context.new_page()
 
 
 async def main() -> int:
@@ -210,21 +238,7 @@ async def main() -> int:
     out_dir.mkdir(parents=True)
     results = []
     async with async_playwright() as p:
-        browser = await p.chromium.launch(headless=not args.headed, args=[
-            "--use-fake-ui-for-media-stream", "--autoplay-policy=no-user-gesture-required"])
-        context = await browser.new_context(permissions=["microphone"])
-        await context.add_init_script(STUB)
-
-        async def serve_clip(route):
-            name = route.request.url.split("/__clips/", 1)[1]
-            path = (CLIPS / name).resolve()
-            if CLIPS.resolve() not in path.parents or not path.exists():
-                await route.fulfill(status=404)
-                return
-            await route.fulfill(body=path.read_bytes(), content_type="audio/wav")
-
-        await context.route("**/__clips/**", serve_clip)
-        page = await context.new_page()
+        browser, page = await open_driver_page(p, args.headed)
         for n, scenario in enumerate(scenarios):
             if n and args.gap:
                 await asyncio.sleep(args.gap)

@@ -1,0 +1,291 @@
+<title>Voltline Listening Test</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,400..800&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<style>
+/* Layout: one narrow column, one task at a time; a progress rail on top, the answer key never on the page. */
+:root {
+  --ground: #eef1f4;      /* aluminium */
+  --panel: #ffffff;
+  --ink: #1d2227;         /* graphite */
+  --muted: #5b6573;
+  --rule: #cdd3da;
+  --accent: #2456c9;      /* the clip you are listening to */
+  --accent-soft: #dfe7fb;
+  --ok: #2f7a4a;
+  --warn: #9a5b00;
+  --display: "Archivo", "Helvetica Neue", Arial, sans-serif;
+  --body: "Archivo", "Helvetica Neue", Arial, sans-serif;
+  --mono: "IBM Plex Mono", ui-monospace, Menlo, monospace;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --ground: #15191d; --panel: #1e2328; --ink: #e7ebef; --muted: #9aa5b2; --rule: #363d45;
+    --accent: #8fb0ff; --accent-soft: #233154; --ok: #6cc28c; --warn: #e2a55a; color-scheme: dark;
+  }
+}
+:root[data-theme="dark"] {
+  --ground: #15191d; --panel: #1e2328; --ink: #e7ebef; --muted: #9aa5b2; --rule: #363d45;
+  --accent: #8fb0ff; --accent-soft: #233154; --ok: #6cc28c; --warn: #e2a55a; color-scheme: dark;
+}
+body { background: var(--ground); color: var(--ink); font: 400 16px/1.55 var(--body); }
+.wrap {
+  max-width: 44rem; margin: 0 auto;
+  padding-left: max(16px, env(safe-area-inset-left, 0px));
+  padding-right: max(16px, env(safe-area-inset-right, 0px));
+  padding-block: 28px 56px;
+  display: grid; gap: 20px;
+}
+h1 { font: 760 clamp(1.7rem, 4.5vw, 2.3rem)/1.1 var(--display); font-variation-settings: "wdth" 112; margin: 0; text-wrap: balance; }
+h2 { font: 700 1.15rem/1.3 var(--display); margin: 0; text-wrap: balance; }
+p { margin: 0; max-width: 62ch; }
+.muted { color: var(--muted); }
+.panel { background: var(--panel); border: 1px solid var(--rule); border-radius: 10px; padding: 20px; display: grid; gap: 16px; }
+.rail { display: grid; gap: 6px; }
+.rail-bar { height: 6px; border-radius: 3px; background: var(--rule); overflow: hidden; }
+.rail-bar span { display: block; height: 100%; width: 0; background: var(--accent); transition: width 200ms; }
+.rail-text { font: 500 0.85rem var(--mono); color: var(--muted); font-variant-numeric: tabular-nums; }
+.clips { display: grid; grid-template-columns: repeat(auto-fit, minmax(16rem, 1fr)); gap: 14px; }
+.clip { border: 1px solid var(--rule); border-radius: 8px; padding: 14px; display: grid; gap: 12px; min-width: 0; }
+.clip[data-playing="true"] { border-color: var(--accent); background: var(--accent-soft); }
+.clip-head { display: flex; align-items: center; justify-content: space-between; gap: 10px; }
+.clip-name { font: 700 1rem var(--display); }
+.play { font: 650 0.95rem var(--body); padding: 9px 16px; border-radius: 6px; border: 1.5px solid var(--ink); background: var(--panel); color: var(--ink); cursor: pointer; }
+.play:hover { background: var(--accent-soft); }
+.scale { display: grid; grid-template-columns: repeat(5, 1fr); gap: 6px; }
+.scale button { font: 600 1rem var(--body); padding: 8px 0; border-radius: 6px; border: 1px solid var(--rule); background: var(--panel); color: var(--ink); cursor: pointer; }
+.scale button[aria-pressed="true"] { background: var(--ink); color: var(--panel); border-color: var(--ink); }
+.scale button:disabled { opacity: 0.4; cursor: not-allowed; }
+.scale-labels { display: flex; justify-content: space-between; font-size: 0.75rem; color: var(--muted); }
+.defects { display: flex; flex-wrap: wrap; gap: 6px 12px; font-size: 0.88rem; }
+.defects label { display: flex; align-items: center; gap: 6px; cursor: pointer; }
+.pref { display: flex; flex-wrap: wrap; gap: 8px; }
+.pref button, .btn { font: 650 0.95rem var(--body); padding: 10px 16px; border-radius: 6px; border: 1.5px solid var(--rule); background: var(--panel); color: var(--ink); cursor: pointer; }
+.pref button[aria-pressed="true"] { border-color: var(--ink); background: var(--ink); color: var(--panel); }
+.btn-primary { background: var(--ink); color: var(--panel); border-color: var(--ink); }
+.btn:disabled, .pref button:disabled { opacity: 0.45; cursor: not-allowed; }
+.actions { display: flex; flex-wrap: wrap; gap: 10px; justify-content: space-between; align-items: center; }
+.hint { font-size: 0.88rem; color: var(--muted); }
+.scale-key { display: grid; gap: 4px; padding-left: 1.2rem; margin: 0; }
+.field { display: grid; gap: 6px; }
+.field input { font: 500 1rem var(--mono); padding: 10px 12px; border-radius: 6px; border: 1px solid var(--rule); background: var(--panel); color: var(--ink); max-width: 12rem; }
+textarea { width: 100%; box-sizing: border-box; min-height: 9rem; font: 0.8rem/1.4 var(--mono); padding: 10px; border-radius: 6px; border: 1px solid var(--rule); background: var(--ground); color: var(--ink); }
+.status { font-size: 0.92rem; }
+.status[data-tone="ok"] { color: var(--ok); }
+.status[data-tone="warn"] { color: var(--warn); }
+button:focus-visible, input:focus-visible, textarea:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+@media (prefers-reduced-motion: reduce) { .rail-bar span { transition: none; } }
+</style>
+
+<div class="wrap">
+  <header style="display:grid;gap:8px">
+    <h1>Voltline Listening Test</h1>
+    <p class="muted">Two voice assistants answer customer questions about an electronics store. Listen to each answer and say how natural it sounds. About 8 minutes.</p>
+  </header>
+
+  <section class="panel" id="intro">
+    <h2>Before you start</h2>
+    <p>Use headphones in a quiet room. Each screen has one or two recordings. Play each one, rate it, and tick anything that sounds wrong. When there are two, also choose the one you prefer. The order is shuffled for every listener.</p>
+    <ol class="scale-key">
+      <li><strong>1</strong> Clearly machine-like or broken</li>
+      <li><strong>2</strong> Mostly machine-like</li>
+      <li><strong>3</strong> Acceptable</li>
+      <li><strong>4</strong> Mostly natural</li>
+      <li><strong>5</strong> Like a person</li>
+    </ol>
+    <div class="field">
+      <label for="listener"><strong>Your listener code</strong> <span class="muted">(from the person who sent you this, such as L2)</span></label>
+      <input id="listener" autocomplete="off" maxlength="8" placeholder="L1">
+    </div>
+    <div class="actions">
+      <span class="status" id="intro-status" aria-live="polite">Loading the recordings…</span>
+      <button class="btn btn-primary" id="start" disabled>Start listening</button>
+    </div>
+  </section>
+
+  <section class="panel" id="task" hidden>
+    <div class="rail">
+      <div class="rail-bar" aria-hidden="true"><span id="rail-fill"></span></div>
+      <div class="rail-text" id="rail-text">Screen 1 of 17</div>
+    </div>
+    <h2 id="task-title">Listen to both answers</h2>
+    <div class="clips" id="clips"></div>
+    <div id="pref-block" class="field">
+      <strong>Which did you prefer?</strong>
+      <div class="pref" id="pref"></div>
+    </div>
+    <div class="actions">
+      <span class="hint" id="task-hint">Play each recording to rate it.</span>
+      <button class="btn btn-primary" id="next" disabled>Next</button>
+    </div>
+  </section>
+
+  <section class="panel" id="done" hidden>
+    <h2>Thank you</h2>
+    <p class="status" id="save-status" aria-live="polite">Saving your answers…</p>
+    <div class="actions">
+      <button class="btn" id="download" hidden>Download my answers</button>
+      <button class="btn" id="copy">Copy my answers</button>
+    </div>
+    <p class="hint">If saving did not work, copy your answers and send them to the person who invited you. They contain your listener code and ratings only.</p>
+    <textarea id="answers" readonly aria-label="Your answers"></textarea>
+  </section>
+</div>
+
+<script>
+const $ = (id) => document.getElementById(id);
+const DRAFT_KEY = "voltline-listening-draft";
+let test = null, screens = [], at = 0, answers = [], listener = "", audio = new Audio(), playingId = null;
+
+function rng(seedText) {  // small deterministic shuffle per listener (mulberry32)
+  let h = 1779033703 ^ seedText.length;
+  for (const c of seedText) { h = Math.imul(h ^ c.charCodeAt(0), 3432918353); h = (h << 13) | (h >>> 19); }
+  let a = h >>> 0;
+  return () => { a |= 0; a = (a + 0x6D2B79F5) | 0; let t = Math.imul(a ^ (a >>> 15), 1 | a);
+    t = (t + Math.imul(t ^ (t >>> 7), 61 | t)) ^ t; return ((t ^ (t >>> 14)) >>> 0) / 4294967296; };
+}
+function shuffle(list, rand) { const a = [...list]; for (let i = a.length - 1; i > 0; i--) { const j = Math.floor(rand() * (i + 1)); [a[i], a[j]] = [a[j], a[i]]; } return a; }
+
+function buildScreens(code) {
+  const rand = rng("voltline:" + code);
+  const items = [
+    ...test.pairs.map((p) => ({ kind: "pair", id: p.pair, clips: rand() < 0.5 ? [...p.clips] : [p.clips[1], p.clips[0]] })),
+    ...test.singles.map((c) => ({ kind: "single", id: c, clips: [c] })),
+  ];
+  let order = shuffle(items, rand);
+  // keep a pair and its hidden repeat apart
+  const repeat = test.pairs.find((p) => p.repeat_of);
+  if (repeat) {
+    const i = order.findIndex((s) => s.id === repeat.pair), j = order.findIndex((s) => s.id === repeat.repeat_of);
+    if (Math.abs(i - j) < 4) { const [r] = order.splice(i, 1); order.splice(j < order.length / 2 ? order.length : 0, 0, r); }
+  }
+  return order;
+}
+
+function saveDraft() { try { localStorage.setItem(DRAFT_KEY, JSON.stringify({ listener, at, answers })); } catch (e) {} }
+function loadDraft() { try { return JSON.parse(localStorage.getItem(DRAFT_KEY) || "null"); } catch (e) { return null; } }
+
+function play(id, card) {
+  if (playingId === id && !audio.paused) { audio.pause(); return; }
+  audio.src = "clips/" + id + ".wav";
+  playingId = id;
+  document.querySelectorAll(".clip").forEach((c) => c.dataset.playing = "false");
+  card.dataset.playing = "true";
+  audio.play().catch(() => { $("task-hint").textContent = "The recording did not play. Check that sound is allowed, then press Play again."; });
+  const answer = answers[at];
+  answer.played[id] = true;
+  card.querySelectorAll(".scale button").forEach((b) => b.disabled = false);
+  update();
+}
+audio.addEventListener("ended", () => { document.querySelectorAll(".clip").forEach((c) => c.dataset.playing = "false"); });
+
+function render() {
+  const s = screens[at];
+  answers[at] = answers[at] || { screen: s.id, kind: s.kind, clips: s.clips, played: {}, ratings: {}, defects: {}, preference: null };
+  const ans = answers[at];
+  $("rail-fill").style.width = `${(at / screens.length) * 100}%`;
+  $("rail-text").textContent = `Screen ${at + 1} of ${screens.length}`;
+  $("task-title").textContent = s.kind === "pair" ? "Listen to both answers" : "Listen to this answer";
+  const box = $("clips"); box.replaceChildren();
+  s.clips.forEach((id, i) => {
+    const card = document.createElement("div"); card.className = "clip"; card.dataset.playing = "false";
+    const name = s.kind === "pair" ? (i === 0 ? "Answer 1" : "Answer 2") : "Answer";
+    card.innerHTML = `<div class="clip-head"><span class="clip-name"></span><button class="play" type="button">Play</button></div>
+      <div><div class="scale" role="group"></div><div class="scale-labels"><span>Machine-like</span><span>Like a person</span></div></div>
+      <div class="defects"></div>`;
+    card.querySelector(".clip-name").textContent = name;
+    card.querySelector(".scale").setAttribute("aria-label", `Naturalness of ${name}`);
+    card.querySelector(".play").addEventListener("click", () => play(id, card));
+    for (let n = 1; n <= 5; n++) {
+      const b = document.createElement("button"); b.type = "button"; b.textContent = n; b.title = test.scale[n - 1];
+      b.disabled = !ans.played[id]; b.setAttribute("aria-pressed", ans.ratings[id] === n);
+      b.addEventListener("click", () => { ans.ratings[id] = n; card.querySelectorAll(".scale button").forEach((x) => x.setAttribute("aria-pressed", x === b)); update(); });
+      card.querySelector(".scale").append(b);
+    }
+    test.defects.forEach((d, k) => {
+      const l = document.createElement("label"); const c = document.createElement("input"); c.type = "checkbox";
+      c.id = `d-${at}-${i}-${k}`; c.checked = (ans.defects[id] || []).includes(d);
+      c.addEventListener("change", () => { const set = new Set(ans.defects[id] || []); c.checked ? set.add(d) : set.delete(d); ans.defects[id] = [...set]; saveDraft(); });
+      l.append(c, document.createTextNode(d)); card.querySelector(".defects").append(l);
+    });
+    box.append(card);
+  });
+  $("pref-block").hidden = s.kind !== "pair";
+  const pref = $("pref"); pref.replaceChildren();
+  if (s.kind === "pair") {
+    [["Answer 1", s.clips[0]], ["Answer 2", s.clips[1]], ["No preference", "none"]].forEach(([label, value]) => {
+      const b = document.createElement("button"); b.type = "button"; b.textContent = label; b.setAttribute("aria-pressed", ans.preference === value);
+      b.addEventListener("click", () => { ans.preference = value; pref.querySelectorAll("button").forEach((x) => x.setAttribute("aria-pressed", x === b)); update(); });
+      pref.append(b);
+    });
+  }
+  $("next").textContent = at === screens.length - 1 ? "Finish" : "Next";
+  update();
+}
+
+function update() {
+  const s = screens[at], ans = answers[at];
+  const rated = s.clips.every((id) => ans.ratings[id]);
+  const ready = rated && (s.kind === "single" || ans.preference);
+  $("next").disabled = !ready;
+  $("task-hint").textContent = !s.clips.every((id) => ans.played[id]) ? "Play each recording to rate it."
+    : !rated ? "Rate each recording from 1 to 5." : s.kind === "pair" && !ans.preference ? "Choose the one you preferred." : "Ready.";
+  saveDraft();
+}
+
+function result() {
+  return { listener, test_version: test.version, run: test.run, finished_at: new Date().toISOString(),
+    order: screens.map((s) => s.id),
+    answers: answers.map((a) => ({ screen: a.screen, kind: a.kind, clips: a.clips, ratings: a.ratings, defects: a.defects, preference: a.preference })) };
+}
+
+async function finish() {
+  audio.pause();
+  $("task").hidden = true; $("done").hidden = false;
+  const data = result(); const text = JSON.stringify(data);
+  $("answers").value = text;
+  const status = $("save-status");
+  status.textContent = "Saving your answers…";
+  try {
+    const db = window.claude ? await window.claude.use("db") : null;
+    const user = window.claude ? await window.claude.use("user") : null;
+    if (!db || !user) throw new Error("no store");
+    const id = await user.id();
+    await db.doc("ratings/" + id).set(data);
+    status.textContent = "Saved. Thank you, you can close this page.";
+    status.dataset.tone = "ok";
+  } catch (e) {
+    status.textContent = "Your answers could not be saved here. Please download or copy them below and send them to the person who invited you.";
+    status.dataset.tone = "warn";
+  }
+  try {
+    const downloads = window.claude ? await window.claude.use("downloads") : null;
+    if (downloads) {
+      $("download").hidden = false;
+      $("download").onclick = () => downloads.save({ filename: `listening-${listener}.json`, data: text }).catch(() => {});
+    }
+  } catch (e) {}
+  try { localStorage.removeItem(DRAFT_KEY); } catch (e) {}
+}
+
+$("copy").addEventListener("click", () => {
+  const t = $("answers");
+  navigator.clipboard.writeText(t.value).then(() => { $("copy").textContent = "Copied"; }).catch(() => { t.focus(); t.select(); });
+});
+$("next").addEventListener("click", () => { audio.pause(); if (at < screens.length - 1) { at++; render(); window.scrollTo(0, 0); } else { finish(); } });
+$("listener").addEventListener("input", () => { $("start").disabled = !test || !$("listener").value.trim(); });
+$("start").addEventListener("click", () => {
+  listener = $("listener").value.trim().toUpperCase();
+  screens = buildScreens(listener);
+  const draft = loadDraft();
+  if (draft && draft.listener === listener && Array.isArray(draft.answers)) { answers = draft.answers; at = Math.min(draft.at || 0, screens.length - 1); }
+  else { answers = []; at = 0; }
+  $("intro").hidden = true; $("task").hidden = false; render();
+});
+
+fetch("test.json").then((r) => { if (!r.ok) throw new Error(r.status); return r.json(); }).then((t) => {
+  test = t;
+  $("intro-status").textContent = `${t.pairs.length + t.singles.length} screens ready.`;
+  $("start").disabled = !$("listener").value.trim();
+}).catch(() => { $("intro-status").textContent = "The recordings did not load. Reload the page to try again."; $("intro-status").dataset.tone = "warn"; });
+</script>

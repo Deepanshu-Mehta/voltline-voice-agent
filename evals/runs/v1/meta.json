@@ -1,0 +1,8 @@
+{
+  "run": "v1",
+  "commit": "f1600e4",
+  "started": "2026-11-13T01:24:41",
+  "sets": "core,accent,turn-taking,scenario",
+  "systems": "A,B",
+  "repeat": 1
+}

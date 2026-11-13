@@ -41,3 +41,12 @@ stt-compare:        ## Hearing A/B: the question clips through Deepgram, Gnani a
 
 record:             ## Record the 20-question set in your own voice (stays local, data/private/)
 	uv run --project server python evals/audio/record.py
+
+compare:            ## Paired run of both systems through the web page (RUN=name)
+	uv run --project server python evals/compare.py --run $(or $(RUN),v1)
+
+score:              ## Score a paired run from its recordings (RUN=name)
+	uv run --project server python evals/score_run.py --run $(or $(RUN),v1)
+
+annotations:        ## Merge Audacity labels and check the detectors against them
+	uv run --project server python evals/annotation.py merge
